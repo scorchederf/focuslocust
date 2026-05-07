@@ -1,4 +1,4 @@
-Read AGENTS.md, README.md, and codex-obsidian-kb-builder-stage-1.md first.
+Read AGENTS.md, README.md, and focuslocust-builder-stage-1.md first.
 
 Write clear project documentation for this repository.
 
@@ -39,7 +39,7 @@ Files to update or create:
 Done when:
 - A new user can install dependencies, run tests, run doctor, and build the MITRE vault.
 - A developer can understand where parser, renderer, templates, cache, and safe-write logic live.
-- The docs clearly state that only files with `generated_by: obsidian-kb-builder` may be overwritten.
+- The docs clearly state that only files with `parsed_by: focuslocust` may be overwritten.
 - The docs clearly show the filename format, for example `T1003.002-security-account-manager.md`.
 - The docs mention future sources as design notes only, not implemented features.
 - Run a quick documentation review for consistency before finishing.

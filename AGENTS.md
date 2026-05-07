@@ -30,4 +30,4 @@ If an action requires access outside the repository, do not perform it.
 - No DataviewJS.
 - Use source-specific templates.
 - Use the required naming convention: `<id>-<lowercase-kebab-slug>.md`.
-- Only overwrite/delete generated files containing `generated_by: focuslocust`.
+- Only overwrite/delete generated files containing `parsed_by: focuslocust`.

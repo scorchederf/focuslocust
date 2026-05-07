@@ -59,7 +59,7 @@ This avoids broken local links to pages the baseline does not generate.
 Generated files must include:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 The builder may overwrite or delete only generated Markdown files containing that marker.

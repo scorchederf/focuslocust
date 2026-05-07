@@ -35,16 +35,29 @@ Future sources may include LOLBAS, GTFOBins, Sigma, Atomic Red Team, PayloadsAll
 
 ## Pipeline
 
-```text
-MITRE STIX JSON
-    -> parse supported ATT&CK objects
-    -> collect supported relationships
-    -> normalise names, paths, references, and links
-    -> render Markdown through source-specific templates
-    -> write indexes
+```mermaid
+flowchart LR
+    Config[config.yml] --> CLI[builder.py]
+    CLI --> Cache[load or fetch MITRE STIX JSON]
+    Cache --> Parser[parse supported ATT&CK objects]
+    Parser --> Relations[collect supported relationships]
+    Relations --> Render[render source-specific templates]
+    Render --> Safety[safe generated-file write]
+    Safety --> Vault[vault/kb/mitre/attack]
 ```
 
 The CLI entrypoint is `builder.py`.
+
+Main code locations:
+
+- CLI: `builder.py`
+- config loading: `src/kb_builder/config.py`
+- path validation and directory creation: `src/kb_builder/paths.py`
+- cache handling: `src/kb_builder/cache.py`
+- MITRE parser: `src/kb_builder/sources/mitre.py`
+- renderer and index generation: `src/kb_builder/render/markdown.py`
+- templates: `templates/mitre/` and `templates/shared/`
+- safe-write and clean logic: `src/kb_builder/safe_write.py`
 
 ## Install
 
@@ -57,7 +70,7 @@ pip install -r requirements.txt
 ## Check Environment
 
 ```bash
-python builder.py doctor --config config.yml
+python3 builder.py doctor --config config.yml
 ```
 
 `doctor` verifies the config, output paths, and required templates.
@@ -65,7 +78,7 @@ python builder.py doctor --config config.yml
 ## Build
 
 ```bash
-python builder.py build --config config.yml
+python3 builder.py build --config config.yml
 ```
 
 The generated vault is written to:
@@ -77,25 +90,25 @@ vault/
 You can override the vault output path:
 
 ```bash
-python builder.py build --config config.yml --vault ./scratch-vault
+python3 builder.py build --config config.yml --vault ./scratch-vault
 ```
 
 Enable verbose logs when troubleshooting:
 
 ```bash
-python builder.py build --config config.yml --verbose
+python3 builder.py build --config config.yml --verbose
 ```
 
 ## Clean
 
 ```bash
-python builder.py clean --config config.yml
+python3 builder.py clean --config config.yml
 ```
 
 `clean` deletes only generated Markdown files that contain:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 Manual notes without that marker are preserved.
@@ -214,7 +227,7 @@ vault/kb/mitre/attack/indexes/all-references.md
 Generated Markdown files include:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 The builder may only overwrite or delete files containing that marker. If a target Markdown file already exists without the marker, the builder skips it and logs a warning.
@@ -239,6 +252,14 @@ cp -a vault baseline/02
 ```
 
 Choose the next numeric directory manually. Do not overwrite an existing baseline unless that is the explicit task.
+
+## Documentation
+
+- [Usage](docs/usage.md)
+- [Architecture](docs/architecture.md)
+- [Templates](docs/templates.md)
+- [Adding a Source](docs/adding-a-source.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 ## Templates
 
@@ -272,7 +293,7 @@ Before finishing a change:
 
 ```bash
 python3 -m pytest
-python builder.py build --config config.yml
+python3 builder.py build --config config.yml
 ```
 
 ## Git Setup
@@ -299,9 +320,3 @@ git remote add origin <repo-url>
 git branch -M main
 git push -u origin main
 ```
-
-## Reference Repository
-
-The `originalgithub/` directory is a local reference copy. Treat it as read-only. Use it only to compare behavior and output style.
-
-Do not modify files under `originalgithub/`.

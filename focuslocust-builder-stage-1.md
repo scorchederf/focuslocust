@@ -153,7 +153,7 @@ The tool must:
 10. Only delete or overwrite files that contain the generated marker:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 ---
@@ -493,7 +493,7 @@ The builder must never freely delete all Markdown files in `kb/` or `ws/`.
 Before rebuilding, it may remove or overwrite only files that include:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 This must be checked by reading the file contents.
@@ -503,7 +503,7 @@ Simple safe rebuild algorithm:
 ```text
 For each .md file under kb/ and ws/:
     read file as text
-    if "generated_by: focuslocust" appears in the file:
+    if "parsed_by: focuslocust" appears in the file:
         delete it
     else:
         leave it alone
@@ -515,10 +515,10 @@ When writing a file:
 If target file does not exist:
     write it
 
-If target file exists and contains "generated_by: focuslocust":
+If target file exists and contains "parsed_by: focuslocust":
     overwrite it
 
-If target file exists and does not contain "generated_by: focuslocust":
+If target file exists and does not contain "parsed_by: focuslocust":
     skip it and log a warning
 ```
 
@@ -940,7 +940,7 @@ It must produce this shape:
 
 ```markdown
 ---
-generated_by: focuslocust
+parsed_by: focuslocust
 source: mitre
 type: {{ obj.type }}
 id: {{ obj.id }}
@@ -1021,7 +1021,7 @@ Example structure:
 
 ```markdown
 ---
-generated_by: focuslocust
+parsed_by: focuslocust
 source: mitre
 type: tactic
 id: {{ obj.id }}
@@ -1097,7 +1097,7 @@ Every generated index must include frontmatter:
 
 ```yaml
 ---
-generated_by: focuslocust
+parsed_by: focuslocust
 source: mitre
 type: index
 ---
@@ -1111,7 +1111,7 @@ Example:
 
 ```markdown
 ---
-generated_by: focuslocust
+parsed_by: focuslocust
 source: mitre
 type: index
 ---
@@ -1246,7 +1246,7 @@ python builder.py build --config config.yml
 Also explain that generated files contain:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 and that manual files without that marker are not overwritten.
@@ -1694,7 +1694,7 @@ templates/mitre/data-source.md.j2
 Generated files must contain:
 
 ```yaml
-generated_by: focuslocust
+parsed_by: focuslocust
 ```
 
 Only files with that marker may be overwritten or deleted.

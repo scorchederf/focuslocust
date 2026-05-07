@@ -7,11 +7,11 @@ from src.kb_builder.safe_write import (
 
 def test_generated_file_can_be_overwritten(tmp_path):
     path = tmp_path / "note.md"
-    path.write_text("---\ngenerated_by: focuslocust\n---\nold", encoding="utf-8")
+    path.write_text("---\nparsed_by: focuslocust\n---\nold", encoding="utf-8")
 
     result = safe_write_text(
         path,
-        "---\ngenerated_by: focuslocust\n---\nnew",
+        "---\nparsed_by: focuslocust\n---\nnew",
         marker="focuslocust",
     )
 
@@ -25,7 +25,7 @@ def test_manual_file_cannot_be_overwritten(tmp_path):
 
     result = safe_write_text(
         path,
-        "---\ngenerated_by: focuslocust\n---\nnew",
+        "---\nparsed_by: focuslocust\n---\nnew",
         marker="focuslocust",
     )
 
@@ -37,7 +37,7 @@ def test_generated_detection(tmp_path):
     generated = tmp_path / "generated.md"
     manual = tmp_path / "manual.md"
 
-    generated.write_text("---\ngenerated_by: focuslocust\n---", encoding="utf-8")
+    generated.write_text("---\nparsed_by: focuslocust\n---", encoding="utf-8")
     manual.write_text("manual", encoding="utf-8")
 
     assert is_generated_file(generated, "focuslocust") is True
@@ -48,7 +48,7 @@ def test_clean_generated_markdown(tmp_path):
     generated = tmp_path / "generated.md"
     manual = tmp_path / "manual.md"
 
-    generated.write_text("---\ngenerated_by: focuslocust\n---", encoding="utf-8")
+    generated.write_text("---\nparsed_by: focuslocust\n---", encoding="utf-8")
     manual.write_text("manual", encoding="utf-8")
 
     count = clean_generated_markdown([tmp_path], marker="focuslocust")
