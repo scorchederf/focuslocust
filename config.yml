@@ -23,12 +23,15 @@ sources:
     include_groups: false
     include_software: false
     include_malware: false
+  lolbins:
+    enabled: true
+    local_path: ".cache/lolbas/yml"
 
 rendering:
   use_full_path_wikilinks: true
   alias_wikilinks: true
   title_in_body: false
-  generated_marker: "focuslocust"
+  parsed_marker: "focuslocust"
 
 naming:
   style: "id-slug"

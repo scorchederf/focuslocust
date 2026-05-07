@@ -1,7 +1,11 @@
 ---
-parsed_by: focuslocust
+parsed_by: {{ parsed_marker }}
 source: lolbas
-type: placeholder
+type: index
 ---
 
-Stage-one placeholder template.
+# {{ title }}
+
+{% for obj in objects %}
+- [[{{ obj.path | strip_md }}|{{ obj.name }}]]
+{% endfor %}

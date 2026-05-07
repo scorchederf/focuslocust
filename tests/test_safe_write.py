@@ -56,3 +56,20 @@ def test_clean_generated_markdown(tmp_path):
     assert count == 1
     assert not generated.exists()
     assert manual.exists()
+
+
+def test_legacy_lolbas_placeholder_can_be_overwritten(tmp_path):
+    path = tmp_path / "xsd.exe.md"
+    path.write_text(
+        '---\ntitle: "Unknown LOLBAS entry"\nsource: "LOLBAS"\nsource_type: "os_binary"\n---\n',
+        encoding="utf-8",
+    )
+
+    result = safe_write_text(
+        path,
+        "---\nparsed_by: focuslocust\nsource: lolbas\n---\n# xsd.exe\n",
+        marker="focuslocust",
+    )
+
+    assert result is True
+    assert "parsed_by: focuslocust" in path.read_text(encoding="utf-8")

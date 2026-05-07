@@ -8,11 +8,12 @@ Read AGENTS.md and README.md first.
 Implement and improve this project only within the current repository.
 
 Do not access parent directories.
-Do not use the network unless explicitly required.
+Any network access must be requested. 
 Do not modify originalgithub/.
 Do not modify baseline snapshots unless explicitly asked.
 
-Stage one is MITRE ATT&CK only.
+Stage one MITRE ATT&CK is complete.
+LOLBAS / LOLBins is complete.
 
 Keep the implementation simple:
 - Python
@@ -23,7 +24,7 @@ Keep the implementation simple:
 - deterministic filenames like T1003.002-security-account-manager.md
 - Obsidian wikilinks
 
-Do not add SQLite, graph databases, AI, Dataview, DataviewJS, plugin systems, generated group pages, campaign pages, malware pages, or future source ingestion yet.
+Do not add SQLite, graph databases, AI, Dataview, DataviewJS, plugin systems, generated group pages, campaign pages, malware pages, or new future source ingestion without an explicit task.
 
 Current procedure-example rules:
 - Include only ATT&CK `uses` relationships where the target is a technique or sub-technique and the source ATT&CK ID starts with `S`.
@@ -37,5 +38,5 @@ The current accepted generated-vault snapshot is baseline/01.
 
 Run the tests and fix any failures.
 Use `python3 -m pytest`.
-Use `python builder.py build --config config.yml` to build the vault.
+Use `python3 builder.py build --config config.yml` to build the vault.
 ```

@@ -42,6 +42,7 @@ def ensure_project_paths(config: dict[str, Any]) -> ProjectPaths:
     required_dirs = [
         vault_path,
         vault_path / "kb",
+        vault_path / "kb" / "_build",
         vault_path / "kb" / "mitre",
         vault_path / "kb" / "mitre" / "attack",
         vault_path / "kb" / "mitre" / "attack" / "tactics",
@@ -50,6 +51,8 @@ def ensure_project_paths(config: dict[str, Any]) -> ProjectPaths:
         vault_path / "kb" / "mitre" / "attack" / "data-sources",
         vault_path / "kb" / "mitre" / "attack" / "software",
         vault_path / "kb" / "mitre" / "attack" / "indexes",
+        vault_path / "kb" / "lolbas",
+        vault_path / "kb" / "lolbas" / "tools",
         vault_path / "kb" / "indexes",
         cache_path,
         cache_path / "mitre",

@@ -4,11 +4,10 @@
 
 Build a simple, repeatable Python tool that generates an Obsidian security knowledge base from structured and semi-structured security datasets.
 
-The first implementation stage is **MITRE ATT&CK only**.
+The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBins has also been completed as the next source.
 
 Future stages will add:
 
-- LOLBAS / LOLBins
 - GTFOBins
 - Sigma
 - Atomic Red Team
@@ -281,8 +280,8 @@ There must eventually be a central tool directory.
 Platform-specific tools:
 
 ```text
-kb/tools/windows/certutil.exe.md
-kb/tools/windows/powershell.exe.md
+kb/lolbas/tools/certutil.exe.md
+kb/lolbas/tools/powershell.exe.md
 kb/tools/linux/grep.md
 kb/tools/linux/awk.md
 ```
@@ -525,7 +524,7 @@ If target file exists and does not contain "parsed_by: focuslocust":
 Log example:
 
 ```text
-Skipped kb/mitre/techniques/T1059-command-and-scripting-interpreter.md because it does not contain generated_by marker
+Skipped kb/mitre/techniques/T1059-command-and-scripting-interpreter.md because it does not contain parsed_by marker
 ```
 
 This is enough for stage one. Do not build a manifest system yet.
@@ -566,7 +565,7 @@ rendering:
   use_full_path_wikilinks: true
   alias_wikilinks: true
   title_in_body: false
-  generated_marker: "focuslocust"
+  parsed_marker: "focuslocust"
 
 naming:
   style: "id-slug"
@@ -1403,17 +1402,11 @@ Do not implement these in stage one, but structure the project so they are easy 
 
 ## LOLBAS
 
-LOLBAS should generate central tool pages:
+LOLBAS should generate source-specific tool pages:
 
 ```text
-kb/tools/windows/certutil.exe.md
-kb/tools/windows/mshta.exe.md
-```
-
-It should not generate:
-
-```text
-kb/lolbas/certutil.exe.md
+kb/lolbas/tools/certutil.exe.md
+kb/lolbas/tools/mshta.exe.md
 ```
 
 LOLBAS pages should use:

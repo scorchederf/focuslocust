@@ -2,23 +2,26 @@
 
 Focus Locust is a simple Python builder for an Obsidian security knowledge base.
 
-The current baseline is stage one: MITRE ATT&CK Enterprise only. The builder reads ATT&CK STIX JSON, normalises the objects we support, renders Markdown with source-specific Jinja2 templates, and writes index pages for browsing in Obsidian.
+The builder currently supports MITRE ATT&CK Enterprise and LOLBAS/LOLBins. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
 
 ## Current Scope
 
-Stage one supports:
+Implemented sources:
 
 - MITRE ATT&CK Enterprise STIX JSON
 - tactics, techniques, sub-techniques, mitigations, data sources, and software/tool notes
+- LOLBAS / LOLBins YAML from `.cache/lolbas/yml`
+- LOLBAS tool notes under `kb/lolbas/tools/`
 - Obsidian Markdown output
 - deterministic filenames using `<id>-<lowercase-kebab-slug>.md`
 - full-path Obsidian wikilinks
-- source-specific templates under `templates/mitre/`
+- source-specific templates under `templates/mitre/` and `templates/lolbas/`
 - generated-file overwrite protection
 - simple index pages
+- `_build` datasource field and template reference pages
 - baseline snapshots under `baseline/`
 
-Stage one intentionally excludes:
+Intentionally excluded:
 
 - SQLite
 - graph databases
@@ -29,21 +32,24 @@ Stage one intentionally excludes:
 - generated group pages
 - campaign pages
 - malware pages
-- non-MITRE sources
+- Sigma, Atomic Red Team, PayloadsAllTheThings, GTFOBins, and internal Markdown ingestion
 
-Future sources may include LOLBAS, GTFOBins, Sigma, Atomic Red Team, PayloadsAllTheThings, and internal Markdown repositories, but those are not part of the current baseline.
+Future source work should follow the source-specific parser/template pattern already used by MITRE and LOLBAS.
 
 ## Pipeline
 
 ```mermaid
 flowchart LR
     Config[config.yml] --> CLI[builder.py]
-    CLI --> Cache[load or fetch MITRE STIX JSON]
-    Cache --> Parser[parse supported ATT&CK objects]
+    CLI --> MITRE[load or fetch MITRE STIX JSON]
+    CLI --> LOLBAS[load LOLBAS YAML]
+    MITRE --> Parser[parse supported source objects]
+    LOLBAS --> Parser
     Parser --> Relations[collect supported relationships]
     Relations --> Render[render source-specific templates]
     Render --> Safety[safe generated-file write]
-    Safety --> Vault[vault/kb/mitre/attack]
+    Safety --> Vault[vault/kb]
+    Parser --> BuildRefs[write _build field references]
 ```
 
 The CLI entrypoint is `builder.py`.
@@ -55,7 +61,9 @@ Main code locations:
 - path validation and directory creation: `src/kb_builder/paths.py`
 - cache handling: `src/kb_builder/cache.py`
 - MITRE parser: `src/kb_builder/sources/mitre.py`
+- LOLBAS parser: `src/kb_builder/sources/lolbas.py`
 - renderer and index generation: `src/kb_builder/render/markdown.py`
+- datasource field summaries: `src/kb_builder/build_summary.py`
 - templates: `templates/mitre/` and `templates/shared/`
 - safe-write and clean logic: `src/kb_builder/safe_write.py`
 
@@ -143,12 +151,15 @@ sources:
     include_groups: false
     include_software: false
     include_malware: false
+  lolbins:
+    enabled: true
+    local_path: ".cache/lolbas/yml"
 
 rendering:
-  generated_marker: "focuslocust"
+  parsed_marker: "focuslocust"
 ```
 
-`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as pages in this baseline.
+`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory.
 
 ## Naming
 
@@ -164,13 +175,14 @@ Examples:
 T1003.002-security-account-manager.md
 S0002-mimikatz.md
 M1027-password-policies.md
+certutil.exe.md
 ```
 
-Dots in ATT&CK sub-technique IDs are preserved.
+Dots in ATT&CK sub-technique IDs and Windows filenames are preserved.
 
 ## Vault Structure
 
-Stage one generates content under:
+The builder generates content under:
 
 ```text
 vault/
@@ -183,13 +195,15 @@ vault/
 │   │       ├── data-sources/
 │   │       ├── software/
 │   │       └── indexes/
+│   ├── lolbas/
+│   │   └── tools/
+│   ├── _build/
 │   └── indexes/
 ```
 
 Reserved future folders may exist or be created later:
 
 ```text
-kb/tools/
 kb/detections/
 kb/tests/
 kb/payloads/
@@ -234,6 +248,25 @@ The builder may only overwrite or delete files containing that marker. If a targ
 
 This is the main safety rule for working in an Obsidian vault that may also contain manual notes.
 
+## Build Reference Notes
+
+Every build writes datasource reference notes under:
+
+```text
+vault/kb/_build/
+```
+
+`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE and LOLBAS objects.
+
+Example Jinja raw-field access:
+
+```jinja
+{{ obj.raw | field_value("Name") }}
+{% for handle in obj.raw | field_values("Acknowledgement[].Handle") %}
+- {{ handle }}
+{% endfor %}
+```
+
 ## Baselines
 
 The current accepted vault snapshot is:
@@ -272,9 +305,12 @@ templates/mitre/mitigation.md.j2
 templates/mitre/data-source.md.j2
 templates/mitre/tool.md.j2
 templates/mitre/index.md.j2
+templates/lolbas/tool.md.j2
+templates/lolbas/index.md.j2
+templates/build/object-properties.md.j2
 ```
 
-Use source-specific templates for future sources rather than adding cross-source conditionals to MITRE templates.
+Use source-specific templates for future sources rather than adding cross-source conditionals to existing templates.
 
 ## Development Rules
 
@@ -293,6 +329,11 @@ Before finishing a change:
 
 ```bash
 python3 -m pytest
+```
+
+For final vault regeneration, run:
+
+```bash
 python3 builder.py build --config config.yml
 ```
 

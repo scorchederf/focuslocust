@@ -1,0 +1,25 @@
+---
+parsed_by: {{ parsed_marker }}
+source: build
+type: object-property-reference
+object_source: {{ obj.source }}
+object_type: {{ obj.type }}
+object_id: {{ obj.id }}
+object_name: {{ obj.name }}
+---
+
+# Example Object: {{ obj.id }} - {{ obj.name }}
+
+Object note: [[{{ obj.path | replace(".md", "") }}|{{ obj.id }} - {{ obj.name }}]]
+
+Build group: `{{ group_name }}`
+
+This example object was selected because it has the most raw datasource properties in its build group.
+
+## Properties
+
+| Property | Types | Count | Jinja2 access | Values |
+| --- | --- | ---: | --- | --- |
+{% for field in fields %}
+| `{{ field.name | replace("|", "\\|") }}` | {{ field.types | replace("|", "\\|") }} | {{ field.count }} | <code>{{ field.jinja | replace("|", "\\|") }}</code> | {% for value in field.values %}`{{ value | replace("`", "\\`") | replace("|", "\\|") }}`{% if not loop.last %}<br>{% endif %}{% endfor %} |
+{% endfor %}

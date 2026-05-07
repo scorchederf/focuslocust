@@ -18,7 +18,7 @@ class DummyLogger:
 
 def test_table_cell_escapes_wikilink_pipe(tmp_path):
     renderer = MarkdownRenderer(
-        config={"rendering": {"generated_marker": "focuslocust"}},
+        config={"rendering": {"parsed_marker": "focuslocust"}},
         paths=ProjectPaths(
             vault_path=tmp_path / "vault",
             cache_path=tmp_path / ".cache",
@@ -37,7 +37,7 @@ def test_table_cell_escapes_wikilink_pipe(tmp_path):
 
 def test_table_cell_replaces_newlines():
     renderer = MarkdownRenderer(
-        config={"rendering": {"generated_marker": "focuslocust"}},
+        config={"rendering": {"parsed_marker": "focuslocust"}},
         paths=ProjectPaths(
             vault_path=Path("vault"),
             cache_path=Path(".cache"),
@@ -254,7 +254,7 @@ def test_render_mitre_smoke_with_indexes_references_and_relationships(tmp_path):
     renderer = MarkdownRenderer(
         config={
             "sources": {"mitre": {"domain": "enterprise-attack"}},
-            "rendering": {"generated_marker": "focuslocust"},
+            "rendering": {"parsed_marker": "focuslocust"},
         },
         paths=ProjectPaths(
             vault_path=tmp_path / "vault",

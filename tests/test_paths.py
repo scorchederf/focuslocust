@@ -19,7 +19,7 @@ def test_resolve_repo_path_rejects_absolute_paths_outside_repo():
         resolve_repo_path("/tmp/focuslocust-outside", "test.path")
 
 
-def test_ensure_project_paths_creates_stage_one_directories(tmp_path, monkeypatch):
+def test_ensure_project_paths_creates_builder_directories(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
     paths = ensure_project_paths(
@@ -34,8 +34,8 @@ def test_ensure_project_paths_creates_stage_one_directories(tmp_path, monkeypatc
     assert (tmp_path / "vault/kb/mitre/attack/techniques").is_dir()
     assert (tmp_path / "vault/kb/mitre/attack/software").is_dir()
     assert (tmp_path / "vault/kb/mitre/attack/indexes").is_dir()
+    assert (tmp_path / "vault/kb/lolbas/tools").is_dir()
     assert (tmp_path / "vault/kb/indexes").is_dir()
-    assert not (tmp_path / "vault/kb/tools").exists()
     assert not (tmp_path / "vault/kb/detections").exists()
     assert not (tmp_path / "vault/kb/tests").exists()
     assert not (tmp_path / "vault/kb/payloads").exists()

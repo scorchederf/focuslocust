@@ -1,7 +1,223 @@
 ---
-parsed_by: focuslocust
+parsed_by: {{ parsed_marker }}
+title: {{ obj.name | default(obj.raw | field_value('Name')) | yaml_quote }}
+description: {{ obj.description | default(obj.raw | field_value('Description')) | yaml_quote }}
 source: lolbas
-type: placeholder
+source_type: tool
+build_group: lolbas/tools
+id: {{ obj.id | yaml_quote }}
+name: {{ obj.name | default(obj.raw | field_value('Name')) | yaml_quote }}
+created: {{ obj.raw | field_value('Created') | yaml_quote }}
+author: {{ obj.raw | field_value('Author') | yaml_quote }}
+platform:
+  - {{ "Windows" | yaml_quote }}
+categories:
+{% set categories = obj.raw | field_values("Commands[].Category") %}
+{% for value in categories | unique | sort %}
+  - {{ value | yaml_quote }}
+{% endfor %}
+mitre_techniques:
+{% set mitre_ids = obj.raw | field_values("Commands[].MitreID") %}
+{% for value in mitre_ids | unique | sort %}
+  - {{ value | yaml_quote }}
+{% endfor %}
+privileges:
+{% set privileges = obj.raw | field_values("Commands[].Privileges") %}
+{% for value in privileges | unique | sort %}
+  - {{ value | yaml_quote }}
+{% endfor %}
+paths:
+{% for value in obj.raw | field_values("Full_Path[].Path") %}
+  - {{ value | yaml_quote }}
+{% endfor %}
+tags:
+  - {{ "lolbas" | yaml_quote }}
+  - {{ "lolbas/tool" | yaml_quote }}
+  - {{ "platform/windows" | yaml_quote }}
+{% for value in categories | unique | sort %}
+  - {{ ("lolbas/category/" ~ (value | lower | replace(' ', '-'))) | yaml_quote }}
+{% endfor %}
 ---
 
-Stage-one placeholder template.
+# {{ obj.name }}
+
+## Summary
+
+{{ obj.raw | field_value("Description") | default(obj.description, true) }}
+
+## Key Details
+
+| Field | Value |
+|---|---|
+| Name | `{{ obj.raw | field_value("Name") | default(obj.name, true) }}` |
+| Author | `{{ obj.raw | field_value("Author") }}` |
+| Created | `{{ obj.raw | field_value("Created") }}` |
+| Source | `LOLBAS` |
+| Type | `Tool` |
+
+## Paths
+
+{% for value in obj.raw | field_values("Full_Path[].Path") %}
+- `{{ value }}`
+{% else %}
+- No known paths listed.
+{% endfor %}
+
+## Commands
+
+| Category | Use case | Command | ATT&CK |
+| --- | --- | --- | --- |
+{% for command in obj.commands %}
+| {{ command.category | table_cell }} | {{ command.usecase | table_cell }} | `{{ command.command | table_cell }}` | {{ command.mitre_id | table_cell }} |
+{% else %}
+|  | No commands listed. |  |  |
+{% endfor %}
+
+{% for command in obj.commands %}
+### {{ loop.index }}. {{ command.category | default("Uncategorised", true) }} — {{ command.usecase | default("No use case provided", true) }}
+
+{% if command.description %}
+{{ command.description }}
+{% endif %}
+
+{% if command.command %}
+**Command:**
+
+```cmd
+{{ command.command }}
+```
+{% endif %}
+
+| Field | Value |
+|---|---|
+| Category | `{{ command.category }}` |
+| Use case | {{ command.usecase }} |
+| Privileges | `{{ command.privileges }}` |
+| MITRE ATT&CK | `{{ command.mitre_id }}` |
+| Operating system | {{ command.operating_system }} |
+
+{% if command.tags is defined and command.tags %}
+**Command tags:**
+
+{% for key, values in command.tags.items() %}
+- **{{ key }}:** {% for value in values %}`{{ value }}`{% if not loop.last %}, {% endif %}{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% else %}
+No commands listed.
+{% endfor %}
+
+## Command Tags Summary
+
+{% set execute_tags = obj.raw | field_values("Commands[].Tags[].Execute") %}
+{% set download_tags = obj.raw | field_values("Commands[].Tags[].Download") %}
+{% set other_tags = obj.raw | field_values("Commands[].Tags[]") %}
+
+### Execute
+
+{% for value in execute_tags | unique | sort %}
+- `{{ value }}`
+{% else %}
+- No execute tags listed.
+{% endfor %}
+
+### Download
+
+{% for value in download_tags | unique | sort %}
+- `{{ value }}`
+{% else %}
+- No download tags listed.
+{% endfor %}
+
+## Detection
+
+### Sigma
+
+{% for value in obj.raw | field_values("Detection[].Sigma") %}
+- {{ value }}
+{% else %}
+- No Sigma detections listed.
+{% endfor %}
+
+### Elastic
+
+{% for value in obj.raw | field_values("Detection[].Elastic") %}
+- {{ value }}
+{% else %}
+- No Elastic detections listed.
+{% endfor %}
+
+### Splunk
+
+{% for value in obj.raw | field_values("Detection[].Splunk") %}
+- {{ value }}
+{% else %}
+- No Splunk detections listed.
+{% endfor %}
+
+### IOCs / Detection Ideas
+
+{% for value in obj.raw | field_values("Detection[].IOC") %}
+- {{ value }}
+{% else %}
+- No IOC or detection ideas listed.
+{% endfor %}
+
+### Block Rules
+
+{% for value in obj.raw | field_values("Detection[].BlockRule") %}
+- {{ value }}
+{% else %}
+- No block rules listed.
+{% endfor %}
+
+### Other Detection References
+
+{% for detection in obj.raw.Detection | default([], true) %}
+{% if detection.items is defined %}
+{% for key, value in detection.items() %}
+{% if key not in ["Sigma", "Elastic", "Splunk", "IOC", "BlockRule"] %}
+- **{{ key }}:** {{ value }}
+{% endif %}
+{% endfor %}
+{% elif detection %}
+- {{ detection }}
+{% endif %}
+{% else %}
+- No other detection references listed.
+{% endfor %}
+
+## Code Samples
+
+{% for value in obj.raw | field_values("Code_Sample[].Code") %}
+- {{ value }}
+{% else %}
+- No code samples listed.
+{% endfor %}
+
+## Resources
+
+{% for value in obj.raw | field_values("Resources[].Link") %}
+- {{ value }}
+{% else %}
+- No resources listed.
+{% endfor %}
+
+## Acknowledgements
+
+{% for item in obj.raw.Acknowledgement | default([], true) %}
+{% if item.Person is defined or item.Handle is defined %}
+- {{ item.Person | default("") }}{% if item.Handle is defined and item.Handle %} — `{{ item.Handle }}`{% endif %}
+{% else %}
+- {{ item }}
+{% endif %}
+{% else %}
+- No acknowledgements listed.
+{% endfor %}
+
+## Raw Source Coverage
+
+The parser preserves the full original LOLBAS YAML object in `obj.raw`. This template intentionally avoids rendering the full raw object because plain Jinja2 does not include a YAML serialization filter by default.
+
+For debugging, inspect `obj.raw` in the build logs or add a project-specific YAML serialization filter in the renderer.

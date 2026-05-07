@@ -22,7 +22,8 @@ If an action requires access outside the repository, do not perform it.
 
 - Python only.
 - Keep the implementation simple.
-- Stage one is MITRE ATT&CK only.
+- Stage one MITRE ATT&CK is complete.
+- LOLBAS / LOLBins is complete and uses source-specific output under `kb/lolbas/`.
 - No SQLite.
 - No graph database.
 - No AI layer.

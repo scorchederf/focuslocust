@@ -6,13 +6,20 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from src.kb_builder.build_summary import render_datasource_field_summary, render_object_property_pages
 from src.kb_builder.cache import load_or_fetch_mitre
 from src.kb_builder.config import load_config
 from src.kb_builder.logging_setup import setup_logging
 from src.kb_builder.paths import ensure_project_paths
 from src.kb_builder.render.markdown import MarkdownRenderer
 from src.kb_builder.safe_write import clean_generated_markdown
+from src.kb_builder.sources.lolbas import LolbasSource
 from src.kb_builder.sources.mitre import MitreSource
+
+
+def marker_from_config(config: dict) -> str:
+    rendering_config = config.get("rendering", {})
+    return rendering_config.get("parsed_marker", "focuslocust")
 
 
 def build(config_path: str, vault_override: str | None = None, verbose: bool = False) -> int:
@@ -32,25 +39,68 @@ def build(config_path: str, vault_override: str | None = None, verbose: bool = F
 
     deleted_count = clean_generated_markdown(
         roots=[paths.vault_path / "kb", paths.vault_path / "ws"],
-        marker=config["rendering"]["generated_marker"],
+        marker=marker_from_config(config),
         logger=logger,
     )
     logger.info(f"Deleted generated Markdown files: {deleted_count}")
 
-    mitre_config = config.get("sources", {}).get("mitre", {})
-    if not mitre_config.get("enabled", False):
-        logger.warning("MITRE source is disabled; nothing to build")
-        return 0
-
-    data = load_or_fetch_mitre(config=config, paths=paths, logger=logger)
-    source = MitreSource(config=mitre_config, logger=logger)
-    objects = source.parse(data)
+    sources_config = config.get("sources", {})
+    mitre_config = sources_config.get("mitre", {})
+    lolbins_config = sources_config.get("lolbins", sources_config.get("lolbas", {}))
+    total_written = 0
+    total_skipped = 0
+    raw_sources: dict[str, list[dict]] = {}
+    build_objects: dict[str, list] = {}
 
     renderer = MarkdownRenderer(config=config, paths=paths, logger=logger)
-    written_count, skipped_count = renderer.render_mitre(objects)
+    if mitre_config.get("enabled", False):
+        data = load_or_fetch_mitre(config=config, paths=paths, logger=logger)
+        raw_sources["mitre"] = data.get("objects", []) if isinstance(data.get("objects", []), list) else []
+        source = MitreSource(config=mitre_config, logger=logger)
+        objects = source.parse(data)
+        build_objects["mitre/tactics"] = [obj for obj in objects if obj.type == "tactic"]
+        build_objects["mitre/techniques"] = [obj for obj in objects if obj.type == "technique"]
+        written_count, skipped_count = renderer.render_mitre(objects)
+        total_written += written_count
+        total_skipped += skipped_count
+    else:
+        logger.warning("MITRE source is disabled")
 
-    logger.info(f"Files written: {written_count}")
-    logger.info(f"Manual files skipped: {skipped_count}")
+    if lolbins_config.get("enabled", False):
+        source = LolbasSource(config=lolbins_config, logger=logger)
+        records = source.load()
+        raw_sources["lolbas"] = records
+        tools = source.parse(records)
+        build_objects["lolbas/tools"] = tools
+        written_count, skipped_count = renderer.render_lolbas(tools)
+        total_written += written_count
+        total_skipped += skipped_count
+    else:
+        logger.info("LOLBAS/LOLBins source is disabled")
+
+    if raw_sources:
+        if render_datasource_field_summary(
+            sources=raw_sources,
+            marker=marker_from_config(config),
+            paths=paths,
+            logger=logger,
+        ):
+            total_written += 1
+        else:
+            total_skipped += 1
+
+    if build_objects:
+        written_count, skipped_count = render_object_property_pages(
+            objects_by_group=build_objects,
+            marker=marker_from_config(config),
+            paths=paths,
+            logger=logger,
+        )
+        total_written += written_count
+        total_skipped += skipped_count
+
+    logger.info(f"Files written: {total_written}")
+    logger.info(f"Manual files skipped: {total_skipped}")
     logger.info("Build completed")
 
     return 0
@@ -67,7 +117,7 @@ def clean(config_path: str, verbose: bool = False) -> int:
 
     count = clean_generated_markdown(
         roots=[paths.vault_path / "kb", paths.vault_path / "ws"],
-        marker=config["rendering"]["generated_marker"],
+        marker=marker_from_config(config),
         logger=logger,
     )
 
@@ -97,6 +147,15 @@ def doctor(config_path: str, verbose: bool = False) -> int:
         Path("templates/mitre/tool.md.j2"),
         Path("templates/mitre/index.md.j2"),
     ]
+    sources_config = config.get("sources", {})
+    lolbins_config = sources_config.get("lolbins", sources_config.get("lolbas", {}))
+    if lolbins_config.get("enabled", False):
+        required_templates.extend(
+            [
+                Path("templates/lolbas/tool.md.j2"),
+                Path("templates/lolbas/index.md.j2"),
+            ]
+        )
 
     missing = [str(path) for path in required_templates if not path.exists()]
     if missing:
@@ -104,9 +163,13 @@ def doctor(config_path: str, verbose: bool = False) -> int:
             logger.error(f"Missing template: {item}")
         return 1
 
-    mitre_config = config.get("sources", {}).get("mitre", {})
-    if not mitre_config.get("url") and not mitre_config.get("local_path"):
+    mitre_config = sources_config.get("mitre", {})
+    if mitre_config.get("enabled", False) and not mitre_config.get("url") and not mitre_config.get("local_path"):
         logger.error("MITRE source requires either url or local_path")
+        return 1
+
+    if lolbins_config.get("enabled", False) and not lolbins_config.get("local_path"):
+        logger.error("LOLBAS/LOLBins source requires local_path")
         return 1
 
     logger.info("Doctor check passed")

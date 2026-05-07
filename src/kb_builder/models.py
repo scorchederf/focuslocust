@@ -40,3 +40,24 @@ class MitreObject(KBObject):
     subtechniques: list[dict[str, str]] = field(default_factory=list)
     techniques_used: list[dict[str, str]] = field(default_factory=list)
     parent_technique_id: str = ""
+
+
+@dataclass
+class LolbasCommand:
+    command: str = ""
+    description: str = ""
+    usecase: str = ""
+    category: str = ""
+    privileges: str = ""
+    mitre_id: str = ""
+    operating_system: str = ""
+
+
+@dataclass
+class LolbasTool(KBObject):
+    functions: list[str] = field(default_factory=list)
+    commands: list[LolbasCommand] = field(default_factory=list)
+    paths: list[str] = field(default_factory=list)
+    detections: list[str] = field(default_factory=list)
+    resources: list[str] = field(default_factory=list)
+    acknowledgements: list[str] = field(default_factory=list)

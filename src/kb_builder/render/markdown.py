@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import json
 import re
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from ..models import MitreObject
+from ..models import LolbasTool, MitreObject
 from ..naming import strip_md
 from ..paths import ProjectPaths
 from ..render.links import wikilink
@@ -18,7 +19,8 @@ class MarkdownRenderer:
         self.config = config
         self.paths = paths
         self.logger = logger
-        self.marker = config.get("rendering", {}).get("generated_marker", "focuslocust")
+        rendering_config = config.get("rendering", {})
+        self.marker = rendering_config.get("parsed_marker", "focuslocust")
 
         self.env = Environment(
             loader=FileSystemLoader("templates"),
@@ -30,6 +32,9 @@ class MarkdownRenderer:
         self.env.filters["strip_md"] = strip_md
         self.env.filters["table_cell"] = self._table_cell
         self.env.filters["index_link"] = self._index_link
+        self.env.filters["field_values"] = self._field_values
+        self.env.filters["field_value"] = self._field_value
+        self.env.filters["yaml_quote"] = self._yaml_quote
 
     def render_mitre(self, objects: list[MitreObject]) -> tuple[int, int]:
         link_map = self._build_link_map(objects)
@@ -42,7 +47,7 @@ class MarkdownRenderer:
             template_name = f"mitre/{obj.type}.md.j2"
             content = self.env.get_template(template_name).render(
                 obj=obj,
-                generated_marker=self.marker,
+                parsed_marker=self.marker,
                 link_map=link_map,
             )
             content = self._normalize_markdown(content)
@@ -56,6 +61,39 @@ class MarkdownRenderer:
         index_written, index_skipped = self._render_indexes(enriched, link_map)
         written += index_written
         skipped += index_skipped
+
+        return written, skipped
+
+    def render_lolbas(self, tools: list[LolbasTool]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for tool in tools:
+            content = self.env.get_template("lolbas/tool.md.j2").render(
+                obj=tool,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / tool.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("lolbas/index.md.j2").render(
+            title="LOLBAS Tools",
+            objects=tools,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/lolbas.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
 
         return written, skipped
 
@@ -261,6 +299,45 @@ class MarkdownRenderer:
     def _table_cell(self, value: str) -> str:
         return (value or "").replace("|", "\\|").replace("\n", "<br>")
 
+    def _yaml_quote(self, value) -> str:
+        return json.dumps("" if value is None else str(value))
+
+    def _field_values(self, value, path: str) -> list[str]:
+        values = self._extract_field_values(value, path)
+        return [str(item) for item in values if item is not None and item != ""]
+
+    def _field_value(self, value, path: str) -> str:
+        values = self._field_values(value, path)
+        return values[0] if values else ""
+
+    def _extract_field_values(self, value, path: str):
+        current = [value]
+        for part in path.split("."):
+            next_values = []
+            is_list_part = part.endswith("[]")
+            key = part[:-2] if is_list_part else part
+
+            for item in current:
+                if isinstance(item, dict):
+                    child = item.get(key)
+                else:
+                    child = getattr(item, key, None)
+
+                if child is None:
+                    continue
+
+                if is_list_part:
+                    if isinstance(child, list):
+                        next_values.extend(child)
+                    else:
+                        next_values.append(child)
+                else:
+                    next_values.append(child)
+
+            current = next_values
+
+        return current
+
     def _index_link(self, obj: MitreObject, link_map: dict[str, str]) -> str:
         return wikilink(link_map[obj.id], f"{obj.id} - {obj.name}")
 
@@ -297,7 +374,7 @@ class MarkdownRenderer:
                 objects=index_objects,
                 link_map=link_map,
                 source="mitre",
-                generated_marker=self.marker,
+                parsed_marker=self.marker,
             )
             body = self._normalize_markdown(body)
             if safe_write_text(self.paths.vault_path / path, body, marker=self.marker, logger=self.logger):
@@ -362,7 +439,7 @@ class MarkdownRenderer:
     ) -> str:
         lines = [
             "---",
-            f"generated_by: {self.marker}",
+            f"parsed_by: {self.marker}",
             "source: mitre",
             "type: index",
             "tags:",
@@ -414,7 +491,7 @@ class MarkdownRenderer:
 
         lines = [
             "---",
-            f"generated_by: {self.marker}",
+            f"parsed_by: {self.marker}",
             "source: mitre",
             "type: reference-index",
             "---",
@@ -441,7 +518,7 @@ class MarkdownRenderer:
 
         lines = [
             "---",
-            f"generated_by: {self.marker}",
+            f"parsed_by: {self.marker}",
             "source: mitre",
             "type: index",
             "---",
@@ -467,7 +544,7 @@ class MarkdownRenderer:
 
         lines = [
             "---",
-            f"generated_by: {self.marker}",
+            f"parsed_by: {self.marker}",
             "source: mitre",
             "type: index",
             "---",
