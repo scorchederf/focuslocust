@@ -1,0 +1,18 @@
+---
+generated_by: {{ generated_marker }}
+source: mitre
+type: data-source
+aliases:
+{% for alias in obj.aliases %}
+    - {{ alias }}
+{% endfor %}
+tags:
+{% for tag in obj.tags %}
+    - {{ tag }}
+{% endfor %}
+mitre-attack: {{ obj.path | strip_md }}
+---
+
+## Description
+
+{{ obj.description | parse_description(obj.reference_notes, link_map) }}

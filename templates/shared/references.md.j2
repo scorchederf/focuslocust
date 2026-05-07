@@ -1,0 +1,9 @@
+{% if obj.external_references %}
+## References
+
+{% for ref in obj.external_references %}
+{% if ref.url %}
+- [{{ ref.source_name }}]({{ ref.url }})
+{% endif %}
+{% endfor %}
+{% endif %}

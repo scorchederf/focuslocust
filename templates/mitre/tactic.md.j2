@@ -1,0 +1,27 @@
+---
+generated_by: {{ generated_marker }}
+source: mitre
+type: tactic
+aliases:
+{% for alias in obj.aliases %}
+    - {{ alias }}
+{% endfor %}
+tags:
+{% for tag in obj.tags %}
+    - {{ tag }}
+{% endfor %}
+mitre-attack: {{ obj.path | strip_md }}
+---
+
+## Description
+
+{{ obj.description | parse_description(obj.reference_notes, link_map) }}
+
+{% if obj.related_techniques %}
+## Techniques
+| ID | Name | Description |
+| --- | --- | --- |
+{% for technique in obj.related_techniques %}
+| {{ technique.link | table_cell }} | {{ technique.name | table_cell }} | {{ technique.description | parse_description(technique.reference_notes, link_map) | table_cell }} |
+{% endfor %}
+{% endif %}

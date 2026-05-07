@@ -1,0 +1,37 @@
+vault_path: "./vault"
+
+logging:
+  verbose: false
+  log_dir: ".logs"
+
+cache:
+  dir: ".cache"
+  refresh: false
+
+sources:
+  mitre:
+    enabled: true
+    domain: "enterprise-attack"
+    url: "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json"
+    local_path: null
+    include_tactics: true
+    include_techniques: true
+    include_subtechniques: true
+    include_mitigations: true
+    include_data_sources: true
+    include_tools: true
+    include_groups: false
+    include_software: false
+    include_malware: false
+
+rendering:
+  use_full_path_wikilinks: true
+  alias_wikilinks: true
+  title_in_body: false
+  generated_marker: "focuslocust"
+
+naming:
+  style: "id-slug"
+  lowercase: true
+  separator: "-"
+  preserve_dots: true

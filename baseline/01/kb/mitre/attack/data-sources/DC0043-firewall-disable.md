@@ -1,0 +1,15 @@
+---
+generated_by: focuslocust
+source: mitre
+type: data-source
+aliases:
+    - DC0043
+tags:
+    - attack/domain/enterprise_attack
+    - attack/type/data_source
+mitre-attack: kb/mitre/attack/data-sources/DC0043-firewall-disable
+---
+
+## Description
+
+The deactivation, misconfiguration, or complete stoppage of firewall services, either on a host or in a cloud control plane. Such activity may involve turning off firewalls, modifying rules to disable protection, or deleting firewall-related configurations and activity logs. Examples: <br><br>- Disabling Host-Based Firewalls: Stopping the Windows Defender Firewall service or using `iptables -F` to flush all rules on a Linux system.<br>- Cloud Firewall Modification or Deactivation: Modifying or deleting security group rules in AWS or disabling a network firewall in Azure.<br>- Activity Log Deletion: Writing or deleting entries in Azure Firewall Activity Logs to hide unauthorized firewall changes.<br>- Temporary Disable for Malicious Operations: Temporarily disabling a firewall to allow malicious files or traffic, then re-enabling it to avoid detection.<br>- Using Command-Line Tools to Stop Firewalls: Running commands like `Set-NetFirewallProfile -Enabled False on Windows or systemctl stop ufw` on Linux.<br><br>This data component can be collected through the following measures:<br><br>Cloud Control Plane<br><br>- Azure Activity Logs:<br>    - Enable logging of administrative actions, such as stopping or modifying Azure Firewall configurations.<br>    - Use Azure Monitor to track specific firewall-related actions, including disabling or rule deletion.<br>- AWS CloudTrail Logs:<br>    - Monitor `RevokeSecurityGroupIngress` or `RevokeSecurityGroupEgress` events to detect rule changes in AWS Security Groups.<br>- Google Cloud Platform Logs:<br>    - Collect logs from the Firewall Rules resource in Google Cloud Operations Suite to detect rule deletions or modifications.<br><br>Host-Level Firewalls<br><br>- Windows Firewall Event Logs:<br>    - Enable logging of firewall state changes:<br>        - Security Event ID 2004: Firewall service stopped.<br>        - Security Event ID 2005: Firewall service started.<br>    - Use Sysmon for process creation events tied to firewall commands or scripts (Sysmon Event ID 1).<br>- Linux Firewall Logs: Use auditd to track commands like iptables, firewalld, or ufw: `auditctl -a always,exit -F arch=b64 -S execve -k firewall_disable`<br>- macOS Firewall: Monitor changes to the macOS Application Firewall using the log show command.<br><br>Network-Level Monitoring<br><br>- IDS/IPS Alerts: Deploy IDS/IPS systems to monitor abnormal traffic flows that could indicate firewall disablement.<br>- NetFlow Data: Analyze NetFlow or packet capture data for traffic patterns inconsistent with firewall enforcement.<br><br>SIEM and CSPM Tools<br><br>- SIEM Integration: Use tools like Splunk or QRadar to centralize and analyze firewall disablement events from both hosts and cloud platforms.<br>- Cloud Security Posture Management (CSPM): Use CSPM solutions to monitor misconfigurations and track deactivation of critical cloud services like firewalls.

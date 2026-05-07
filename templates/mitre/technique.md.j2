@@ -1,0 +1,76 @@
+---
+generated_by: {{ generated_marker }}
+source: mitre
+type: technique
+aliases:
+{% for alias in obj.aliases %}
+    - {{ alias }}
+{% endfor %}
+tags:
+{% for tag in obj.tags %}
+    - {{ tag }}
+{% endfor %}
+mitre-attack: {{ obj.path | strip_md }}
+tactic:
+{% for tactic in obj.tactics %}
+    - {{ tactic | replace("-", " ") | title }}
+{% endfor %}
+platforms:
+{% for platform in obj.platforms %}
+    - {{ platform }}
+{% endfor %}
+permissions required:
+{% if obj.permissions_required %}
+{% for permission in obj.permissions_required %}
+    - {{ permission }}
+{% endfor %}
+{% else %}
+    - none
+{% endif %}
+---
+
+## Description
+
+{{ obj.description | parse_description(obj.reference_notes, link_map) }}
+
+{% if obj.procedure_examples %}
+## Procedure Examples
+| ID | Name | Use |
+| --- | --- | --- |
+{% for procedure in obj.procedure_examples %}
+| {{ procedure.link | table_cell }} | {{ procedure.name | table_cell }} | {{ procedure.description | parse_description(procedure.reference_notes, link_map) | table_cell }} |
+{% endfor %}
+{% endif %}
+
+{% if obj.mitigations %}
+## Mitigations
+| ID | Name | Description |
+| --- | --- | --- |
+{% for mitigation in obj.mitigations %}
+| {{ mitigation.link | table_cell }} | {{ mitigation.name | table_cell }} | {{ mitigation.description | parse_description(mitigation.reference_notes, link_map) | table_cell }} |
+{% endfor %}
+{% endif %}
+
+{% if obj.subtechniques %}
+## Sub-techniques
+| ID | Name |
+| --- | --- |
+{% for subtechnique in obj.subtechniques %}
+| {{ subtechnique.link | table_cell }} | {{ subtechnique.name | table_cell }} |
+{% endfor %}
+{% endif %}
+
+{% if obj.data_sources %}
+## Data Sources
+{% for data_source in obj.data_sources %}
+- {{ data_source }}
+{% endfor %}
+{% endif %}
+
+{% if obj.reference_notes %}
+{% for ref in obj.reference_notes %}
+{% if ref.url %} [^{{ ref.id }}]: [{{ ref.source_name }}]({{ ref.url }})
+{% else %} [^{{ ref.id }}]: {{ ref.source_name }}
+{% endif %}
+{% endfor %}
+{% endif %}

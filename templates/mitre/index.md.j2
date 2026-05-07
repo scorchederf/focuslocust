@@ -1,0 +1,13 @@
+---
+generated_by: {{ generated_marker }}
+source: {{ source }}
+type: index
+tags:
+    - attack/type/index
+---
+
+# {{ title }}
+
+{% for obj in objects %}
+- {{ obj | index_link(link_map) }}
+{% endfor %}
