@@ -8,7 +8,6 @@ The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBi
 
 Future stages will add:
 
-- GTFOBins
 - Sigma
 - Atomic Red Team
 - PayloadsAllTheThings

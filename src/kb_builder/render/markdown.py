@@ -7,7 +7,7 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from ..models import LolbasTool, MitreObject
+from ..models import GtfobinsTool, LolbasTool, MitreObject
 from ..naming import strip_md
 from ..paths import ProjectPaths
 from ..render.links import wikilink
@@ -87,6 +87,39 @@ class MarkdownRenderer:
         index = self._normalize_markdown(index)
         if safe_write_text(
             self.paths.vault_path / "kb/indexes/lolbas.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
+
+        return written, skipped
+
+    def render_gtfobins(self, tools: list[GtfobinsTool]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for tool in tools:
+            content = self.env.get_template("gtfobins/tool.md.j2").render(
+                obj=tool,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / tool.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("gtfobins/index.md.j2").render(
+            title="GTFOBins Tools",
+            objects=tools,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/gtfobins.md",
             index,
             marker=self.marker,
             logger=self.logger,

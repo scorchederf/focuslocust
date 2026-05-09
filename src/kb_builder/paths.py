@@ -53,6 +53,8 @@ def ensure_project_paths(config: dict[str, Any]) -> ProjectPaths:
         vault_path / "kb" / "mitre" / "attack" / "indexes",
         vault_path / "kb" / "lolbas",
         vault_path / "kb" / "lolbas" / "tools",
+        vault_path / "kb" / "gtfobins",
+        vault_path / "kb" / "gtfobins" / "tools",
         vault_path / "kb" / "indexes",
         cache_path,
         cache_path / "mitre",

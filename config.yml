@@ -26,6 +26,9 @@ sources:
   lolbins:
     enabled: true
     local_path: ".cache/lolbas/yml"
+  gtfobins:
+    enabled: true
+    local_path: ".cache/gtfobins/_gtfobins"
 
 rendering:
   use_full_path_wikilinks: true

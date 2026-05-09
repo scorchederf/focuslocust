@@ -1,0 +1,11 @@
+---
+parsed_by: {{ parsed_marker }}
+source: gtfobins
+type: index
+---
+
+# {{ title }}
+
+{% for obj in objects %}
+- [[{{ obj.path | strip_md }}|{{ obj.name }}]]
+{% endfor %}

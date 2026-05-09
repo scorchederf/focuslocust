@@ -1,0 +1,62 @@
+---
+parsed_by: {{ parsed_marker }}
+title: {{ obj.name | yaml_quote }}
+description: {{ obj.description | yaml_quote }}
+source: gtfobins
+source_type: tool
+build_group: gtfobins/tools
+id: {{ obj.id | yaml_quote }}
+name: {{ obj.name | yaml_quote }}
+platform:
+  - {{ "Linux" | yaml_quote }}
+functions:
+{% for value in obj.functions %}
+  - {{ value | yaml_quote }}
+{% endfor %}
+tags:
+  - {{ "gtfobins" | yaml_quote }}
+  - {{ "gtfobins/tool" | yaml_quote }}
+  - {{ "platform/linux" | yaml_quote }}
+{% for value in obj.functions %}
+  - {{ ("gtfobins/function/" ~ (value | lower | replace(' ', '-'))) | yaml_quote }}
+{% endfor %}
+---
+
+# {{ obj.name }}
+
+## Summary
+
+{{ obj.description }}
+
+## Key Details
+
+| Field | Value |
+|---|---|
+| Name | `{{ obj.name }}` |
+| Source | `GTFOBins` |
+| Type | `Tool` |
+| Functions | {{ obj.functions | join(", ") }} |
+| URL | {{ obj.url }} |
+
+## Functions
+
+{% for example in obj.function_examples %}
+### {{ example.function }}
+
+{% if example.description %}
+{{ example.description }}
+{% endif %}
+
+{% if example.code %}
+```sh
+{{ example.code }}
+```
+{% else %}
+- No command listed.
+{% endif %}
+
+{% else %}
+- No functions listed.
+{% endfor %}
+
+

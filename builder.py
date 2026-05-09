@@ -13,6 +13,7 @@ from src.kb_builder.logging_setup import setup_logging
 from src.kb_builder.paths import ensure_project_paths
 from src.kb_builder.render.markdown import MarkdownRenderer
 from src.kb_builder.safe_write import clean_generated_markdown
+from src.kb_builder.sources.gtfobins import GtfobinsSource
 from src.kb_builder.sources.lolbas import LolbasSource
 from src.kb_builder.sources.mitre import MitreSource
 
@@ -47,6 +48,7 @@ def build(config_path: str, vault_override: str | None = None, verbose: bool = F
     sources_config = config.get("sources", {})
     mitre_config = sources_config.get("mitre", {})
     lolbins_config = sources_config.get("lolbins", sources_config.get("lolbas", {}))
+    gtfobins_config = sources_config.get("gtfobins", {})
     total_written = 0
     total_skipped = 0
     raw_sources: dict[str, list[dict]] = {}
@@ -77,6 +79,18 @@ def build(config_path: str, vault_override: str | None = None, verbose: bool = F
         total_skipped += skipped_count
     else:
         logger.info("LOLBAS/LOLBins source is disabled")
+
+    if gtfobins_config.get("enabled", False):
+        source = GtfobinsSource(config=gtfobins_config, logger=logger)
+        records = source.load()
+        raw_sources["gtfobins"] = records
+        tools = source.parse(records)
+        build_objects["gtfobins/tools"] = tools
+        written_count, skipped_count = renderer.render_gtfobins(tools)
+        total_written += written_count
+        total_skipped += skipped_count
+    else:
+        logger.info("GTFOBins source is disabled")
 
     if raw_sources:
         if render_datasource_field_summary(
@@ -149,11 +163,19 @@ def doctor(config_path: str, verbose: bool = False) -> int:
     ]
     sources_config = config.get("sources", {})
     lolbins_config = sources_config.get("lolbins", sources_config.get("lolbas", {}))
+    gtfobins_config = sources_config.get("gtfobins", {})
     if lolbins_config.get("enabled", False):
         required_templates.extend(
             [
                 Path("templates/lolbas/tool.md.j2"),
                 Path("templates/lolbas/index.md.j2"),
+            ]
+        )
+    if gtfobins_config.get("enabled", False):
+        required_templates.extend(
+            [
+                Path("templates/gtfobins/tool.md.j2"),
+                Path("templates/gtfobins/index.md.j2"),
             ]
         )
 
@@ -170,6 +192,10 @@ def doctor(config_path: str, verbose: bool = False) -> int:
 
     if lolbins_config.get("enabled", False) and not lolbins_config.get("local_path"):
         logger.error("LOLBAS/LOLBins source requires local_path")
+        return 1
+
+    if gtfobins_config.get("enabled", False) and not gtfobins_config.get("local_path"):
+        logger.error("GTFOBins source requires local_path")
         return 1
 
     logger.info("Doctor check passed")

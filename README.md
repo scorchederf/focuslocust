@@ -2,7 +2,7 @@
 
 Focus Locust is a simple Python builder for an Obsidian security knowledge base.
 
-The builder currently supports MITRE ATT&CK Enterprise and LOLBAS/LOLBins. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
+The builder currently supports MITRE ATT&CK Enterprise, LOLBAS/LOLBins, and GTFOBins. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
 
 ## Current Scope
 
@@ -12,10 +12,12 @@ Implemented sources:
 - tactics, techniques, sub-techniques, mitigations, data sources, and software/tool notes
 - LOLBAS / LOLBins YAML from `.cache/lolbas/yml`
 - LOLBAS tool notes under `kb/lolbas/tools/`
+- GTFOBins Markdown from `.cache/gtfobins/_gtfobins`
+- GTFOBins tool notes under `kb/gtfobins/tools/`
 - Obsidian Markdown output
 - deterministic filenames using `<id>-<lowercase-kebab-slug>.md`
 - full-path Obsidian wikilinks
-- source-specific templates under `templates/mitre/` and `templates/lolbas/`
+- source-specific templates under `templates/mitre/`, `templates/lolbas/`, and `templates/gtfobins/`
 - generated-file overwrite protection
 - simple index pages
 - `_build` datasource field and template reference pages
@@ -32,7 +34,7 @@ Intentionally excluded:
 - generated group pages
 - campaign pages
 - malware pages
-- Sigma, Atomic Red Team, PayloadsAllTheThings, GTFOBins, and internal Markdown ingestion
+- Sigma, Atomic Red Team, PayloadsAllTheThings, and internal Markdown ingestion
 
 Future source work should follow the source-specific parser/template pattern already used by MITRE and LOLBAS.
 
@@ -43,8 +45,10 @@ flowchart LR
     Config[config.yml] --> CLI[builder.py]
     CLI --> MITRE[load or fetch MITRE STIX JSON]
     CLI --> LOLBAS[load LOLBAS YAML]
+    CLI --> GTFOBins[load GTFOBins Markdown]
     MITRE --> Parser[parse supported source objects]
     LOLBAS --> Parser
+    GTFOBins --> Parser
     Parser --> Relations[collect supported relationships]
     Relations --> Render[render source-specific templates]
     Render --> Safety[safe generated-file write]
@@ -62,9 +66,11 @@ Main code locations:
 - cache handling: `src/kb_builder/cache.py`
 - MITRE parser: `src/kb_builder/sources/mitre.py`
 - LOLBAS parser: `src/kb_builder/sources/lolbas.py`
+- GTFOBins parser: `src/kb_builder/sources/gtfobins.py`
 - renderer and index generation: `src/kb_builder/render/markdown.py`
 - datasource field summaries: `src/kb_builder/build_summary.py`
 - templates: `templates/mitre/` and `templates/shared/`
+- source templates: `templates/lolbas/` and `templates/gtfobins/`
 - safe-write and clean logic: `src/kb_builder/safe_write.py`
 
 ## Install
@@ -154,12 +160,15 @@ sources:
   lolbins:
     enabled: true
     local_path: ".cache/lolbas/yml"
+  gtfobins:
+    enabled: true
+    local_path: ".cache/gtfobins/_gtfobins"
 
 rendering:
   parsed_marker: "focuslocust"
 ```
 
-`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory.
+`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory. `sources.gtfobins.local_path` points at the cached GTFOBins Markdown directory.
 
 ## Naming
 
@@ -176,6 +185,7 @@ T1003.002-security-account-manager.md
 S0002-mimikatz.md
 M1027-password-policies.md
 certutil.exe.md
+tar.md
 ```
 
 Dots in ATT&CK sub-technique IDs and Windows filenames are preserved.
@@ -196,6 +206,8 @@ vault/
 │   │       ├── software/
 │   │       └── indexes/
 │   ├── lolbas/
+│   │   └── tools/
+│   ├── gtfobins/
 │   │   └── tools/
 │   ├── _build/
 │   └── indexes/
@@ -256,7 +268,7 @@ Every build writes datasource reference notes under:
 vault/kb/_build/
 ```
 
-`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE and LOLBAS objects.
+`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE, LOLBAS, and GTFOBins objects.
 
 Example Jinja raw-field access:
 
@@ -307,6 +319,8 @@ templates/mitre/tool.md.j2
 templates/mitre/index.md.j2
 templates/lolbas/tool.md.j2
 templates/lolbas/index.md.j2
+templates/gtfobins/tool.md.j2
+templates/gtfobins/index.md.j2
 templates/build/object-properties.md.j2
 ```
 

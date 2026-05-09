@@ -61,3 +61,16 @@ class LolbasTool(KBObject):
     detections: list[str] = field(default_factory=list)
     resources: list[str] = field(default_factory=list)
     acknowledgements: list[str] = field(default_factory=list)
+
+
+@dataclass
+class GtfobinsFunction:
+    function: str = ""
+    code: str = ""
+    description: str = ""
+
+
+@dataclass
+class GtfobinsTool(KBObject):
+    functions: list[str] = field(default_factory=list)
+    function_examples: list[GtfobinsFunction] = field(default_factory=list)
