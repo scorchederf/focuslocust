@@ -1,6 +1,6 @@
 # Adding A Source
 
-MITRE, LOLBAS, and GTFOBins are implemented. Future sources should follow the same source-specific pattern.
+MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings are implemented. Future sources should follow the same source-specific pattern.
 
 ```mermaid
 flowchart LR
@@ -36,13 +36,11 @@ Not implemented yet:
 
 - Sigma
 - Atomic Red Team
-- PayloadsAllTheThings
-- internal Markdown repositories
+- HackTricks-style Markdown repositories
 
 Each future source should keep its own folder, for example:
 
 ```text
 kb/sigma/
 kb/atomic/
-kb/payloadsallthethings/
 ```

@@ -74,3 +74,24 @@ class GtfobinsFunction:
 class GtfobinsTool(KBObject):
     functions: list[str] = field(default_factory=list)
     function_examples: list[GtfobinsFunction] = field(default_factory=list)
+
+
+@dataclass
+class PayloadTopic(KBObject):
+    category: str = ""
+    relative_path: str = ""
+    headings: list[str] = field(default_factory=list)
+    body: str = ""
+    moved_to: str = ""
+    is_category_index: bool = False
+    has_category_index: bool = False
+
+
+@dataclass
+class InternalTopic(KBObject):
+    category: str = ""
+    relative_path: str = ""
+    headings: list[str] = field(default_factory=list)
+    body: str = ""
+    is_category_index: bool = False
+    has_category_index: bool = False

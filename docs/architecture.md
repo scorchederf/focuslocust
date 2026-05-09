@@ -11,9 +11,13 @@ flowchart TD
     Sources --> MITRE[MITRE STIX loader/parser]
     Sources --> LOLBAS[LOLBAS YAML loader/parser]
     Sources --> GTFOBins[GTFOBins Markdown loader/parser]
+    Sources --> PATT[PayloadsAllTheThings Markdown loader/parser]
+    Sources --> IATT[InternalAllTheThings Markdown loader/parser]
     MITRE --> Renderer[MarkdownRenderer]
     LOLBAS --> Renderer
     GTFOBins --> Renderer
+    PATT --> Renderer
+    IATT --> Renderer
     Renderer --> Templates[source-specific templates]
     Templates --> SafeWrite[safe_write_text]
     SafeWrite --> Vault[vault/kb]
@@ -32,6 +36,8 @@ flowchart TD
 | MITRE parser | `src/kb_builder/sources/mitre.py` | Parses ATT&CK objects and relationships. |
 | LOLBAS parser | `src/kb_builder/sources/lolbas.py` | Parses LOLBAS YAML from `.cache/lolbas/yml`. |
 | GTFOBins parser | `src/kb_builder/sources/gtfobins.py` | Parses GTFOBins Markdown/YAML documents from `.cache/gtfobins/_gtfobins`. |
+| PayloadsAllTheThings parser | `src/kb_builder/sources/payloadsallthethings.py` | Parses PayloadsAllTheThings Markdown topics from `.cache/payloadsallthethings`. |
+| InternalAllTheThings parser | `src/kb_builder/sources/internalallthethings.py` | Parses InternalAllTheThings Markdown topics from `.cache/internalallthethings/docs`. |
 | Renderer | `src/kb_builder/render/markdown.py` | Renders Markdown and registers Jinja filters. |
 | Build refs | `src/kb_builder/build_summary.py` | Writes `_build` datasource field references. |
 
@@ -55,6 +61,16 @@ GTFOBins generates:
 
 - `kb/gtfobins/tools/`
 - `kb/indexes/gtfobins.md`
+
+PayloadsAllTheThings generates:
+
+- `kb/payloads/`
+- `kb/indexes/payloadsallthethings.md`
+
+InternalAllTheThings generates:
+
+- `kb/internal/`
+- `kb/indexes/internalallthethings.md`
 
 Build reference pages generate:
 

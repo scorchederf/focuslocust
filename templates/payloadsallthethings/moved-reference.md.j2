@@ -1,7 +1,34 @@
 ---
-parsed_by: focuslocust
+parsed_by: {{ parsed_marker }}
 source: payloadsallthethings
-type: placeholder
+source_type: moved-reference
+build_group: payloadsallthethings/topics
+type: payload-topic
+id: {{ obj.id | yaml_quote }}
+title: {{ obj.name | yaml_quote }}
+description: {{ obj.description | yaml_quote }}
+category: {{ obj.category | yaml_quote }}
+relative_path: {{ obj.relative_path | yaml_quote }}
+moved_to: {{ obj.moved_to | yaml_quote }}
+source_url: {{ obj.url | yaml_quote }}
+tags:
+{% for tag in obj.tags %}
+  - {{ tag | yaml_quote }}
+{% endfor %}
 ---
 
-Stage-one placeholder template.
+# {{ obj.name }}
+
+This PayloadsAllTheThings page has moved.
+
+| Field | Value |
+|---|---|
+| Dataset | `PayloadsAllTheThings` |
+| Category | `{{ obj.category }}` |
+| Source path | `{{ obj.relative_path }}` |
+| Original source | {{ obj.url }} |
+| Moved to | {{ obj.moved_to }} |
+
+## Source Notice
+
+{{ obj.body }}

@@ -2,7 +2,7 @@
 
 Focus Locust is a simple Python builder for an Obsidian security knowledge base.
 
-The builder currently supports MITRE ATT&CK Enterprise, LOLBAS/LOLBins, and GTFOBins. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
+The builder currently supports MITRE ATT&CK Enterprise, LOLBAS/LOLBins, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
 
 ## Current Scope
 
@@ -14,10 +14,14 @@ Implemented sources:
 - LOLBAS tool notes under `kb/lolbas/tools/`
 - GTFOBins Markdown from `.cache/gtfobins/_gtfobins`
 - GTFOBins tool notes under `kb/gtfobins/tools/`
+- PayloadsAllTheThings Markdown from `.cache/payloadsallthethings`
+- PayloadsAllTheThings topic/reference notes under `kb/payloads/`
+- InternalAllTheThings Markdown from `.cache/internalallthethings/docs`
+- InternalAllTheThings topic/reference notes under `kb/internal/`
 - Obsidian Markdown output
 - deterministic filenames using `<id>-<lowercase-kebab-slug>.md`
 - full-path Obsidian wikilinks
-- source-specific templates under `templates/mitre/`, `templates/lolbas/`, and `templates/gtfobins/`
+- source-specific templates under `templates/mitre/`, `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, and `templates/internalallthethings/`
 - generated-file overwrite protection
 - simple index pages
 - `_build` datasource field and template reference pages
@@ -34,9 +38,9 @@ Intentionally excluded:
 - generated group pages
 - campaign pages
 - malware pages
-- Sigma, Atomic Red Team, PayloadsAllTheThings, and internal Markdown ingestion
+- Sigma and Atomic Red Team
 
-Future source work should follow the source-specific parser/template pattern already used by MITRE, LOLBAS, and GTFOBins.
+Future source work should follow the source-specific parser/template pattern already used by MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings.
 
 ## Pipeline
 
@@ -46,9 +50,13 @@ flowchart LR
     CLI --> MITRE[load or fetch MITRE STIX JSON]
     CLI --> LOLBAS[load LOLBAS YAML]
     CLI --> GTFOBins[load GTFOBins Markdown]
+    CLI --> PATT[load PayloadsAllTheThings Markdown]
+    CLI --> IATT[load InternalAllTheThings Markdown]
     MITRE --> Parser[parse supported source objects]
     LOLBAS --> Parser
     GTFOBins --> Parser
+    PATT --> Parser
+    IATT --> Parser
     Parser --> Relations[collect supported relationships]
     Relations --> Render[render source-specific templates]
     Render --> Safety[safe generated-file write]
@@ -67,10 +75,12 @@ Main code locations:
 - MITRE parser: `src/kb_builder/sources/mitre.py`
 - LOLBAS parser: `src/kb_builder/sources/lolbas.py`
 - GTFOBins parser: `src/kb_builder/sources/gtfobins.py`
+- PayloadsAllTheThings parser: `src/kb_builder/sources/payloadsallthethings.py`
+- InternalAllTheThings parser: `src/kb_builder/sources/internalallthethings.py`
 - renderer and index generation: `src/kb_builder/render/markdown.py`
 - datasource field summaries: `src/kb_builder/build_summary.py`
 - templates: `templates/mitre/` and `templates/shared/`
-- source templates: `templates/lolbas/` and `templates/gtfobins/`
+- source templates: `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, and `templates/internalallthethings/`
 - safe-write and clean logic: `src/kb_builder/safe_write.py`
 
 ## Install
@@ -94,6 +104,8 @@ python3 builder.py doctor --config config.yml
 ```bash
 python3 builder.py build --config config.yml
 ```
+
+Repository workflow note: agents should not run the build automatically after changes unless explicitly asked. Run tests, then give this build command to the project owner to run.
 
 The generated vault is written to:
 
@@ -163,12 +175,18 @@ sources:
   gtfobins:
     enabled: true
     local_path: ".cache/gtfobins/_gtfobins"
+  payloadsallthethings:
+    enabled: true
+    local_path: ".cache/payloadsallthethings"
+  internalallthethings:
+    enabled: true
+    local_path: ".cache/internalallthethings/docs"
 
 rendering:
   parsed_marker: "focuslocust"
 ```
 
-`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory. `sources.gtfobins.local_path` points at the cached GTFOBins Markdown directory.
+`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory. `sources.gtfobins.local_path` points at the cached GTFOBins Markdown directory. `sources.payloadsallthethings.local_path` points at the cached PayloadsAllTheThings repository. `sources.internalallthethings.local_path` points at the cached InternalAllTheThings docs directory.
 
 ## Naming
 
@@ -186,6 +204,8 @@ S0002-mimikatz.md
 M1027-password-policies.md
 certutil.exe.md
 tar.md
+command-injection.md
+initial-access.md
 ```
 
 Dots in ATT&CK sub-technique IDs and Windows filenames are preserved.
@@ -209,6 +229,14 @@ vault/
 │   │   └── tools/
 │   ├── gtfobins/
 │   │   └── tools/
+│   ├── payloads/
+│   │   ├── command-injection/
+│   │   ├── file-inclusion/
+│   │   └── ...
+│   ├── internal/
+│   │   ├── active-directory/
+│   │   ├── redteam/
+│   │   └── ...
 │   ├── _build/
 │   └── indexes/
 ```
@@ -218,7 +246,6 @@ Reserved future folders may exist or be created later:
 ```text
 kb/detections/
 kb/tests/
-kb/payloads/
 ws/
 ```
 
@@ -268,7 +295,7 @@ Every build writes datasource reference notes under:
 vault/kb/_build/
 ```
 
-`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE, LOLBAS, and GTFOBins objects.
+`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings objects.
 
 Example Jinja raw-field access:
 
@@ -321,6 +348,11 @@ templates/lolbas/tool.md.j2
 templates/lolbas/index.md.j2
 templates/gtfobins/tool.md.j2
 templates/gtfobins/index.md.j2
+templates/payloadsallthethings/payload-topic.md.j2
+templates/payloadsallthethings/moved-reference.md.j2
+templates/payloadsallthethings/index.md.j2
+templates/internalallthethings/topic.md.j2
+templates/internalallthethings/index.md.j2
 templates/build/object-properties.md.j2
 ```
 
@@ -345,7 +377,7 @@ Before finishing a change:
 python3 -m pytest
 ```
 
-For final vault regeneration, run:
+Do not run vault regeneration automatically unless explicitly requested. For final vault regeneration, give the project owner this command:
 
 ```bash
 python3 builder.py build --config config.yml

@@ -6,8 +6,8 @@
 flowchart LR
     Install[pip install requirements] --> Doctor[doctor]
     Doctor --> Test[pytest]
-    Test --> Build[build vault]
-    Build --> Obsidian[open vault/]
+    Test --> OwnerBuild[owner runs build]
+    OwnerBuild --> Obsidian[open vault/]
 ```
 
 ```bash
@@ -38,7 +38,9 @@ Run tests after changing parsers, renderers, templates, path handling, build sum
 python3 builder.py build --config config.yml
 ```
 
-Build currently processes enabled MITRE, LOLBAS, and GTFOBins sources.
+Agents should not run this build command automatically unless explicitly requested. They should run tests and give this command to the project owner.
+
+Build currently processes enabled MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings sources.
 
 Default source settings:
 
@@ -52,6 +54,12 @@ sources:
   gtfobins:
     enabled: true
     local_path: ".cache/gtfobins/_gtfobins"
+  payloadsallthethings:
+    enabled: true
+    local_path: ".cache/payloadsallthethings"
+  internalallthethings:
+    enabled: true
+    local_path: ".cache/internalallthethings/docs"
 ```
 
 ## Clean
@@ -75,6 +83,8 @@ Useful starting points:
 - `vault/kb/indexes/mitre.md`
 - `vault/kb/indexes/lolbas.md`
 - `vault/kb/indexes/gtfobins.md`
+- `vault/kb/indexes/payloadsallthethings.md`
+- `vault/kb/indexes/internalallthethings.md`
 - `vault/kb/_build/datasource-fields.md`
 
 ## Cache
@@ -103,4 +113,22 @@ The active GTFOBins source directory is:
 
 ```text
 .cache/gtfobins/_gtfobins
+```
+
+PayloadsAllTheThings has been cloned under:
+
+```text
+.cache/payloadsallthethings/
+```
+
+InternalAllTheThings has been cloned under:
+
+```text
+.cache/internalallthethings/
+```
+
+The active InternalAllTheThings source directory is:
+
+```text
+.cache/internalallthethings/docs
 ```

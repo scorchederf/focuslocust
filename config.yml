@@ -29,6 +29,12 @@ sources:
   gtfobins:
     enabled: true
     local_path: ".cache/gtfobins/_gtfobins"
+  payloadsallthethings:
+    enabled: true
+    local_path: ".cache/payloadsallthethings"
+  internalallthethings:
+    enabled: true
+    local_path: ".cache/internalallthethings/docs"
 
 rendering:
   use_full_path_wikilinks: true

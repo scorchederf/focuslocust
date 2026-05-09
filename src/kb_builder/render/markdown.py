@@ -7,7 +7,7 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from ..models import GtfobinsTool, LolbasTool, MitreObject
+from ..models import GtfobinsTool, InternalTopic, LolbasTool, MitreObject, PayloadTopic
 from ..naming import strip_md
 from ..paths import ProjectPaths
 from ..render.links import wikilink
@@ -120,6 +120,77 @@ class MarkdownRenderer:
         index = self._normalize_markdown(index)
         if safe_write_text(
             self.paths.vault_path / "kb/indexes/gtfobins.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
+
+        return written, skipped
+
+    def render_payloadsallthethings(self, topics: list[PayloadTopic]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for topic in topics:
+            template_name = (
+                "payloadsallthethings/moved-reference.md.j2"
+                if topic.moved_to
+                else "payloadsallthethings/payload-topic.md.j2"
+            )
+            content = self.env.get_template(template_name).render(
+                obj=topic,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / topic.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("payloadsallthethings/index.md.j2").render(
+            title="PayloadsAllTheThings",
+            objects=topics,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/payloadsallthethings.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
+
+        return written, skipped
+
+    def render_internalallthethings(self, topics: list[InternalTopic]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for topic in topics:
+            content = self.env.get_template("internalallthethings/topic.md.j2").render(
+                obj=topic,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / topic.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("internalallthethings/index.md.j2").render(
+            title="InternalAllTheThings",
+            objects=topics,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/internalallthethings.md",
             index,
             marker=self.marker,
             logger=self.logger,

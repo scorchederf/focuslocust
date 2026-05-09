@@ -57,6 +57,26 @@ GTFOBins expects:
 
 If missing, clone or refresh the GTFOBins repository inside `.cache/gtfobins`.
 
+## PayloadsAllTheThings Cache Missing
+
+PayloadsAllTheThings expects:
+
+```text
+.cache/payloadsallthethings
+```
+
+If missing, clone or refresh the PayloadsAllTheThings repository inside `.cache/payloadsallthethings`.
+
+## InternalAllTheThings Cache Missing
+
+InternalAllTheThings expects:
+
+```text
+.cache/internalallthethings/docs
+```
+
+If missing, clone or refresh the InternalAllTheThings repository inside `.cache/internalallthethings`.
+
 ## YAML Frontmatter Errors
 
 Windows paths must be YAML-escaped in templates with `yaml_quote`.

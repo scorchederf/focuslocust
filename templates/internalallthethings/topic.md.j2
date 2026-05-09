@@ -1,9 +1,9 @@
 ---
 parsed_by: {{ parsed_marker }}
-source: payloadsallthethings
-source_type: payload-topic
-build_group: payloadsallthethings/topics
-type: payload-topic
+source: internalallthethings
+source_type: internal-topic
+build_group: internalallthethings/topics
+type: internal-topic
 id: {{ obj.id | yaml_quote }}
 title: {{ obj.name | yaml_quote }}
 description: {{ obj.description | yaml_quote }}
@@ -22,7 +22,7 @@ tags:
 
 | Field | Value |
 |---|---|
-| Dataset | `PayloadsAllTheThings` |
+| Dataset | `InternalAllTheThings` |
 | Category | `{{ obj.category }}` |
 | Source path | `{{ obj.relative_path }}` |
 | Source URL | {{ obj.url }} |

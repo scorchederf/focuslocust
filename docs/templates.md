@@ -8,8 +8,10 @@ Current implemented template folders:
 templates/
 ├── build/
 ├── gtfobins/
+├── internalallthethings/
 ├── lolbas/
 ├── mitre/
+├── payloadsallthethings/
 └── shared/
 ```
 
@@ -48,6 +50,25 @@ templates/gtfobins/index.md.j2
 ```
 
 GTFOBins templates render normalized fields such as `obj.name`, `obj.functions`, `obj.function_examples`, and `obj.path`, and can also access preserved source frontmatter through `obj.raw`.
+
+## PayloadsAllTheThings Templates
+
+```text
+templates/payloadsallthethings/payload-topic.md.j2
+templates/payloadsallthethings/moved-reference.md.j2
+templates/payloadsallthethings/index.md.j2
+```
+
+PayloadsAllTheThings templates render topic/reference pages from Markdown files. They use normalized fields such as `obj.name`, `obj.category`, `obj.relative_path`, `obj.headings`, `obj.body`, and `obj.moved_to`.
+
+## InternalAllTheThings Templates
+
+```text
+templates/internalallthethings/topic.md.j2
+templates/internalallthethings/index.md.j2
+```
+
+InternalAllTheThings templates render internal pentest topic/reference pages from Markdown files. They use normalized fields such as `obj.name`, `obj.category`, `obj.relative_path`, `obj.headings`, and `obj.body`.
 
 ## Build Templates
 

@@ -32,3 +32,4 @@ If an action requires access outside the repository, do not perform it.
 - Use source-specific templates.
 - Use the required naming convention: `<id>-<lowercase-kebab-slug>.md`.
 - Only overwrite/delete generated files containing `parsed_by: focuslocust`.
+- Run tests when changing code or templates, but do not run `python3 builder.py build --config config.yml` unless the user explicitly asks for a build. Give the build command to the user so they can run it.
