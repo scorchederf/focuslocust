@@ -7,9 +7,17 @@ Current implemented template folders:
 ```text
 templates/
 ├── build/
+├── gtfobins/
 ├── lolbas/
 ├── mitre/
 └── shared/
+```
+
+```mermaid
+flowchart LR
+    Object[parsed object] --> SourceTemplate[source template]
+    SourceTemplate --> Markdown[generated Markdown]
+    Markdown --> SafeWrite[safe write marker check]
 ```
 
 ## MITRE Templates
@@ -31,6 +39,15 @@ templates/lolbas/index.md.j2
 ```
 
 LOLBAS templates render normalized fields such as `obj.name`, `obj.commands`, and `obj.path`, and can also access preserved raw YAML through `obj.raw`.
+
+## GTFOBins Templates
+
+```text
+templates/gtfobins/tool.md.j2
+templates/gtfobins/index.md.j2
+```
+
+GTFOBins templates render normalized fields such as `obj.name`, `obj.functions`, `obj.function_examples`, and `obj.path`, and can also access preserved source frontmatter through `obj.raw`.
 
 ## Build Templates
 

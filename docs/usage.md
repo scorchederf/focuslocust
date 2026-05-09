@@ -2,6 +2,14 @@
 
 ## Install
 
+```mermaid
+flowchart LR
+    Install[pip install requirements] --> Doctor[doctor]
+    Doctor --> Test[pytest]
+    Test --> Build[build vault]
+    Build --> Obsidian[open vault/]
+```
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -30,7 +38,7 @@ Run tests after changing parsers, renderers, templates, path handling, build sum
 python3 builder.py build --config config.yml
 ```
 
-Build currently processes enabled MITRE and LOLBAS sources.
+Build currently processes enabled MITRE, LOLBAS, and GTFOBins sources.
 
 Default source settings:
 
@@ -41,6 +49,9 @@ sources:
   lolbins:
     enabled: true
     local_path: ".cache/lolbas/yml"
+  gtfobins:
+    enabled: true
+    local_path: ".cache/gtfobins/_gtfobins"
 ```
 
 ## Clean
@@ -63,6 +74,7 @@ Useful starting points:
 
 - `vault/kb/indexes/mitre.md`
 - `vault/kb/indexes/lolbas.md`
+- `vault/kb/indexes/gtfobins.md`
 - `vault/kb/_build/datasource-fields.md`
 
 ## Cache
@@ -79,4 +91,16 @@ The active LOLBAS YAML directory is:
 
 ```text
 .cache/lolbas/yml
+```
+
+GTFOBins has been cloned under:
+
+```text
+.cache/gtfobins/
+```
+
+The active GTFOBins source directory is:
+
+```text
+.cache/gtfobins/_gtfobins
 ```

@@ -10,8 +10,10 @@ flowchart TD
     Clean --> Sources[enabled sources]
     Sources --> MITRE[MITRE STIX loader/parser]
     Sources --> LOLBAS[LOLBAS YAML loader/parser]
+    Sources --> GTFOBins[GTFOBins Markdown loader/parser]
     MITRE --> Renderer[MarkdownRenderer]
     LOLBAS --> Renderer
+    GTFOBins --> Renderer
     Renderer --> Templates[source-specific templates]
     Templates --> SafeWrite[safe_write_text]
     SafeWrite --> Vault[vault/kb]
@@ -29,6 +31,7 @@ flowchart TD
 | MITRE cache | `src/kb_builder/cache.py` | Loads local/cache/remote MITRE STIX JSON. |
 | MITRE parser | `src/kb_builder/sources/mitre.py` | Parses ATT&CK objects and relationships. |
 | LOLBAS parser | `src/kb_builder/sources/lolbas.py` | Parses LOLBAS YAML from `.cache/lolbas/yml`. |
+| GTFOBins parser | `src/kb_builder/sources/gtfobins.py` | Parses GTFOBins Markdown/YAML documents from `.cache/gtfobins/_gtfobins`. |
 | Renderer | `src/kb_builder/render/markdown.py` | Renders Markdown and registers Jinja filters. |
 | Build refs | `src/kb_builder/build_summary.py` | Writes `_build` datasource field references. |
 
@@ -47,6 +50,11 @@ LOLBAS generates:
 
 - `kb/lolbas/tools/`
 - `kb/indexes/lolbas.md`
+
+GTFOBins generates:
+
+- `kb/gtfobins/tools/`
+- `kb/indexes/gtfobins.md`
 
 Build reference pages generate:
 

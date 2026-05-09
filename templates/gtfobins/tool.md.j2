@@ -59,4 +59,11 @@ tags:
 - No functions listed.
 {% endfor %}
 
+## Source Body
+
+{% if obj.raw._body %}
+{{ obj.raw._body }}
+{% else %}
+- No Markdown body provided.
+{% endif %}
 

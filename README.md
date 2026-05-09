@@ -36,7 +36,7 @@ Intentionally excluded:
 - malware pages
 - Sigma, Atomic Red Team, PayloadsAllTheThings, and internal Markdown ingestion
 
-Future source work should follow the source-specific parser/template pattern already used by MITRE and LOLBAS.
+Future source work should follow the source-specific parser/template pattern already used by MITRE, LOLBAS, and GTFOBins.
 
 ## Pipeline
 
@@ -308,7 +308,7 @@ Choose the next numeric directory manually. Do not overwrite an existing baselin
 
 ## Templates
 
-Each source has its own templates. Stage one uses:
+Each source has its own templates. The current build uses:
 
 ```text
 templates/mitre/tactic.md.j2

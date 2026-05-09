@@ -2,6 +2,14 @@
 
 ## Run Checks
 
+```mermaid
+flowchart TD
+    Failure[build or doctor failure] --> Doctor[run doctor]
+    Doctor --> Cache[check source cache paths]
+    Cache --> Templates[check required templates]
+    Templates --> Tests[run pytest]
+```
+
 ```bash
 python3 builder.py doctor --config config.yml
 python3 -m pytest
@@ -38,6 +46,16 @@ LOLBAS expects:
 ```
 
 If missing, clone or refresh the LOLBAS repo inside `.cache/lolbas`.
+
+## GTFOBins Cache Missing
+
+GTFOBins expects:
+
+```text
+.cache/gtfobins/_gtfobins
+```
+
+If missing, clone or refresh the GTFOBins repository inside `.cache/gtfobins`.
 
 ## YAML Frontmatter Errors
 

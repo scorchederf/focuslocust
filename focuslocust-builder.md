@@ -4,7 +4,7 @@
 
 Build a simple, repeatable Python tool that generates an Obsidian security knowledge base from structured and semi-structured security datasets.
 
-The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBins has also been completed as the next source.
+The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBins and GTFOBins have also been completed as source-specific tool sources.
 
 Future stages will add:
 
@@ -20,6 +20,7 @@ The immediate goal is:
 
 ```text
 MITRE ATT&CK STIX JSON
+LOLBAS / GTFOBins source files
     → parsed Python objects
     → Obsidian Markdown notes
     → wikilinks
