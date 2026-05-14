@@ -8,6 +8,7 @@ Current implemented template folders:
 templates/
 ├── build/
 ├── gtfobins/
+├── hacktricks/
 ├── internalallthethings/
 ├── lolbas/
 ├── mitre/
@@ -69,6 +70,15 @@ templates/internalallthethings/index.md.j2
 ```
 
 InternalAllTheThings templates render internal pentest topic/reference pages from Markdown files. They use normalized fields such as `obj.name`, `obj.category`, `obj.relative_path`, `obj.headings`, and `obj.body`.
+
+## HackTricks Templates
+
+```text
+templates/hacktricks/topic.md.j2
+templates/hacktricks/index.md.j2
+```
+
+HackTricks templates render topic/reference pages from Markdown files. They use normalized fields such as `obj.name`, `obj.category`, `obj.relative_path`, `obj.headings`, and `obj.body`.
 
 ## Build Templates
 

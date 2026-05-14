@@ -40,7 +40,7 @@ python3 builder.py build --config config.yml
 
 Agents should not run this build command automatically unless explicitly requested. They should run tests and give this command to the project owner.
 
-Build currently processes enabled MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings sources.
+Build currently processes enabled MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, and HackTricks sources.
 
 Default source settings:
 
@@ -60,6 +60,9 @@ sources:
   internalallthethings:
     enabled: true
     local_path: ".cache/internalallthethings/docs"
+  hacktricks:
+    enabled: true
+    local_path: ".cache/hacktricks/src"
 ```
 
 ## Clean
@@ -85,6 +88,7 @@ Useful starting points:
 - `vault/kb/indexes/gtfobins.md`
 - `vault/kb/indexes/payloadsallthethings.md`
 - `vault/kb/indexes/internalallthethings.md`
+- `vault/kb/indexes/hacktricks.md`
 - `vault/kb/_build/datasource-fields.md`
 
 ## Cache
@@ -131,4 +135,16 @@ The active InternalAllTheThings source directory is:
 
 ```text
 .cache/internalallthethings/docs
+```
+
+HackTricks has been cloned under:
+
+```text
+.cache/hacktricks/
+```
+
+The active HackTricks source directory is:
+
+```text
+.cache/hacktricks/src
 ```

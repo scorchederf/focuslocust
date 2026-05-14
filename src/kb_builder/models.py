@@ -95,3 +95,24 @@ class InternalTopic(KBObject):
     body: str = ""
     is_category_index: bool = False
     has_category_index: bool = False
+
+
+@dataclass
+class HackTricksTopic(KBObject):
+    category: str = ""
+    relative_path: str = ""
+    headings: list[str] = field(default_factory=list)
+    body: str = ""
+    is_category_index: bool = False
+    has_category_index: bool = False
+
+
+@dataclass
+class RedTeamingTopic(KBObject):
+    category: str = ""
+    relative_path: str = ""
+    headings: list[str] = field(default_factory=list)
+    body: str = ""
+    is_category_index: bool = False
+    has_category_index: bool = False
+    child_topics: list[dict[str, str]] = field(default_factory=list)

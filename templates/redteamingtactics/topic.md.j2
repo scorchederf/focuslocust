@@ -1,0 +1,40 @@
+---
+parsed_by: {{ parsed_marker }}
+source: redteamingtactics
+source_type: redteaming-topic
+build_group: redteamingtactics/topics
+type: redteaming-topic
+id: {{ obj.id | yaml_quote }}
+title: {{ obj.name | yaml_quote }}
+description: {{ obj.description | yaml_quote }}
+category: {{ obj.category | yaml_quote }}
+relative_path: {{ obj.relative_path | yaml_quote }}
+source_url: {{ obj.url | yaml_quote }}
+tags:
+{% for tag in obj.tags %}
+  - {{ tag | yaml_quote }}
+{% endfor %}
+---
+
+# {{ obj.name }}
+
+## Source
+
+| Field | Value |
+|---|---|
+| Dataset | `RedTeaming Tactics and Techniques` |
+| Category | `{{ obj.category }}` |
+| Source path | `{{ obj.relative_path }}` |
+| Source URL | {{ obj.url }} |
+{% if obj.body %}
+## Content
+
+{{ obj.body }}
+{% endif %}
+{% if obj.child_topics %}
+## Subpages
+
+{% for child in obj.child_topics %}
+- [[{{ child.path }}|{{ child.name }}]]
+{% endfor %}
+{% endif %}

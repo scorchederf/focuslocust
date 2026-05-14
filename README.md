@@ -2,7 +2,7 @@
 
 Focus Locust is a simple Python builder for an Obsidian security knowledge base.
 
-The builder currently supports MITRE ATT&CK Enterprise, LOLBAS/LOLBins, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
+The builder currently supports MITRE ATT&CK Enterprise, LOLBAS/LOLBins, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, HackTricks, and RedTeaming Tactics and Techniques. It reads source data, normalises supported records, renders Markdown with source-specific Jinja2 templates, writes indexes for browsing in Obsidian, and creates `_build` reference notes for datasource fields.
 
 ## Current Scope
 
@@ -18,10 +18,14 @@ Implemented sources:
 - PayloadsAllTheThings topic/reference notes under `kb/payloads/`
 - InternalAllTheThings Markdown from `.cache/internalallthethings/docs`
 - InternalAllTheThings topic/reference notes under `kb/internal/`
+- HackTricks Markdown from `.cache/hacktricks/src`
+- HackTricks topic/reference notes under `kb/hacktricks/`
+- RedTeaming Tactics and Techniques Markdown from `.cache/redteaming-tactics-and-techniques`
+- RedTeaming Tactics and Techniques topic/reference notes under `kb/redteaming/`
 - Obsidian Markdown output
 - deterministic filenames using `<id>-<lowercase-kebab-slug>.md`
 - full-path Obsidian wikilinks
-- source-specific templates under `templates/mitre/`, `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, and `templates/internalallthethings/`
+- source-specific templates under `templates/mitre/`, `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, `templates/internalallthethings/`, `templates/hacktricks/`, and `templates/redteamingtactics/`
 - generated-file overwrite protection
 - simple index pages
 - `_build` datasource field and template reference pages
@@ -40,7 +44,7 @@ Intentionally excluded:
 - malware pages
 - Sigma and Atomic Red Team
 
-Future source work should follow the source-specific parser/template pattern already used by MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings.
+Future source work should follow the source-specific parser/template pattern already used by MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, HackTricks, and RedTeaming Tactics and Techniques.
 
 ## Pipeline
 
@@ -52,11 +56,15 @@ flowchart LR
     CLI --> GTFOBins[load GTFOBins Markdown]
     CLI --> PATT[load PayloadsAllTheThings Markdown]
     CLI --> IATT[load InternalAllTheThings Markdown]
+    CLI --> HackTricks[load HackTricks Markdown]
+    CLI --> RedTeam[load RedTeaming Tactics Markdown]
     MITRE --> Parser[parse supported source objects]
     LOLBAS --> Parser
     GTFOBins --> Parser
     PATT --> Parser
     IATT --> Parser
+    HackTricks --> Parser
+    RedTeam --> Parser
     Parser --> Relations[collect supported relationships]
     Relations --> Render[render source-specific templates]
     Render --> Safety[safe generated-file write]
@@ -77,10 +85,12 @@ Main code locations:
 - GTFOBins parser: `src/kb_builder/sources/gtfobins.py`
 - PayloadsAllTheThings parser: `src/kb_builder/sources/payloadsallthethings.py`
 - InternalAllTheThings parser: `src/kb_builder/sources/internalallthethings.py`
+- HackTricks parser: `src/kb_builder/sources/hacktricks.py`
+- RedTeaming Tactics parser: `src/kb_builder/sources/redteamingtactics.py`
 - renderer and index generation: `src/kb_builder/render/markdown.py`
 - datasource field summaries: `src/kb_builder/build_summary.py`
 - templates: `templates/mitre/` and `templates/shared/`
-- source templates: `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, and `templates/internalallthethings/`
+- source templates: `templates/lolbas/`, `templates/gtfobins/`, `templates/payloadsallthethings/`, `templates/internalallthethings/`, `templates/hacktricks/`, and `templates/redteamingtactics/`
 - safe-write and clean logic: `src/kb_builder/safe_write.py`
 
 ## Install
@@ -181,12 +191,18 @@ sources:
   internalallthethings:
     enabled: true
     local_path: ".cache/internalallthethings/docs"
+  hacktricks:
+    enabled: true
+    local_path: ".cache/hacktricks/src"
+  redteamingtactics:
+    enabled: true
+    local_path: ".cache/redteaming-tactics-and-techniques"
 
 rendering:
   parsed_marker: "focuslocust"
 ```
 
-`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory. `sources.gtfobins.local_path` points at the cached GTFOBins Markdown directory. `sources.payloadsallthethings.local_path` points at the cached PayloadsAllTheThings repository. `sources.internalallthethings.local_path` points at the cached InternalAllTheThings docs directory.
+`include_tools` controls generated ATT&CK tool notes under `kb/mitre/attack/software/`. Malware and groups are intentionally not generated as MITRE pages. `sources.lolbins.local_path` points at the cached LOLBAS YAML directory. `sources.gtfobins.local_path` points at the cached GTFOBins Markdown directory. `sources.payloadsallthethings.local_path` points at the cached PayloadsAllTheThings repository. `sources.internalallthethings.local_path` points at the cached InternalAllTheThings docs directory. `sources.hacktricks.local_path` points at the cached HackTricks `src` directory. `sources.redteamingtactics.local_path` points at the cached RedTeaming Tactics and Techniques repository.
 
 ## Naming
 
@@ -206,6 +222,8 @@ certutil.exe.md
 tar.md
 command-injection.md
 initial-access.md
+sql-injection.md
+process-injection.md
 ```
 
 Dots in ATT&CK sub-technique IDs and Windows filenames are preserved.
@@ -236,6 +254,14 @@ vault/
 │   ├── internal/
 │   │   ├── active-directory/
 │   │   ├── redteam/
+│   │   └── ...
+│   ├── hacktricks/
+│   │   ├── pentesting-web/
+│   │   ├── network-services-pentesting/
+│   │   └── ...
+│   ├── redteaming/
+│   │   ├── offensive-security/
+│   │   ├── offensive-security-experiments/
 │   │   └── ...
 │   ├── _build/
 │   └── indexes/
@@ -295,7 +321,7 @@ Every build writes datasource reference notes under:
 vault/kb/_build/
 ```
 
-`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings objects.
+`datasource-fields.md` lists raw datasource properties, observed types, counts, and sample values. Example object pages under `_build/objects/` show Jinja access expressions for representative MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, and HackTricks objects.
 
 Example Jinja raw-field access:
 
@@ -353,6 +379,8 @@ templates/payloadsallthethings/moved-reference.md.j2
 templates/payloadsallthethings/index.md.j2
 templates/internalallthethings/topic.md.j2
 templates/internalallthethings/index.md.j2
+templates/hacktricks/topic.md.j2
+templates/hacktricks/index.md.j2
 templates/build/object-properties.md.j2
 ```
 

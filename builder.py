@@ -14,10 +14,12 @@ from src.kb_builder.paths import ensure_project_paths
 from src.kb_builder.render.markdown import MarkdownRenderer
 from src.kb_builder.safe_write import clean_generated_markdown
 from src.kb_builder.sources.gtfobins import GtfobinsSource
+from src.kb_builder.sources.hacktricks import HackTricksSource
 from src.kb_builder.sources.internalallthethings import InternalAllTheThingsSource
 from src.kb_builder.sources.lolbas import LolbasSource
 from src.kb_builder.sources.mitre import MitreSource
 from src.kb_builder.sources.payloadsallthethings import PayloadsAllTheThingsSource
+from src.kb_builder.sources.redteamingtactics import RedTeamingTacticsSource
 
 
 def marker_from_config(config: dict) -> str:
@@ -53,6 +55,8 @@ def build(config_path: str, vault_override: str | None = None, verbose: bool = F
     gtfobins_config = sources_config.get("gtfobins", {})
     payloads_config = sources_config.get("payloadsallthethings", {})
     internal_config = sources_config.get("internalallthethings", {})
+    hacktricks_config = sources_config.get("hacktricks", {})
+    redteaming_config = sources_config.get("redteamingtactics", {})
     total_written = 0
     total_skipped = 0
     raw_sources: dict[str, list[dict]] = {}
@@ -119,6 +123,30 @@ def build(config_path: str, vault_override: str | None = None, verbose: bool = F
         total_skipped += skipped_count
     else:
         logger.info("InternalAllTheThings source is disabled")
+
+    if hacktricks_config.get("enabled", False):
+        source = HackTricksSource(config=hacktricks_config, logger=logger)
+        records = source.load()
+        raw_sources["hacktricks"] = records
+        topics = source.parse(records)
+        build_objects["hacktricks/topics"] = topics
+        written_count, skipped_count = renderer.render_hacktricks(topics)
+        total_written += written_count
+        total_skipped += skipped_count
+    else:
+        logger.info("HackTricks source is disabled")
+
+    if redteaming_config.get("enabled", False):
+        source = RedTeamingTacticsSource(config=redteaming_config, logger=logger)
+        records = source.load()
+        raw_sources["redteamingtactics"] = records
+        topics = source.parse(records)
+        build_objects["redteamingtactics/topics"] = topics
+        written_count, skipped_count = renderer.render_redteamingtactics(topics)
+        total_written += written_count
+        total_skipped += skipped_count
+    else:
+        logger.info("RedTeaming Tactics source is disabled")
 
     if raw_sources:
         if render_datasource_field_summary(
@@ -194,6 +222,8 @@ def doctor(config_path: str, verbose: bool = False) -> int:
     gtfobins_config = sources_config.get("gtfobins", {})
     payloads_config = sources_config.get("payloadsallthethings", {})
     internal_config = sources_config.get("internalallthethings", {})
+    hacktricks_config = sources_config.get("hacktricks", {})
+    redteaming_config = sources_config.get("redteamingtactics", {})
     if lolbins_config.get("enabled", False):
         required_templates.extend(
             [
@@ -223,6 +253,20 @@ def doctor(config_path: str, verbose: bool = False) -> int:
                 Path("templates/internalallthethings/index.md.j2"),
             ]
         )
+    if hacktricks_config.get("enabled", False):
+        required_templates.extend(
+            [
+                Path("templates/hacktricks/topic.md.j2"),
+                Path("templates/hacktricks/index.md.j2"),
+            ]
+        )
+    if redteaming_config.get("enabled", False):
+        required_templates.extend(
+            [
+                Path("templates/redteamingtactics/topic.md.j2"),
+                Path("templates/redteamingtactics/index.md.j2"),
+            ]
+        )
 
     missing = [str(path) for path in required_templates if not path.exists()]
     if missing:
@@ -249,6 +293,14 @@ def doctor(config_path: str, verbose: bool = False) -> int:
 
     if internal_config.get("enabled", False) and not internal_config.get("local_path"):
         logger.error("InternalAllTheThings source requires local_path")
+        return 1
+
+    if hacktricks_config.get("enabled", False) and not hacktricks_config.get("local_path"):
+        logger.error("HackTricks source requires local_path")
+        return 1
+
+    if redteaming_config.get("enabled", False) and not redteaming_config.get("local_path"):
+        logger.error("RedTeaming Tactics source requires local_path")
         return 1
 
     logger.info("Doctor check passed")

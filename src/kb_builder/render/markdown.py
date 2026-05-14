@@ -2,12 +2,22 @@ from __future__ import annotations
 
 from collections import defaultdict
 import json
+from pathlib import Path
 import re
+import shutil
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from ..models import GtfobinsTool, InternalTopic, LolbasTool, MitreObject, PayloadTopic
+from ..models import (
+    GtfobinsTool,
+    HackTricksTopic,
+    InternalTopic,
+    LolbasTool,
+    MitreObject,
+    PayloadTopic,
+    RedTeamingTopic,
+)
 from ..naming import strip_md
 from ..paths import ProjectPaths
 from ..render.links import wikilink
@@ -200,6 +210,95 @@ class MarkdownRenderer:
             skipped += 1
 
         return written, skipped
+
+    def render_hacktricks(self, topics: list[HackTricksTopic]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for topic in topics:
+            content = self.env.get_template("hacktricks/topic.md.j2").render(
+                obj=topic,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / topic.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("hacktricks/index.md.j2").render(
+            title="HackTricks",
+            objects=topics,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/hacktricks.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
+
+        return written, skipped
+
+    def render_redteamingtactics(self, topics: list[RedTeamingTopic]) -> tuple[int, int]:
+        written = 0
+        skipped = 0
+
+        for topic in topics:
+            self._copy_redteaming_assets(topic)
+            content = self.env.get_template("redteamingtactics/topic.md.j2").render(
+                obj=topic,
+                parsed_marker=self.marker,
+            )
+            content = self._normalize_markdown(content)
+            if safe_write_text(self.paths.vault_path / topic.path, content, marker=self.marker, logger=self.logger):
+                written += 1
+            else:
+                skipped += 1
+
+        index = self.env.get_template("redteamingtactics/index.md.j2").render(
+            title="RedTeaming Tactics and Techniques",
+            objects=topics,
+            parsed_marker=self.marker,
+        )
+        index = self._normalize_markdown(index)
+        if safe_write_text(
+            self.paths.vault_path / "kb/indexes/redteamingtactics.md",
+            index,
+            marker=self.marker,
+            logger=self.logger,
+        ):
+            written += 1
+        else:
+            skipped += 1
+
+        return written, skipped
+
+    def _copy_redteaming_assets(self, topic: RedTeamingTopic) -> None:
+        asset_filenames = topic.raw.get("_asset_filenames", [])
+        source_path = topic.raw.get("_source_path", "")
+        if not asset_filenames or not source_path:
+            return
+
+        relative_parts = Path(topic.relative_path).parts
+        if not relative_parts:
+            return
+
+        source_root = Path(source_path).parents[len(relative_parts) - 1]
+        source_asset_dir = source_root / ".gitbook" / "assets"
+        target_asset_dir = self.paths.vault_path / "kb/redteaming/_assets"
+        target_asset_dir.mkdir(parents=True, exist_ok=True)
+
+        for asset_filename in asset_filenames:
+            source_asset = source_asset_dir / asset_filename
+            target_asset = target_asset_dir / asset_filename
+            if not source_asset.is_file() or target_asset.exists():
+                continue
+            shutil.copy2(source_asset, target_asset)
 
     def _build_link_map(self, objects: list[MitreObject]) -> dict[str, str]:
         link_map = {}

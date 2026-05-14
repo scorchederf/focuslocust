@@ -9,7 +9,7 @@ Audience:
 
 Documentation goals:
 1. Explain what the project does.
-2. Explain the completed MITRE stage-one scope, completed LOLBAS scope, completed GTFOBins scope, completed PayloadsAllTheThings scope, and completed InternalAllTheThings scope.
+2. Explain the completed MITRE stage-one scope, completed LOLBAS scope, completed GTFOBins scope, completed PayloadsAllTheThings scope, completed InternalAllTheThings scope, and completed HackTricks scope.
 3. Explain what is intentionally not implemented yet.
 4. Explain the folder structure.
 5. Explain the generated file safety rule.
@@ -37,9 +37,9 @@ Files to update or create:
 - docs/troubleshooting.md
 
 Done when:
-- A new user can install dependencies, run tests, run doctor, and build the MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings vault.
+- A new user can install dependencies, run tests, run doctor, and build the MITRE, LOLBAS, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, and HackTricks vault.
 - A developer can understand where parser, renderer, templates, cache, and safe-write logic live.
 - The docs clearly state that only files with `parsed_by: focuslocust` may be overwritten.
 - The docs clearly show the filename format, for example `T1003.002-security-account-manager.md`.
-- The docs mention future sources as design notes only, not implemented features, while documenting LOLBAS, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings as complete.
+- The docs mention future sources as design notes only, not implemented features, while documenting LOLBAS, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, and HackTricks as complete.
 - Run a quick documentation review for consistency before finishing.

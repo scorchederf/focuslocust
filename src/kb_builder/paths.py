@@ -57,6 +57,7 @@ def ensure_project_paths(config: dict[str, Any]) -> ProjectPaths:
         vault_path / "kb" / "gtfobins" / "tools",
         vault_path / "kb" / "payloads",
         vault_path / "kb" / "internal",
+        vault_path / "kb" / "hacktricks",
         vault_path / "kb" / "indexes",
         cache_path,
         cache_path / "mitre",

@@ -77,6 +77,16 @@ InternalAllTheThings expects:
 
 If missing, clone or refresh the InternalAllTheThings repository inside `.cache/internalallthethings`.
 
+## HackTricks Cache Missing
+
+HackTricks expects:
+
+```text
+.cache/hacktricks/src
+```
+
+If missing, clone or refresh the HackTricks repository inside `.cache/hacktricks`.
+
 ## YAML Frontmatter Errors
 
 Windows paths must be YAML-escaped in templates with `yaml_quote`.

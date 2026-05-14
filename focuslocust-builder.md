@@ -4,13 +4,12 @@
 
 Build a simple, repeatable Python tool that generates an Obsidian security knowledge base from structured and semi-structured security datasets.
 
-The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBins, GTFOBins, PayloadsAllTheThings, and InternalAllTheThings have also been completed as source-specific sources.
+The first implementation stage, MITRE ATT&CK, has been completed. LOLBAS / LOLBins, GTFOBins, PayloadsAllTheThings, InternalAllTheThings, and HackTricks have also been completed as source-specific sources.
 
 Future stages will add:
 
 - Sigma
 - Atomic Red Team
-- HackTricks-style Markdown repositories
 - CSV / XLSX / JSON / YAML / Markdown / GitHub data sources
 
 The project should stay simple. Do not build a graph database, SQLite layer, AI layer, dashboard engine, plugin framework, or complex manifest system in stage one.
@@ -19,7 +18,7 @@ The immediate goal is:
 
 ```text
 MITRE ATT&CK STIX JSON
-LOLBAS / GTFOBins / PayloadsAllTheThings / InternalAllTheThings source files
+LOLBAS / GTFOBins / PayloadsAllTheThings / InternalAllTheThings / HackTricks source files
     → parsed Python objects
     → Obsidian Markdown notes
     → wikilinks

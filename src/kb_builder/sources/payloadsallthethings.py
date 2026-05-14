@@ -109,7 +109,7 @@ class PayloadsAllTheThingsSource:
         title = self._title(body, path)
         is_category_index = path.name.lower() == "readme.md"
         topic_id = f"patt-{slugify(relative_path.removesuffix('.md'))}"
-        page_slug = slugify(category) if is_category_index else slugify(path.stem)
+        page_slug = slugify(path.parts[-2]) if is_category_index and len(path.parts) > 1 else slugify(path.stem)
         output_dir = "/".join(slugify(part) for part in path.parts[:-1])
         output_path = f"kb/payloads/{output_dir}/{page_slug}.md" if output_dir else f"kb/payloads/{page_slug}.md"
         source_url = self._source_url(relative_path)

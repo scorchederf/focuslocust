@@ -13,11 +13,13 @@ flowchart TD
     Sources --> GTFOBins[GTFOBins Markdown loader/parser]
     Sources --> PATT[PayloadsAllTheThings Markdown loader/parser]
     Sources --> IATT[InternalAllTheThings Markdown loader/parser]
+    Sources --> HackTricks[HackTricks Markdown loader/parser]
     MITRE --> Renderer[MarkdownRenderer]
     LOLBAS --> Renderer
     GTFOBins --> Renderer
     PATT --> Renderer
     IATT --> Renderer
+    HackTricks --> Renderer
     Renderer --> Templates[source-specific templates]
     Templates --> SafeWrite[safe_write_text]
     SafeWrite --> Vault[vault/kb]
@@ -38,6 +40,7 @@ flowchart TD
 | GTFOBins parser | `src/kb_builder/sources/gtfobins.py` | Parses GTFOBins Markdown/YAML documents from `.cache/gtfobins/_gtfobins`. |
 | PayloadsAllTheThings parser | `src/kb_builder/sources/payloadsallthethings.py` | Parses PayloadsAllTheThings Markdown topics from `.cache/payloadsallthethings`. |
 | InternalAllTheThings parser | `src/kb_builder/sources/internalallthethings.py` | Parses InternalAllTheThings Markdown topics from `.cache/internalallthethings/docs`. |
+| HackTricks parser | `src/kb_builder/sources/hacktricks.py` | Parses HackTricks Markdown topics from `.cache/hacktricks/src`. |
 | Renderer | `src/kb_builder/render/markdown.py` | Renders Markdown and registers Jinja filters. |
 | Build refs | `src/kb_builder/build_summary.py` | Writes `_build` datasource field references. |
 
@@ -71,6 +74,11 @@ InternalAllTheThings generates:
 
 - `kb/internal/`
 - `kb/indexes/internalallthethings.md`
+
+HackTricks generates:
+
+- `kb/hacktricks/`
+- `kb/indexes/hacktricks.md`
 
 Build reference pages generate:
 

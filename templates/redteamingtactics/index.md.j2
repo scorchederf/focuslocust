@@ -1,0 +1,21 @@
+---
+parsed_by: {{ parsed_marker }}
+source: redteamingtactics
+type: index
+---
+
+# {{ title }}
+
+{% set current_category = namespace(value="") %}
+{% for obj in objects %}
+{% if obj.category != current_category.value %}
+{% set current_category.value = obj.category %}
+
+## {{ obj.category | replace("-", " ") | title }}
+{% endif %}
+{% if obj.has_category_index and not obj.is_category_index %}
+  - [[{{ obj.path | strip_md }}|{{ obj.name }}]]
+{% else %}
+- [[{{ obj.path | strip_md }}|{{ obj.name }}]]
+{% endif %}
+{% endfor %}

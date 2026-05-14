@@ -1,0 +1,32 @@
+---
+parsed_by: {{ parsed_marker }}
+source: hacktricks
+source_type: hacktricks-topic
+build_group: hacktricks/topics
+type: hacktricks-topic
+id: {{ obj.id | yaml_quote }}
+title: {{ obj.name | yaml_quote }}
+description: {{ obj.description | yaml_quote }}
+category: {{ obj.category | yaml_quote }}
+relative_path: {{ obj.relative_path | yaml_quote }}
+source_url: {{ obj.url | yaml_quote }}
+tags:
+{% for tag in obj.tags %}
+  - {{ tag | yaml_quote }}
+{% endfor %}
+---
+
+# {{ obj.name }}
+
+## Source
+
+| Field | Value |
+|---|---|
+| Dataset | `HackTricks` |
+| Category | `{{ obj.category }}` |
+| Source path | `{{ obj.relative_path }}` |
+| Source URL | {{ obj.url }} |
+
+## Content
+
+{{ obj.body }}
