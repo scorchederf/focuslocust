@@ -1,0 +1,97 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# IDE Tunneling
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1219.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [IDE Tunneling](../../attack/techniques/T1219.001-ide-tunneling.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1219.001 |
+| name | IDE Tunneling |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1219/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2025-03-20T18:46:24.598Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may abuse Integrated Development Environment (IDE) software with remote development features to
+  establish an interactive command and control channel on target systems within a network. IDE tunneling combines SSH, port
+  forwarding, file sharing, and debugging into a single secure connection, letting developers work on remote systems as if
+  they were local. Unlike SSH and port forwarding, IDE tunneling encapsulates an entire session and may use proprietary tunneling
+  protocols alongside SSH, allowing adversaries to blend in with legitimate development workflows. Some IDEs, like Visual
+  Studio Code, also provide CLI tools (e.g., `code tunnel`) that adversaries may use to programmatically establish tunnels
+  and generate web-accessible URLs for remote access. These tunnels can be authenticated through accounts such as GitHub,
+  enabling the adversary to control the compromised system via a legitimate developer portal.(Citation: sentinelone operationDigitalEye
+  Dec 2024)(Citation: Unit42 Chinese VSCode 06 September 2024)(Citation: Thornton tutorial VSCode shell September 2023)
+
+
+  Additionally, adversaries may use IDE tunneling for persistence. Some IDEs, such as Visual Studio Code and JetBrains, support
+  automatic reconnection. Adversaries may configure the IDE to auto-launch at startup, re-establishing the tunnel upon execution.
+  Compromised developer machines may also be exploited as jump hosts to move further into the network.
+
+
+  IDE tunneling tools may be built-in or installed as [IDE Extensions](https://attack.mitre.org/techniques/T1176/002).'
+external_references:
+- external_id: T1219.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1219/001
+- description: Aleksandar Milenkoski, Luigi Martire. (2024, December 10). Operation Digital Eye | Chinese APT Compromises
+    Critical Digital Infrastructure via Visual Studio Code Tunnels. Retrieved February 27, 2025.
+  source_name: sentinelone operationDigitalEye Dec 2024
+  url: https://www.sentinelone.com/labs/operation-digital-eye-chinese-apt-compromises-critical-digital-infrastructure-via-visual-studio-code-tunnels/
+- description: Tom Fakterman. (2024, September 6). Chinese APT Abuses VSCode to Target Government in Asia. Retrieved March
+    24, 2025.
+  source_name: Unit42 Chinese VSCode 06 September 2024
+  url: https://unit42.paloaltonetworks.com/stately-taurus-abuses-vscode-southeast-asian-espionage/
+- description: 'Truvis Thornton. (2023, September 25). Visual Studio Code: embedded reverse shell and how to block, create
+    Sentinel Detection, and add Environment Prevention. Retrieved March 24, 2025.'
+  source_name: Thornton tutorial VSCode shell September 2023
+  url: https://medium.com/@truvis.thornton/visual-studio-code-embedded-reverse-shell-and-how-to-block-create-sentinel-detection-and-add-e864ebafaf6d
+id: attack-pattern--77e29a47-e263-4f11-8692-e5012f44dbac
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-04-22T16:34:13.454Z'
+name: IDE Tunneling
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Purinut Wongwaiwuttiguldej
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.0'
+```

@@ -1,0 +1,87 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# SMS Pumping
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1496.003` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [SMS Pumping](../../attack/techniques/T1496.003-sms-pumping.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1496.003 |
+| name | SMS Pumping |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1496/003 |
+
+## Preserved Source Material
+
+```yaml
+created: '2024-09-25T13:53:19.586Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may leverage messaging services for SMS pumping, which may impact system and/or hosted service availability.(Citation:
+  Twilio SMS Pumping) SMS pumping is a type of telecommunications fraud whereby a threat actor first obtains a set of phone
+  numbers from a telecommunications provider, then leverages a victim’s messaging infrastructure to send large amounts of
+  SMS messages to numbers in that set. By generating SMS traffic to their phone number set, a threat actor may earn payments
+  from the telecommunications provider.(Citation: Twilio SMS Pumping Fraud)
+
+
+  Threat actors often use publicly available web forms, such as one-time password (OTP) or account verification fields, in
+  order to generate SMS traffic. These fields may leverage services such as Twilio, AWS SNS, and Amazon Cognito in the background.(Citation:
+  Twilio SMS Pumping)(Citation: AWS RE:Inforce Threat Detection 2024) In response to the large quantity of requests, SMS costs
+  may increase and communication channels may become overwhelmed.(Citation: Twilio SMS Pumping)'
+external_references:
+- external_id: T1496.003
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1496/003
+- description: Ben Fletcher and Steve de Vera. (2024, June). New tactics and techniques for proactive threat detection. Retrieved
+    September 25, 2024.
+  source_name: AWS RE:Inforce Threat Detection 2024
+  url: https://reinforce.awsevents.com/content/dam/reinforce/2024/slides/TDR432_New-tactics-and-techniques-for-proactive-threat-detection.pdf
+- description: Twilio. (2024, April 10). What Is SMS Pumping Fraud and How to Stop It. Retrieved September 25, 2024.
+  source_name: Twilio SMS Pumping
+  url: https://www.twilio.com/en-us/blog/sms-pumping-fraud-solutions
+- description: Twilio. (n.d.). What is SMS Pumping Fraud?. Retrieved September 25, 2024.
+  source_name: Twilio SMS Pumping Fraud
+  url: https://www.twilio.com/docs/glossary/what-is-sms-pumping-fraud
+id: attack-pattern--130d4494-b2d6-4040-bcea-6e59f05222fe
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: impact
+modified: '2025-04-15T23:02:00.718Z'
+name: SMS Pumping
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_impact_type:
+- Availability
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- SaaS
+x_mitre_version: '1.0'
+```

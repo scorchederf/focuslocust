@@ -1,0 +1,66 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# Stealing Sensitive Information Disclosure from a Web
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-todo-stealing-sensitive-information-disclosure-from-a-web` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/todo/stealing-sensitive-information-disclosure-from-a-web.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Stealing Sensitive Information Disclosure from a Web](../../topics/todo/stealing-sensitive-information-disclosure-from-a-web.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-todo-stealing-sensitive-information-disclosure-from-a-web |
+| name | Stealing Sensitive Information Disclosure from a Web |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/todo/stealing-sensitive-information-disclosure-from-a-web.md |
+
+## Preserved Source Material
+
+```yaml
+_body: '# Stealing Sensitive Information Disclosure from a Web
+
+
+  {{#include ../banners/hacktricks-training.md}}
+
+
+  If at some point you find a **web page that presents you sensitive information based on your session**: Maybe it''s reflecting
+  cookies, or printing or CC details or any other sensitive information, you may try to steal it.\
+
+  Here I present you the main ways to can try to achieve it:
+
+
+  - [**CORS bypass**](../pentesting-web/cors-bypass.md): If you can bypass CORS headers you will be able to steal the information
+  performing Ajax request for a malicious page.
+
+  - [**XSS**](../pentesting-web/xss-cross-site-scripting/index.html): If you find a XSS vulnerability on the page you may
+  be able to abuse it to steal the information.
+
+  - [**Danging Markup**](../pentesting-web/dangling-markup-html-scriptless-injection/index.html): If you cannot inject XSS
+  tags you still may be able to steal the info using other regular HTML tags.
+
+  - [**Clickjaking**](../pentesting-web/clickjacking.md): If there is no protection against this attack, you may be able to
+  trick the user into sending you the sensitive data (an example [here](https://medium.com/bugbountywriteup/apache-example-servlet-leads-to-61a2720cac20)).
+
+
+  {{#include ../banners/hacktricks-training.md}}'
+_relative_path: todo/stealing-sensitive-information-disclosure-from-a-web.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/todo/stealing-sensitive-information-disclosure-from-a-web.md
+```

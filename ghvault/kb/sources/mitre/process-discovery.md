@@ -1,0 +1,102 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Process Discovery
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1057` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Process Discovery](../../attack/techniques/T1057-process-discovery.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1057 |
+| name | Process Discovery |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1057 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:30:48.728Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may attempt to get information about running processes on a system. Information obtained could be
+  used to gain an understanding of common software/applications running on systems within the network. Administrator or otherwise
+  elevated access may provide better process details. Adversaries may use the information from [Process Discovery](https://attack.mitre.org/techniques/T1057)
+  during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target
+  and/or attempts specific actions.
+
+
+  In Windows environments, adversaries could obtain details on running processes using the [Tasklist](https://attack.mitre.org/software/S0057)
+  utility via [cmd](https://attack.mitre.org/software/S0106) or <code>Get-Process</code> via [PowerShell](https://attack.mitre.org/techniques/T1059/001).
+  Information about processes can also be extracted from the output of [Native API](https://attack.mitre.org/techniques/T1106)
+  calls such as <code>CreateToolhelp32Snapshot</code>. In Mac and Linux, this is accomplished with the <code>ps</code> command.
+  Adversaries may also opt to enumerate processes via `/proc`. ESXi also supports use of the `ps` command, as well as `esxcli
+  system process list`.(Citation: Sygnia ESXi Ransomware 2025)(Citation: Crowdstrike Hypervisor Jackpotting Pt 2 2021)
+
+
+  On network devices, [Network Device CLI](https://attack.mitre.org/techniques/T1059/008) commands such as `show processes`
+  can be used to display current running processes.(Citation: US-CERT-TA18-106A)(Citation: show_processes_cisco_cmd)'
+external_references:
+- external_id: T1057
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1057
+- description: Cisco. (2022, August 16). show processes - . Retrieved July 13, 2022.
+  source_name: show_processes_cisco_cmd
+  url: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/fundamentals/command/cf_command_ref/show_monitor_permit_list_through_show_process_memory.html#wp3599497760
+- description: 'Michael Dawson. (2021, August 30). Hypervisor Jackpotting, Part 2: eCrime Actors Increase Targeting of ESXi
+    Servers with Ransomware. Retrieved March 26, 2025.'
+  source_name: Crowdstrike Hypervisor Jackpotting Pt 2 2021
+  url: https://www.crowdstrike.com/en-us/blog/hypervisor-jackpotting-ecrime-actors-increase-targeting-of-esxi-servers/
+- description: US-CERT. (2018, April 20). Alert (TA18-106A) Russian State-Sponsored Cyber Actors Targeting Network Infrastructure
+    Devices. Retrieved October 19, 2020.
+  source_name: US-CERT-TA18-106A
+  url: https://www.us-cert.gov/ncas/alerts/TA18-106A
+- description: 'Zhongyuan Hau (Aaron), Ren Jie Yow, and Yoav Mazor. (2025, January 21). ESXi Ransomware Attacks: Stealthy
+    Persistence through. Retrieved March 27, 2025.'
+  source_name: Sygnia ESXi Ransomware 2025
+  url: https://www.sygnia.co/blog/esxi-ransomware-ssh-tunneling-defense-strategies/
+id: attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: discovery
+modified: '2025-10-24T17:49:05.839Z'
+name: Process Discovery
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Austin Clark, @c2defense
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Network Devices
+- Windows
+x_mitre_version: '1.6'
+```

@@ -1,0 +1,73 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# iOS Serialisation and Encoding
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-mobile-pentesting-ios-pentesting-ios-serialisation-and-encoding` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/mobile-pentesting/ios-pentesting/ios-serialisation-and-encoding.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [iOS Serialisation and Encoding](../../topics/mobile-pentesting/ios-serialisation-and-encoding.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-mobile-pentesting-ios-pentesting-ios-serialisation-and-encoding |
+| name | iOS Serialisation and Encoding |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/mobile-pentesting/ios-pentesting/ios-serialisation-and-encoding.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# iOS Serialisation and Encoding\n\n{{#include ../../banners/hacktricks-training.md}}\n\nCode and more information\
+  \ in [https://mas.owasp.org/MASTG/iOS/0x06h-Testing-Platform-Interaction/#object-persistence](https://mas.owasp.org/MASTG/iOS/0x06h-Testing-Platform-Interaction/#object-persistence).\n\
+  \n## Object Serialization in iOS Development\n\nIn iOS, **object serialization** involves converting objects into a format\
+  \ that can be easily stored or transmitted, and then reconstructing them from this format when needed. Two main protocols,\
+  \ **`NSCoding`** and **`NSSecureCoding`**, facilitate this process for Objective-C or `NSObject` subclasses, allowing objects\
+  \ to be serialized into **`NSData`**, a format that wraps byte buffers.\n\n### **`NSCoding`** Implementation\n\nTo implement\
+  \ `NSCoding`, a class must inherit from `NSObject` or be marked as `@objc`. This protocol mandates the implementation of\
+  \ two methods for encoding and decoding instance variables:\n\n```swift\nclass CustomPoint: NSObject, NSCoding {\n    var\
+  \ x: Double = 0.0\n    var name: String = \"\"\n\n    func encode(with aCoder: NSCoder) {\n        aCoder.encode(x, forKey:\
+  \ \"x\")\n        aCoder.encode(name, forKey: \"name\")\n    }\n\n    required convenience init?(coder aDecoder: NSCoder)\
+  \ {\n        guard let name = aDecoder.decodeObject(forKey: \"name\") as? String else { return nil }\n        self.init(x:\
+  \ aDecoder.decodeDouble(forKey: \"x\"), name: name)\n    }\n}\n```\n\n### **Enhancing Security with `NSSecureCoding`**\n\
+  \nTo mitigate vulnerabilities where attackers inject data into already constructed objects, **`NSSecureCoding`** offers\
+  \ an enhanced protocol. Classes conforming to `NSSecureCoding` must verify the type of objects during decoding, ensuring\
+  \ that only the expected object types are instantiated. However, it's crucial to note that while `NSSecureCoding` enhances\
+  \ type safety, it doesn't encrypt data or ensure its integrity, necessitating additional measures for protecting sensitive\
+  \ information:\n\n```swift\nstatic var supportsSecureCoding: Bool {\n    return true\n}\n\nlet obj = decoder.decodeObject(of:\
+  \ MyClass.self, forKey: \"myKey\")\n```\n\n## Data Archiving with `NSKeyedArchiver`\n\n`NSKeyedArchiver` and its counterpart,\
+  \ `NSKeyedUnarchiver`, enable encoding objects into a file and later retrieving them. This mechanism is useful for persisting\
+  \ objects:\n\n```swift\nNSKeyedArchiver.archiveRootObject(customPoint, toFile: \"/path/to/archive\")\nlet customPoint =\
+  \ NSKeyedUnarchiver.unarchiveObjectWithFile(\"/path/to/archive\") as? CustomPoint\n```\n\n### Using `Codable` for Simplified\
+  \ Serialization\n\nSwift's `Codable` protocol combines `Decodable` and `Encodable`, facilitating the encoding and decoding\
+  \ of objects like `String`, `Int`, `Double`, etc., without extra effort:\n\n```swift\nstruct CustomPointStruct: Codable\
+  \ {\n    var x: Double\n    var name: String\n}\n```\n\nThis approach supports straightforward serialization to and from\
+  \ property lists and JSON, enhancing data handling in Swift applications.\n\n## JSON and XML Encoding Alternatives\n\nBeyond\
+  \ native support, several third-party libraries offer JSON and XML encoding/decoding capabilities, each with its own performance\
+  \ characteristics and security considerations. It's imperative to carefully select these libraries, especially to mitigate\
+  \ vulnerabilities like XXE (XML External Entities) attacks by configuring parsers to prevent external entity processing.\n\
+  \n### Security Considerations\n\nWhen serializing data, especially to the file system, it's essential to be vigilant about\
+  \ the potential inclusion of sensitive information. Serialized data, if intercepted or improperly handled, can expose applications\
+  \ to risks such as unauthorized actions or data leakage. Encrypting and signing serialized data is recommended to enhance\
+  \ security.\n\n## References\n\n- [https://mas.owasp.org/MASTG/iOS/0x06h-Testing-Platform-Interaction/#object-persistence](https://mas.owasp.org/MASTG/iOS/0x06h-Testing-Platform-Interaction/#object-persistence)\n\
+  \n{{#include ../../banners/hacktricks-training.md}}"
+_relative_path: mobile-pentesting/ios-pentesting/ios-serialisation-and-encoding.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/mobile-pentesting/ios-pentesting/ios-serialisation-and-encoding.md
+````

@@ -1,0 +1,95 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Protocol Tunneling
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1572` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Protocol Tunneling](../../attack/techniques/T1572-protocol-tunneling.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1572 |
+| name | Protocol Tunneling |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1572 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-15T16:03:39.082Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may tunnel network communications to and from a victim system within a separate protocol to avoid\
+  \ detection/network filtering and/or enable access to otherwise unreachable systems. Tunneling involves explicitly encapsulating\
+  \ a protocol within another. This behavior may conceal malicious traffic by blending in with existing traffic and/or provide\
+  \ an outer layer of encryption (similar to a VPN). Tunneling could also enable routing of network packets that would otherwise\
+  \ not reach their intended destination, such as SMB, RDP, or other traffic that would be filtered by network appliances\
+  \ or not routed over the Internet. \n\nThere are various means to encapsulate a protocol within another protocol. For example,\
+  \ adversaries may perform SSH tunneling (also known as SSH port forwarding), which involves forwarding arbitrary data over\
+  \ an encrypted SSH tunnel.(Citation: SSH Tunneling)(Citation: Sygnia Abyss Locker 2025) \n\n[Protocol Tunneling](https://attack.mitre.org/techniques/T1572)\
+  \ may also be abused by adversaries during [Dynamic Resolution](https://attack.mitre.org/techniques/T1568). Known as DNS\
+  \ over HTTPS (DoH), queries to resolve C2 infrastructure may be encapsulated within encrypted HTTPS packets.(Citation: BleepingComp\
+  \ Godlua JUL19) \n\nAdversaries may also leverage [Protocol Tunneling](https://attack.mitre.org/techniques/T1572) in conjunction\
+  \ with [Proxy](https://attack.mitre.org/techniques/T1090) and/or [Protocol or Service Impersonation](https://attack.mitre.org/techniques/T1001/003)\
+  \ to further conceal C2 communications and infrastructure. "
+external_references:
+- external_id: T1572
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1572
+- description: Abigail See, Zhongyuan (Aaron) Hau, Ren Jie Yow, Yoav Mazor, Omer Kidron, and Oren Biderman. (2025, February
+    4). The Anatomy of Abyss Locker Ransomware Attack. Retrieved April 4, 2025.
+  source_name: Sygnia Abyss Locker 2025
+  url: https://www.sygnia.co/blog/abyss-locker-ransomware-attack-analysis/
+- description: Gardiner, J.,  Cova, M., Nagaraja, S. (2014, February). Command & Control Understanding, Denying and Detecting.
+    Retrieved April 20, 2016.
+  source_name: University of Birmingham C2
+  url: https://arxiv.org/ftp/arxiv/papers/1408/1408.1136.pdf
+- description: Gatlan, S. (2019, July 3). New Godlua Malware Evades Traffic Monitoring via DNS over HTTPS. Retrieved March
+    15, 2020.
+  source_name: BleepingComp Godlua JUL19
+  url: https://www.bleepingcomputer.com/news/security/new-godlua-malware-evades-traffic-monitoring-via-dns-over-https/
+- description: SSH.COM. (n.d.). SSH tunnel. Retrieved March 15, 2020.
+  source_name: SSH Tunneling
+  url: https://www.ssh.com/ssh/tunneling
+id: attack-pattern--4fe28b27-b13c-453e-a386-c2ef362a573b
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:48:45.888Z'
+name: Protocol Tunneling
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.1'
+```

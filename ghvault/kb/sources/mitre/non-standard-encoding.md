@@ -1,0 +1,78 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Non-Standard Encoding
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1132.002` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Non-Standard Encoding](../../attack/techniques/T1132.002-non-standard-encoding.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1132.002 |
+| name | Non-Standard Encoding |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1132/002 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-14T23:39:50.117Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may encode data with a non-standard data encoding system to make the content of command and control
+  traffic more difficult to detect. Command and control (C2) information can be encoded using a non-standard data encoding
+  system that diverges from existing protocol specifications. Non-standard data encoding schemes may be based on or related
+  to standard data encoding schemes, such as a modified Base64 encoding for the message body of an HTTP request.(Citation:
+  Wikipedia Binary-to-text Encoding)(Citation: Wikipedia Character Encoding) '
+external_references:
+- external_id: T1132.002
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1132/002
+- description: Wikipedia. (2016, December 26). Binary-to-text encoding. Retrieved March 1, 2017.
+  source_name: Wikipedia Binary-to-text Encoding
+  url: https://en.wikipedia.org/wiki/Binary-to-text_encoding
+- description: Wikipedia. (2017, February 19). Character Encoding. Retrieved March 1, 2017.
+  source_name: Wikipedia Character Encoding
+  url: https://en.wikipedia.org/wiki/Character_encoding
+id: attack-pattern--d467bc38-284b-4a00-96ac-125f447799fc
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2026-04-21T18:10:25.277Z'
+name: Non-Standard Encoding
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.1'
+```

@@ -1,0 +1,78 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Response Metadata
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0106` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Response Metadata](../../attack/data-sources/DC0106-response-metadata.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0106 |
+| name | Response Metadata |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0106 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.275Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Contextual information about an Internet-facing resource collected during a scan, including details such as\
+  \ open ports, running services, protocols, and versions. This metadata is typically derived from interpreting scan results\
+  \ and helps build a profile of the targeted system. Examples: \n\n- Port and Service Details:\n    - Open ports (e.g., 22,\
+  \ 80, 443).\n    - Identified services running on those ports (e.g., SSH, HTTP, HTTPS).\n- Service Versions: Detected software\
+  \ version information (e.g., Apache 2.4.41, OpenSSH 8.2).\n- Operating System Information: OS fingerprinting data (e.g.,\
+  \ Linux Kernel 5.4.0).\n- TLS/SSL Certificate Data: Information about the TLS/SSL certificate, such as the expiration date,\
+  \ issuer, and cipher suites.\n\n*Data Collection Measures:*\n\n- Scanning Tools:\n    - Nmap: Collects port, service, and\
+  \ version information using commands like nmap -sV <IP>.\n    - Masscan: High-speed scanning tool for discovering open ports\
+  \ and active services.\n    - Zmap: Focused on large-scale Internet scanning, collecting metadata about discovered services.\n\
+  \    - Shodan API: Retrieves scan metadata for publicly exposed devices and services.\n- Network Logs:\n    - Use logs from\
+  \ firewalls, intrusion detection systems (IDS), or intrusion prevention systems (IPS) to gather metadata from scan attempts.\
+  \ Example: Zeek or Suricata logs for incoming scan traffic.\n- OSINT Platforms: Platforms like Censys, GreyNoise, or Shodan\
+  \ provide aggregated metadata about Internet-facing resources.\n- Cloud Metadata Services: AWS Security Hub, Azure Monitor,\
+  \ or GCP Security Command Center can collect and centralize scan-related metadata for Internet-facing resources in cloud\
+  \ environments."
+external_references:
+- external_id: DC0106
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0106
+id: x-mitre-data-component--1067aa74-5796-4d9b-b4f1-a4c9eb6fd9da
+modified: '2025-10-21T15:14:40.350Z'
+name: Response Metadata
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_log_sources:
+- channel: None
+  name: Internet Scan
+- channel: Altered response metadata or blocked content based on user-agent or geolocation
+  name: NSM:Flow
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.0'
+```

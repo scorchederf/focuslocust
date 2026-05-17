@@ -1,0 +1,77 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Covenant
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `tool` |
+| Record ID | `S1155` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Covenant](../../tools/unknown/covenant.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | S1155 |
+| name | Covenant |
+| type | tool |
+| source | mitre |
+| url | https://attack.mitre.org/software/S1155 |
+
+## Preserved Source Material
+
+```yaml
+created: '2024-09-04T17:08:08.985Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: '[Covenant](https://attack.mitre.org/software/S1155) is a multi-platform command and control framework written
+  in .NET. While designed for penetration testing and security research, the tool has also been used by threat actors such
+  as [HAFNIUM](https://attack.mitre.org/groups/G0125) during operations. [Covenant](https://attack.mitre.org/software/S1155)
+  functions through a central listener managing multiple deployed "Grunts" that communicate back to the controller.(Citation:
+  Github Covenant)(Citation: Microsoft HAFNIUM March 2020)'
+external_references:
+- external_id: S1155
+  source_name: mitre-attack
+  url: https://attack.mitre.org/software/S1155
+- description: cobbr. (2021, April 21). Covenant. Retrieved September 4, 2024.
+  source_name: Github Covenant
+  url: https://github.com/cobbr/Covenant
+- description: MSTIC. (2021, March 2). HAFNIUM targeting Exchange Servers with 0-day exploits. Retrieved March 3, 2021.
+  source_name: Microsoft HAFNIUM March 2020
+  url: https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
+id: tool--05fb53c8-e2ac-4e17-a0c9-a0825e1198bf
+modified: '2024-09-06T18:11:55.619Z'
+name: Covenant
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: tool
+x_mitre_aliases:
+- Covenant
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Subhash Thapa
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.0'
+```

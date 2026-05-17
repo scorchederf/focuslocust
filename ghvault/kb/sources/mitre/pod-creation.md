@@ -1,0 +1,75 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Pod Creation
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0019` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Pod Creation](../../attack/data-sources/DC0019-pod-creation.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0019 |
+| name | Pod Creation |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0019 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.272Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "The initial deployment or instantiation of a new pod in a containerized environment. This includes creating\
+  \ a pod manually, through orchestration tools (Kubernetes), or via Infrastructure-as-Code (IaC) configurations. A Pod is\
+  \ the smallest deployable unit in Kubernetes, typically containing one or more containers. Creation methods include:\n-\
+  \ Direct pod deployment (`kubectl run`, `kubectl apply`)\n- Automated deployment via CI/CD pipelines (e.g., ArgoCD, Jenkins,\
+  \ GitOps)\n- Infrastructure-as-Code (IaC) templates (e.g., Terraform, Helm Charts)\n- API-based deployments via Kubernetes\
+  \ control plane (create_pod API calls)\n- Pods can be ephemeral (short-lived) or persistent (part of a StatefulSet or Deployment).\n\
+  \n*Data Collection Measures:*\n\n- Kubernetes Audit Logs\n    - Captures all API requests, including pod `create` events.\n\
+  - Kube-api server Logs\t\n    - Monitors API calls related to pod deployments and modifications. Related Events: `PodSandboxChanged`,\
+  \ `SyncLoop`, `Created pod`\n- Container Runtime Logs\t\n    - Logs from CRI-O, containerd, or Docker capture pod creation\
+  \ events. Related Events: `container start`, `container create`\n- Cloud Provider Logs\t\n    - GKE, EKS, AKS logs provide\
+  \ insights into Kubernetes API interactions.\n- SIEM & Log Aggregation\t\n    - Integrates Kubernetes logs into SIEM solutions.\n\
+  - EDR/XDR Solutions\t\n    - Monitors container-based activity for anomalous pod creations."
+external_references:
+- external_id: DC0019
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0019
+id: x-mitre-data-component--5263cb33-08cc-4a68-820f-004e1e400d76
+modified: '2025-10-21T15:14:37.749Z'
+name: Pod Creation
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_log_sources:
+- channel: 'CreatePod: Programmatic creation of new pod resources using container images not seen before in the environment'
+  name: AWS:CloudTrail
+- channel: create
+  name: kubernetes:audit
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.0'
+```

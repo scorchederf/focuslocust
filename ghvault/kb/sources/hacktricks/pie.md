@@ -1,0 +1,101 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# PIE
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-binary-exploitation-common-binary-protections-and-bypasses-pie-readme` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/binary-exploitation/common-binary-protections-and-bypasses/pie/README.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [PIE](../../topics/binary-exploitation/pie.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-binary-exploitation-common-binary-protections-and-bypasses-pie-readme |
+| name | PIE |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/binary-exploitation/common-binary-protections-and-bypasses/pie/README.md |
+
+## Preserved Source Material
+
+```yaml
+_body: '# PIE
+
+
+  {{#include ../../../banners/hacktricks-training.md}}
+
+
+  ## Basic Information
+
+
+  A binary compiled as PIE, or **Position Independent Executable**, means the **program can load at different memory locations**
+  each time it''s executed, preventing hardcoded addresses.
+
+
+  The trick to exploit these binaries lies in exploiting the **relative addresses**—the offsets between parts of the program
+  remain the same even if the absolute locations change. To **bypass PIE, you only need to leak one address**, typically from
+  the **stack** using vulnerabilities like format string attacks. Once you have an address, you can calculate others by their
+  **fixed offsets**.
+
+
+  A helpful hint in exploiting PIE binaries is that their **base address typically ends in 000** due to memory pages being
+  the units of randomization, sized at 0x1000 bytes. This alignment can be a critical **check if an exploit isn''t working**
+  as expected, indicating whether the correct base address has been identified.\
+
+  Or you can use this for your exploit, if you leak that an address is located at **`0x649e1024`** you know that the **base
+  address is `0x649e1000`** and from the you can just **calculate offsets** of functions and locations.
+
+
+  ## Bypasses
+
+
+  In order to bypass PIE it''s needed to **leak some address of the loaded** binary, there are some options for this:
+
+
+  - **Disabled ASLR**: If ASLR is disabled a binary compiled with PIE is always **going to be loaded in the same address**,
+  therefore **PIE is going to be useless** as the addresses of the objects are always going to be in the same place.
+
+  - Be **given** the leak (common in easy CTF challenges, [**check this example**](https://ir0nstone.gitbook.io/notes/types/stack/pie/pie-exploit))
+
+  - **Brute-force EBP and EIP values** in the stack until you leak the correct ones:
+
+
+
+  {{#ref}}
+
+  bypassing-canary-and-pie.md
+
+  {{#endref}}
+
+
+  - Use an **arbitrary read** vulnerability such as [**format string**](../../format-strings/index.html) to leak an address
+  of the binary (e.g. from the stack, like in the previous technique) to get the base of the binary and use offsets from there.
+  [**Find an example here**](https://ir0nstone.gitbook.io/notes/types/stack/pie/pie-bypass).
+
+
+  ## References
+
+
+  - [https://ir0nstone.gitbook.io/notes/types/stack/pie](https://ir0nstone.gitbook.io/notes/types/stack/pie)
+
+
+  {{#include ../../../banners/hacktricks-training.md}}'
+_relative_path: binary-exploitation/common-binary-protections-and-bypasses/pie/README.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/binary-exploitation/common-binary-protections-and-bypasses/pie/README.md
+```

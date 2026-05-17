@@ -1,0 +1,120 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Timestomp
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1070.006` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Timestomp](../../attack/techniques/T1070.006-timestomp.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1070.006 |
+| name | Timestomp |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1070/006 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-01-31T12:42:44.103Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may modify file time attributes to hide new files or changes to existing files. Timestomping is
+  a technique that modifies the timestamps of a file (the modify, access, create, and change times), often to mimic files
+  that are in the same folder and blend malicious files with legitimate files.
+
+
+  In Windows systems, both the `$STANDARD_INFORMATION` (`$SI`) and `$FILE_NAME` (`$FN`) attributes record times in a Master
+  File Table (MFT) file.(Citation: Inversecos Timestomping 2022) `$SI` (dates/time stamps) is displayed to the end user, including
+  in the File System view, while `$FN` is dealt with by the kernel.(Citation: Magnet Forensics)
+
+
+  Modifying the `$SI` attribute is the most common method of timestomping because it can be modified at the user level using
+  API calls. `$FN` timestomping, however, typically requires interacting with the system kernel or moving or renaming a file.(Citation:
+  Inversecos Timestomping 2022)
+
+
+  Adversaries modify timestamps on files so that they do not appear conspicuous to forensic investigators or file analysis
+  tools. In order to evade detections that rely on identifying discrepancies between the `$SI` and `$FN` attributes, adversaries
+  may also engage in “double timestomping” by modifying times on both attributes simultaneously.(Citation: Double Timestomping)
+
+
+  In Linux systems and on ESXi servers, threat actors may attempt to perform timestomping using commands such as `touch -a
+  -m -t <timestamp> <filename>` (which sets access and modification times to a specific value) or `touch -r <filename> <filename>`
+  (which sets access and modification times to match those of another file).(Citation: Inversecos Linux Timestomping)(Citation:
+  Juniper Networks ESXi Backdoor 2022)
+
+
+  Timestomping may be used along with file name [Masquerading](https://attack.mitre.org/techniques/T1036) to hide malware
+  and tools.(Citation: WindowsIR Anti-Forensic Techniques)'
+external_references:
+- external_id: T1070.006
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1070/006
+- description: Asher Langton. (2022, December 9). A Custom Python Backdoor for VMWare ESXi Servers. Retrieved March 26, 2025.
+  source_name: Juniper Networks ESXi Backdoor 2022
+  url: https://blogs.juniper.net/en-us/threat-research/a-custom-python-backdoor-for-vmware-esxi-servers
+- description: 'Carvey, H. (2013, July 23). HowTo: Determine/Detect the use of Anti-Forensics Techniques. Retrieved June 3,
+    2016.'
+  source_name: WindowsIR Anti-Forensic Techniques
+  url: http://windowsir.blogspot.com/2013/07/howto-determinedetect-use-of-anti.html
+- description: 'inversecos. (2022, August 4). Detecting Linux Anti-Forensics: Timestomping. Retrieved March 26, 2025.'
+  source_name: Inversecos Linux Timestomping
+  url: https://www.inversecos.com/2022/08/detecting-linux-anti-forensics.html
+- description: 'Lina Lau. (2022, April 28). Defence Evasion Technique: Timestomping Detection – NTFS Forensics. Retrieved
+    September 30, 2024.'
+  source_name: Inversecos Timestomping 2022
+  url: https://www.inversecos.com/2022/04/defence-evasion-technique-timestomping.html
+- description: Magnet Forensics. (2020, August 24). Expose Evidence of Timestomping with the NTFS Timestamp Mismatch Artifact.
+    Retrieved June 20, 2024.
+  source_name: Magnet Forensics
+  url: https://www.magnetforensics.com/blog/expose-evidence-of-timestomping-with-the-ntfs-timestamp-mismatch-artifact-in-magnet-axiom-4-4/
+- description: Matthew Dunwoody. (2022, April 28). I have seen double-timestomping ITW, including by APT29. Stay sharp out
+    there.. Retrieved June 20, 2024.
+  source_name: Double Timestomping
+  url: https://x.com/matthewdunwoody/status/1519846657646604289
+id: attack-pattern--47f2d673-ca62-47e9-929b-1b0be9657611
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: stealth
+modified: '2026-04-15T20:30:57.770Z'
+name: Timestomp
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Mike Hartley @mikehartley10
+- Romain Dumont, ESET
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '2.0'
+```

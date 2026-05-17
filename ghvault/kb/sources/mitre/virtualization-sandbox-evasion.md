@@ -1,0 +1,94 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Virtualization／Sandbox Evasion
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1497` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Virtualization／Sandbox Evasion](../../attack/techniques/T1497-virtualization-sandbox-evasion.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1497 |
+| name | Virtualization／Sandbox Evasion |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1497 |
+
+## Preserved Source Material
+
+```yaml
+created: '2019-04-17T22:22:24.505Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may employ various means to detect and avoid virtualization and analysis environments. This may
+  include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine
+  environment (VME) or sandbox. If the adversary detects a VME, they may alter their malware to disengage from the victim
+  or conceal the core functions of the implant. They may also search for VME artifacts before dropping secondary or additional
+  payloads. Adversaries may use the information learned from [Virtualization/Sandbox Evasion](https://attack.mitre.org/techniques/T1497)
+  during automated discovery to shape follow-on behaviors.(Citation: Deloitte Environment Awareness)
+
+
+  Adversaries may use several methods to accomplish [Virtualization/Sandbox Evasion](https://attack.mitre.org/techniques/T1497)
+  such as checking for security monitoring tools (e.g., Sysinternals, Wireshark, etc.) or other system artifacts associated
+  with analysis or virtualization. Adversaries may also check for legitimate user activity to help determine if it is in an
+  analysis environment. Additional methods include use of sleep timers or loops within malware code to avoid operating within
+  a temporary sandbox.(Citation: Unit 42 Pirpi July 2015)
+
+
+  '
+external_references:
+- external_id: T1497
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1497
+- description: 'Falcone, R., Wartell, R.. (2015, July 27). UPS: Observations on CVE-2015-3113, Prior Zero-Days and the Pirpi
+    Payload. Retrieved April 23, 2019.'
+  source_name: Unit 42 Pirpi July 2015
+  url: https://unit42.paloaltonetworks.com/ups-observations-on-cve-2015-3113-prior-zero-days-and-the-pirpi-payload/
+- description: Torello, A. & Guibernau, F. (n.d.). Environment Awareness. Retrieved September 13, 2024.
+  source_name: Deloitte Environment Awareness
+  url: https://drive.google.com/file/d/1t0jn3xr4ff2fR30oQAUn_RsWSnMpOAQc/edit
+id: attack-pattern--82caa33e-d11a-433a-94ea-9b5a5fbef81d
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: stealth
+- kill_chain_name: mitre-attack
+  phase_name: discovery
+modified: '2026-04-15T22:52:12.932Z'
+name: Virtualization/Sandbox Evasion
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Deloitte Threat Library Team
+- Sunny Neo
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+x_mitre_version: '2.0'
+```

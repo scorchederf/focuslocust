@@ -1,0 +1,127 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Domain Generation Algorithms
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1568.002` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Domain Generation Algorithms](../../attack/techniques/T1568.002-domain-generation-algorithms.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1568.002 |
+| name | Domain Generation Algorithms |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1568/002 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-10T17:44:59.787Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may make use of Domain Generation Algorithms (DGAs) to dynamically identify a destination domain
+  for command and control traffic rather than relying on a list of static IP addresses or domains. This has the advantage
+  of making it much harder for defenders to block, track, or take over the command and control channel, as there potentially
+  could be thousands of domains that malware can check for instructions.(Citation: Cybereason Dissecting DGAs)(Citation: Cisco
+  Umbrella DGA)(Citation: Unit 42 DGA Feb 2019)
+
+
+  DGAs can take the form of apparently random or “gibberish” strings (ex: istgmxdejdnxuyla.ru) when they construct domain
+  names by generating each letter. Alternatively, some DGAs employ whole words as the unit by concatenating words together
+  instead of letters (ex: cityjulydish.net). Many DGAs are time-based, generating a different domain for each time period
+  (hourly, daily, monthly, etc). Others incorporate a seed value as well to make predicting future domains more difficult
+  for defenders.(Citation: Cybereason Dissecting DGAs)(Citation: Cisco Umbrella DGA)(Citation: Talos CCleanup 2017)(Citation:
+  Akamai DGA Mitigation)
+
+
+  Adversaries may use DGAs for the purpose of [Fallback Channels](https://attack.mitre.org/techniques/T1008). When contact
+  is lost with the primary command and control server malware may employ a DGA as a means to reestablishing command and control.(Citation:
+  Talos CCleanup 2017)(Citation: FireEye POSHSPY April 2017)(Citation: ESET Sednit 2017 Activity)'
+external_references:
+- external_id: T1568.002
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1568/002
+- description: Ahuja, A., Anderson, H., Grant, D., Woodbridge, J.. (2016, November 2). Predicting Domain Generation Algorithms
+    with Long Short-Term Memory Networks. Retrieved April 26, 2019.
+  source_name: Elastic Predicting DGA
+  url: https://arxiv.org/pdf/1611.00791.pdf
+- description: 'Brumaghin, E. et al. (2017, September 18). CCleanup: A Vast Number of Machines at Risk. Retrieved March 9,
+    2018.'
+  source_name: Talos CCleanup 2017
+  url: http://blog.talosintelligence.com/2017/09/avast-distributes-malware.html
+- description: Chen, L., Wang, T.. (2017, May 5). Detecting Algorithmically Generated Domains Using Data Visualization and
+    N-Grams Methods . Retrieved April 26, 2019.
+  source_name: Pace University Detecting DGA May 2017
+  url: http://csis.pace.edu/~ctappert/srd2017/2017PDF/d4.pdf
+- description: Dunwoody, M.. (2017, April 3). Dissecting One of APT29’s Fileless WMI and PowerShell Backdoors (POSHSPY). Retrieved
+    April 5, 2017.
+  source_name: FireEye POSHSPY April 2017
+  url: https://www.fireeye.com/blog/threat-research/2017/03/dissecting_one_ofap.html
+- description: 'ESET. (2017, December 21). Sednit update: How Fancy Bear Spent the Year. Retrieved February 18, 2019.'
+  source_name: ESET Sednit 2017 Activity
+  url: https://www.welivesecurity.com/2017/12/21/sednit-update-fancy-bear-spent-year/
+- description: 'Jacobs, J. (2014, October 2). Building a DGA Classifier: Part 2, Feature Engineering. Retrieved February 18,
+    2019.'
+  source_name: Data Driven Security DGA
+  url: https://datadrivensecurity.info/blog/posts/2014/Oct/dga-part2/
+- description: Liu, H. and Yuzifovich, Y. (2018, January 9). A Death Match of Domain Generation Algorithms. Retrieved February
+    18, 2019.
+  source_name: Akamai DGA Mitigation
+  url: https://medium.com/@yvyuz/a-death-match-of-domain-generation-algorithms-a5b5dbdc1c6e
+- description: Scarfo, A. (2016, October 10). Domain Generation Algorithms – Why so effective?. Retrieved February 18, 2019.
+  source_name: Cisco Umbrella DGA
+  url: https://umbrella.cisco.com/blog/2016/10/10/domain-generation-algorithms-effective/
+- description: 'Sternfeld, U. (2016). Dissecting Domain Generation Algorithms: Eight Real World DGA Variants. Retrieved February
+    18, 2019.'
+  source_name: Cybereason Dissecting DGAs
+  url: http://go.cybereason.com/rs/996-YZT-709/images/Cybereason-Lab-Analysis-Dissecting-DGAs-Eight-Real-World-DGA-Variants.pdf
+- description: 'Unit 42. (2019, February 7). Threat Brief: Understanding Domain Generation Algorithms (DGA). Retrieved February
+    19, 2019.'
+  source_name: Unit 42 DGA Feb 2019
+  url: https://unit42.paloaltonetworks.com/threat-brief-understanding-domain-generation-algorithms-dga/
+id: attack-pattern--118f61a5-eb3e-4fb6-931f-2096647f4ecd
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:48:25.458Z'
+name: Domain Generation Algorithms
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Ryan Benson, Exabeam
+- Barry Shteiman, Exabeam
+- Sylvain Gil, Exabeam
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.2'
+```

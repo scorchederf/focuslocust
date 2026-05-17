@@ -1,0 +1,71 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# ShimRatReporter
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `tool` |
+| Record ID | `S0445` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [ShimRatReporter](../../tools/unknown/shimratreporter.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | S0445 |
+| name | ShimRatReporter |
+| type | tool |
+| source | mitre |
+| url | https://attack.mitre.org/software/S0445 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-05-12T21:29:48.294Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: '[ShimRatReporter](https://attack.mitre.org/software/S0445) is a tool used by suspected Chinese adversary [Mofang](https://attack.mitre.org/groups/G0103)
+  to automatically conduct initial discovery. The details from this discovery are used to customize follow-on payloads (such
+  as [ShimRat](https://attack.mitre.org/software/S0444)) as well as set up faux infrastructure which mimics the adversary''s
+  targets. [ShimRatReporter](https://attack.mitre.org/software/S0445) has been used in campaigns targeting multiple countries
+  and sectors including government, military, critical infrastructure, automobile, and weapons development.(Citation: FOX-IT
+  May 2016 Mofang)'
+external_references:
+- external_id: S0445
+  source_name: mitre-attack
+  url: https://attack.mitre.org/software/S0445
+- description: 'Yonathan Klijnsma. (2016, May 17). Mofang: A politically motivated information stealing adversary. Retrieved
+    May 12, 2020.'
+  source_name: FOX-IT May 2016 Mofang
+  url: https://foxitsecurity.files.wordpress.com/2016/06/fox-it_mofang_threatreport_tlp-white.pdf
+id: tool--115f88dd-0618-4389-83cb-98d33ae81848
+modified: '2025-04-25T14:45:13.595Z'
+name: ShimRatReporter
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+spec_version: '2.1'
+type: tool
+x_mitre_aliases:
+- ShimRatReporter
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.0'
+```

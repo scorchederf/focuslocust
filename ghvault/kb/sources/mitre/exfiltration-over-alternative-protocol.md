@@ -1,0 +1,96 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Exfiltration Over Alternative Protocol
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1048` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Exfiltration Over Alternative Protocol](../../attack/techniques/T1048-exfiltration-over-alternative-protocol.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1048 |
+| name | Exfiltration Over Alternative Protocol |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1048 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:30:44.720Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may steal data by exfiltrating it over a different protocol than that of the existing command and\
+  \ control channel. The data may also be sent to an alternate network location from the main command and control server.\
+  \  \n\nAlternate protocols include FTP, SMTP, HTTP/S, DNS, SMB, or any other network protocol not being used as the main\
+  \ command and control channel. Adversaries may also opt to encrypt and/or obfuscate these alternate channels. \n\n[Exfiltration\
+  \ Over Alternative Protocol](https://attack.mitre.org/techniques/T1048) can be done using various common operating system\
+  \ utilities such as [Net](https://attack.mitre.org/software/S0039)/SMB or FTP.(Citation: Palo Alto OilRig Oct 2016) On macOS\
+  \ and Linux <code>curl</code> may be used to invoke protocols such as HTTP/S or FTP/S to exfiltrate data from a system.(Citation:\
+  \ 20 macOS Common Tools and Techniques)\n\nMany IaaS and SaaS platforms (such as Microsoft Exchange, Microsoft SharePoint,\
+  \ GitHub, and AWS S3) support the direct download of files, emails, source code, and other sensitive information via the\
+  \ web console or [Cloud API](https://attack.mitre.org/techniques/T1059/009)."
+external_references:
+- external_id: T1048
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1048
+- description: Gardiner, J.,  Cova, M., Nagaraja, S. (2014, February). Command & Control Understanding, Denying and Detecting.
+    Retrieved April 20, 2016.
+  source_name: University of Birmingham C2
+  url: https://arxiv.org/ftp/arxiv/papers/1408/1408.1136.pdf
+- description: Grunzweig, J. and Falcone, R.. (2016, October 4). OilRig Malware Campaign Updates Toolset and Expands Targets.
+    Retrieved May 3, 2017.
+  source_name: Palo Alto OilRig Oct 2016
+  url: http://researchcenter.paloaltonetworks.com/2016/10/unit42-oilrig-malware-campaign-updates-toolset-and-expands-targets/
+- description: Phil Stokes. (2021, February 16). 20 Common Tools & Techniques Used by macOS Threat Actors & Malware. Retrieved
+    August 23, 2021.
+  source_name: 20 macOS Common Tools and Techniques
+  url: https://labs.sentinelone.com/20-common-tools-techniques-used-by-macos-threat-actors-malware/
+id: attack-pattern--a19e86f8-1c0a-4fea-8407-23b73d615776
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: exfiltration
+modified: '2025-10-24T17:49:10.460Z'
+name: Exfiltration Over Alternative Protocol
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- William Cain
+- Alfredo Abarca
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- IaaS
+- Linux
+- macOS
+- Network Devices
+- Office Suite
+- SaaS
+- Windows
+x_mitre_version: '1.6'
+```

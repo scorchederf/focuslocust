@@ -1,0 +1,283 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# User Account Authentication
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0002` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [User Account Authentication](../../attack/data-sources/DC0002-user-account-authentication.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0002 |
+| name | User Account Authentication |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0002 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.271Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: An attempt (successful and failed login attempts) by a user, service, or application to gain access to a network,
+  system, or cloud-based resource. This typically involves credentials such as passwords, tokens, multi-factor authentication
+  (MFA), or biometric validation.
+external_references:
+- external_id: DC0002
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0002
+id: x-mitre-data-component--a953ca55-921a-44f7-9b8d-3d40141aa17e
+modified: '2026-04-24T19:47:33.610Z'
+name: User Account Authentication
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- ics-attack
+- enterprise-attack
+- mobile-attack
+x_mitre_log_sources:
+- channel: pam_unix or pam_google_authenticator invoked repeatedly within short interval
+  name: auditd:AUTH
+- channel: pam_authenticate, sshd
+  name: auditd:SYSCALL
+- channel: execution of ssh, scp, or sftp using previously unseen credentials or keys
+  name: auditd:SYSCALL
+- channel: USER_AUTH
+  name: auditd:USER_LOGIN
+- channel: AssumeRole or ConsoleLogin with repeated MFA failures followed by repeated MFA requests
+  name: AWS:CloudTrail
+- channel: sts:GetFederationToken
+  name: AWS:CloudTrail
+- channel: AssumeRoleWithWebIdentity
+  name: AWS:CloudTrail
+- channel: 'AWS IAM: ListUsers, ListRoles'
+  name: AWS:CloudTrail
+- channel: eventName=ConsoleLogin | eventType=AwsConsoleSignIn
+  name: AWS:CloudTrail
+- channel: ConsoleLogin or AssumeRole
+  name: AWS:CloudTrail
+- channel: ConsoleLogin, AssumeRole, ListAccessKeys, CreateUser
+  name: AWS:CloudTrail
+- channel: Success logs from high-risk accounts
+  name: azure:signinlogs
+- channel: Multiple MFA challenge requests without successful primary login
+  name: azure:signinlogs
+- channel: 'TokenIssued, TokenRenewed: Unexpected or anomalous token issuance events'
+  name: azure:signinlogs
+- channel: 'SignIn: Sign-ins flagged as atypical (new geographic region, unfamiliar device id) shortly after correlated endpoint/browser
+    compromise times'
+  name: azure:signinlogs
+- channel: Operation=UserLogin
+  name: azure:signinlogs
+- channel: Unusual Token Usage or Application Consent
+  name: azure:signinlogs
+- channel: OperationName=SetDomainAuthentication OR Set-FederatedDomain
+  name: azure:signinlogs
+- channel: Sign-in with unfamiliar location/device + portal navigation
+  name: azure:signinlogs
+- channel: Login from newly created account
+  name: azure:signinlogs
+- channel: Interactive/Non-Interactive Sign-In
+  name: azure:signinlogs
+- channel: Reset password or download key from portal
+  name: azure:signinlogs
+- channel: status = failure
+  name: azure:signinlogs
+- channel: Sign-in logs
+  name: azure:signinlogs
+- channel: SigninSuccess
+  name: azure:signinlogs
+- channel: Failure Reason + UserPrincipalName
+  name: azure:signinlogs
+- channel: Sign-in activity
+  name: azure:signinlogs
+- channel: Sign-in logs / audit events
+  name: azure:signinlogs
+- channel: interactive shell or SSH access preceding storage enumeration
+  name: esxi:auth
+- channel: /var/log/auth.log
+  name: esxi:auth
+- channel: SSH session/login
+  name: esxi:auth
+- channel: user login from unexpected IP or non-admin user role
+  name: esxi:vpxa
+- channel: /var/log/vmware/vpxd.log
+  name: esxi:vpxd
+- channel: Unexpected login followed by encoding commands
+  name: ESXiLogs:authlog
+- channel: drive.activity
+  name: gcp:audit
+- channel: login.event
+  name: gcp:audit
+- channel: Sign-in logs / audit events
+  name: gcp:audit
+- channel: Token Generation via Domain Delegation
+  name: gcp:workspaceaudit
+- channel: Failed sign-in events
+  name: GCPAuditLogs:login.googleapis.com
+- channel: get/list requests to /api/v1/secrets or /api/v1/namespaces/*/serviceaccounts
+  name: kubernetes:apiserver
+- channel: authentication.k8s.io/v1beta1
+  name: kubernetes:apiserver
+- channel: Failed login
+  name: kubernetes:audit
+- channel: authentication.k8s.io
+  name: kubernetes:audit
+- channel: sshd login
+  name: linux:auth
+- channel: sudo/date/timedatectl execution by non-standard users
+  name: linux:syslog
+- channel: SSH failed login
+  name: linux:syslog
+- channel: Failed password for invalid user
+  name: linux:syslog
+- channel: 'sshd[pid]: Failed password'
+  name: linux:syslog
+- channel: authentication and authorization events during environmental validation phase
+  name: linux:syslog
+- channel: Logon failure
+  name: m365:exchange
+- channel: FailedLogin
+  name: m365:exchange
+- channel: Sign-in from anomalous location or impossible travel condition
+  name: m365:signinlogs
+- channel: UserLoginSuccess
+  name: m365:signinlogs
+- channel: Unusual sign-in from service principal to user mailbox
+  name: m365:signinlogs
+- channel: Delegated permission grants without user login event
+  name: m365:unified
+- channel: login using refresh_token with no preceding authentication context
+  name: m365:unified
+- channel: Sign-in logs
+  name: m365:unified
+- channel: successful sudo or authentication for account not normally associated with admin actions
+  name: macos:unifiedlog
+- channel: Login success without MFA step
+  name: macos:unifiedlog
+- channel: log show --predicate 'eventMessage contains "Authentication"'
+  name: macos:unifiedlog
+- channel: User credential prompt events without associated trusted installer package
+  name: macos:unifiedlog
+- channel: Login failure / authorization denied
+  name: macos:unifiedlog
+- channel: auth
+  name: macos:unifiedlog
+- channel: Login Window and Authd errors
+  name: macos:unifiedlog
+- channel: authd
+  name: macos:unifiedlog
+- channel: repeated successful authentications with previously unknown accounts or anomalous password acceptance
+  name: network:auth
+- channel: config access, authentication logs
+  name: networkdevice:syslog
+- channel: User privilege escalation to level 15/root prior to destructive commands
+  name: networkdevice:syslog
+- channel: authorization/accounting logs
+  name: networkdevice:syslog
+- channel: Failed and successful logins to network devices outside approved admin IP ranges
+  name: networkdevice:syslog
+- channel: Privileged login followed by destructive format command
+  name: networkdevice:syslog
+- channel: admin login events
+  name: networkdevice:syslog
+- channel: Privileged login followed by destructive command sequence
+  name: networkdevice:syslog
+- channel: AAA, RADIUS, or TACACS authentication
+  name: networkdevice:syslog
+- channel: authentication logs
+  name: networkdevice:syslog
+- channel: AAA or TACACS authentication failures
+  name: networkdevice:syslog
+- channel: authentication & authorization
+  name: networkdevice:syslog
+- channel: login failed
+  name: networkdevice:syslog
+- channel: Accepted password or publickey for user from remote IP
+  name: NSM:Connections
+- channel: Repeated failed authentication attempts or replay patterns
+  name: NSM:Connections
+- channel: Successful login without expected MFA challenge
+  name: NSM:Connections
+- channel: sshd or PAM logins
+  name: NSM:Connections
+- channel: TGS-REQ and AS-REQ seen for new user shortly after domain-modifying process
+  name: NSM:Flow
+- channel: authentication_failure
+  name: Okta:authn
+- channel: 'eventType: user.authentication.sso, app.oauth2.token.grant'
+  name: Okta:SystemLog
+- channel: login_failure
+  name: saas-app:auth
+- channel: Repeated requests to SMS-generating endpoints using anomalous or new user agents, IP ranges, or geographies.
+  name: saas:audit
+- channel: signin_failed
+  name: saas:auth
+- channel: API access without user login
+  name: saas:googleworkspace
+- channel: Accessed third-party credential management service
+  name: saas:googleworkspace
+- channel: login with reused session token and mismatched user agent or IP
+  name: saas:googleworkspace
+- channel: Access via OAuth credentials with unusual scopes or from anomalous IPs
+  name: saas:googleworkspace
+- channel: Authentication events to device management or enterprise mobility management consoles
+  name: saas:MDM
+- channel: Authentication events to Apple iCloud or enterprise device management services
+  name: saas:MDM
+- channel: session.impersonation.start
+  name: saas:okta
+- channel: Unusual OAuth app requesting message-read scopes for Slack/Teams/Jira
+  name: saas:okta
+- channel: authentication_failure
+  name: saas:okta
+- channel: Sign-in logs / audit events
+  name: saas:okta
+- channel: user.account.reset_password; user.mfa.factor.activate; app.oauth2.authorize
+  name: saas:okta
+- channel: API login using access_token without login history
+  name: saas:salesforce
+- channel: Login
+  name: saas:salesforce
+- channel: None
+  name: User Account
+- channel: EventCode=4625
+  name: WinEventLog:Security
+- channel: EventCode=4769, 1200, 1202
+  name: WinEventLog:Security
+- channel: EventCode=4768, 4769, 4770
+  name: WinEventLog:Security
+- channel: EventCode=4769
+  name: WinEventLog:Security
+- channel: EventCode=4776, 4625
+  name: WinEventLog:Security
+- channel: EventCode=4625, 4771, 4648
+  name: WinEventLog:Security
+- channel: EventCode=4648
+  name: WinEventLog:Security
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '3.0'
+```

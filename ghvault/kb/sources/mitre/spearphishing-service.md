@@ -1,0 +1,85 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Spearphishing Service
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1598.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Spearphishing Service](../../attack/techniques/T1598.001-spearphishing-service.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1598.001 |
+| name | Spearphishing Service |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1598/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-10-02T17:08:07.742Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may send spearphishing messages via third-party services to elicit sensitive information that can
+  be used during targeting. Spearphishing for information is an attempt to trick targets into divulging information, frequently
+  credentials or other actionable information. Spearphishing for information frequently involves social engineering techniques,
+  such as posing as a source with a reason to collect information (ex: [Establish Accounts](https://attack.mitre.org/techniques/T1585)
+  or [Compromise Accounts](https://attack.mitre.org/techniques/T1586)) and/or sending multiple, seemingly urgent messages.
+
+
+  All forms of spearphishing are electronically delivered social engineering targeted at a specific individual, company, or
+  industry. In this scenario, adversaries send messages through various social media services, personal webmail, and other
+  non-enterprise controlled services.(Citation: ThreatPost Social Media Phishing) These services are more likely to have a
+  less-strict security policy than an enterprise. As with most kinds of spearphishing, the goal is to generate rapport with
+  the target or get the target''s interest in some way. Adversaries may create fake social media accounts and message employees
+  for potential job opportunities. Doing so allows a plausible reason for asking about services, policies, and information
+  about their environment. Adversaries may also use information from previous reconnaissance efforts (ex: [Social Media](https://attack.mitre.org/techniques/T1593/001)
+  or [Search Victim-Owned Websites](https://attack.mitre.org/techniques/T1594)) to craft persuasive and believable lures.'
+external_references:
+- external_id: T1598.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1598/001
+- description: 'O''Donnell, L. (2020, October 20). Facebook: A Top Launching Pad For Phishing Attacks. Retrieved October 20,
+    2020.'
+  source_name: ThreatPost Social Media Phishing
+  url: https://threatpost.com/facebook-launching-pad-phishing-attacks/160351/
+id: attack-pattern--f870408c-b1cd-49c7-a5c7-0ef0fc496cc6
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: reconnaissance
+modified: '2025-10-24T17:49:38.182Z'
+name: Spearphishing Service
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Robert Simmons, @MalwareUtkonos
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- PRE
+x_mitre_version: '1.0'
+```

@@ -1,0 +1,88 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Netsh Helper DLL
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1546.007` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Netsh Helper DLL](../../attack/techniques/T1546.007-netsh-helper-dll.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1546.007 |
+| name | Netsh Helper DLL |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1546/007 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-01-24T14:26:51.207Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may establish persistence by executing malicious content triggered by Netsh Helper DLLs. Netsh.exe
+  (also referred to as Netshell) is a command-line scripting utility used to interact with the network configuration of a
+  system. It contains functionality to add helper DLLs for extending functionality of the utility.(Citation: TechNet Netsh)
+  The paths to registered netsh.exe helper DLLs are entered into the Windows Registry at <code>HKLM\SOFTWARE\Microsoft\Netsh</code>.
+
+
+  Adversaries can use netsh.exe helper DLLs to trigger execution of arbitrary code in a persistent manner. This execution
+  would take place anytime netsh.exe is executed, which could happen automatically, with another persistence technique, or
+  if other software (ex: VPN) is present on the system that executes netsh.exe as part of its normal functionality.(Citation:
+  Github Netsh Helper CS Beacon)(Citation: Demaske Netsh Persistence)'
+external_references:
+- external_id: T1546.007
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1546/007
+- description: Demaske, M. (2016, September 23). USING NETSHELL TO EXECUTE EVIL DLLS AND PERSIST ON A HOST. Retrieved April
+    8, 2017.
+  source_name: Demaske Netsh Persistence
+  url: https://htmlpreview.github.io/?https://github.com/MatthewDemaske/blogbackup/blob/master/netshell.html
+- description: Microsoft. (n.d.). Using Netsh. Retrieved February 13, 2017.
+  source_name: TechNet Netsh
+  url: https://technet.microsoft.com/library/bb490939.aspx
+- description: Smeets, M. (2016, September 26). NetshHelperBeacon. Retrieved February 13, 2017.
+  source_name: Github Netsh Helper CS Beacon
+  url: https://github.com/outflankbv/NetshHelperBeacon
+id: attack-pattern--f63fe421-b1d1-45c0-b8a7-02cd16ff2bed
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: privilege-escalation
+- kill_chain_name: mitre-attack
+  phase_name: persistence
+modified: '2025-10-24T17:49:37.405Z'
+name: Netsh Helper DLL
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Matthew Demaske, Adaptforward
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.1'
+```

@@ -1,0 +1,107 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Windows Management Instrumentation
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1047` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Windows Management Instrumentation](../../attack/techniques/T1047-windows-management-instrumentation.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1047 |
+| name | Windows Management Instrumentation |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1047 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:30:44.329Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may abuse Windows Management Instrumentation (WMI) to execute malicious commands and payloads. WMI
+  is designed for programmers and is the infrastructure for management data and operations on Windows systems.(Citation: WMI
+  1-3) WMI is an administration feature that provides a uniform environment to access Windows system components.
+
+
+  The WMI service enables both local and remote access, though the latter is facilitated by [Remote Services](https://attack.mitre.org/techniques/T1021)
+  such as [Distributed Component Object Model](https://attack.mitre.org/techniques/T1021/003) and [Windows Remote Management](https://attack.mitre.org/techniques/T1021/006).(Citation:
+  WMI 1-3) Remote WMI over DCOM operates using port 135, whereas WMI over WinRM operates over port 5985 when using HTTP and
+  5986 for HTTPS.(Citation: WMI 1-3) (Citation: Mandiant WMI)
+
+
+  An adversary can use WMI to interact with local and remote systems and use it as a means to execute various behaviors, such
+  as gathering information for [Discovery](https://attack.mitre.org/tactics/TA0007) as well as [Execution](https://attack.mitre.org/tactics/TA0002)
+  of commands and payloads.(Citation: Mandiant WMI) For example, `wmic.exe` can be abused by an adversary to delete shadow
+  copies with the command `wmic.exe Shadowcopy Delete` (i.e., [Inhibit System Recovery](https://attack.mitre.org/techniques/T1490)).(Citation:
+  WMI 6)
+
+
+  **Note:** `wmic.exe` is deprecated as of January of 2024, with the WMIC feature being “disabled by default” on Windows 11+.
+  WMIC will be removed from subsequent Windows releases and replaced by [PowerShell](https://attack.mitre.org/techniques/T1059/001)
+  as the primary WMI interface.(Citation: WMI 7,8) In addition to PowerShell and tools like `wbemtool.exe`, COM APIs can also
+  be used to programmatically interact with WMI via C++, .NET, VBScript, etc.(Citation: WMI 7,8)'
+external_references:
+- external_id: T1047
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1047
+- description: Ballenthin, W., et al. (2015). Windows Management Instrumentation (WMI) Offense, Defense, and Forensics. Retrieved
+    March 30, 2016.
+  source_name: FireEye WMI 2015
+  url: https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/wp-windows-management-instrumentation.pdf
+- description: Mandiant. (n.d.). Retrieved February 13, 2024.
+  source_name: Mandiant WMI
+  url: https://www.mandiant.com/resources/reports
+- description: Microsoft. (2022, June 13). BlackCat. Retrieved February 13, 2024.
+  source_name: WMI 6
+  url: https://www.microsoft.com/en-us/security/blog/2022/06/13/the-many-lives-of-blackcat-ransomware/
+- description: Microsoft. (2023, March 7). Retrieved February 13, 2024.
+  source_name: WMI 1-3
+  url: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page?redirectedfrom=MSDN
+- description: Microsoft. (2024, January 26). WMIC Deprecation. Retrieved February 13, 2024.
+  source_name: WMI 7,8
+  url: https://techcommunity.microsoft.com/t5/windows-it-pro-blog/wmi-command-line-wmic-utility-deprecation-next-steps/ba-p/4039242
+id: attack-pattern--01a5a209-b94c-450b-b7f9-946497d91055
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: execution
+modified: '2025-10-24T17:48:19.670Z'
+name: Windows Management Instrumentation
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- '@ionstorm'
+- Olaf Hartong, Falcon Force
+- Tristan Madani
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_remote_support: false
+x_mitre_version: '1.6'
+```

@@ -1,0 +1,94 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Input Injection
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1674` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Input Injection](../../attack/techniques/T1674-input-injection.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1674 |
+| name | Input Injection |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1674 |
+
+## Preserved Source Material
+
+```yaml
+created: '2025-03-27T18:14:06.330Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may simulate keystrokes on a victim’s computer by various means to perform any type of action on
+  behalf of the user, such as launching the command interpreter using keyboard shortcuts,  typing an inline script to be executed,
+  or interacting directly with a GUI-based application.  These actions can be preprogrammed into adversary tooling or executed
+  through physical devices such as Human Interface Devices (HIDs).
+
+
+  For example, adversaries have used tooling that monitors the Windows message loop to detect when a user visits bank-specific
+  URLs. If detected, the tool then simulates keystrokes to open the developer console or select the address bar, pastes malicious
+  JavaScript from the clipboard, and executes it - enabling manipulation of content within the browser, such as replacing
+  bank account numbers during transactions.(Citation: BleepingComputer BackSwap)(Citation: welivesecurity BackSwap)
+
+
+  Adversaries have also used malicious USB devices to emulate keystrokes that launch PowerShell, leading to the download and
+  execution of malware from adversary-controlled servers.(Citation: BleepingComputer USB)'
+external_references:
+- external_id: T1674
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1674
+- description: Catalin Cimpanu. (2018, May 25). BackSwap Banking Trojan Uses Never-Before-Seen Techniques. Retrieved March
+    27, 2025.
+  source_name: BleepingComputer BackSwap
+  url: https://www.bleepingcomputer.com/news/security/backswap-banking-trojan-uses-never-before-seen-techniques/
+- description: 'Ionut Ilascu. (2020, March 27). FBI: Hackers Sending Malicious USB Drives & Teddy Bears via USPS. Retrieved
+    March 27, 2025.'
+  source_name: BleepingComputer USB
+  url: https://www.bleepingcomputer.com/news/security/fbi-hackers-sending-malicious-usb-drives-and-teddy-bears-via-usps/
+- description: Michal Poslušný. (2018, May 25). BackSwap malware finds innovative ways to empty bank accounts. Retrieved March
+    27, 2025.
+  source_name: welivesecurity BackSwap
+  url: https://www.welivesecurity.com/2018/05/25/backswap-malware-empty-bank-accounts/
+id: attack-pattern--63e3d25c-d57d-407d-8e6a-2cecd71f90be
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: execution
+modified: '2025-04-15T19:58:36.409Z'
+name: Input Injection
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Alexey Kleymenov
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+- macOS
+- Linux
+x_mitre_version: '1.0'
+```

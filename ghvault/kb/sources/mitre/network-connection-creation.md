@@ -1,0 +1,271 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Network Connection Creation
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0082` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Network Connection Creation](../../attack/data-sources/DC0082-network-connection-creation.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0082 |
+| name | Network Connection Creation |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0082 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.274Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "The initial establishment of a network session, where a system or process initiates a connection to a local\
+  \ or remote endpoint. This typically involves capturing socket information (source/destination IP, ports, protocol) and\
+  \ tracking session metadata. Monitoring these events helps detect lateral movement, exfiltration, and command-and-control\
+  \ (C2) activities.\n\n*Data Collection Measures:*\n\n- Windows:\n    - Event ID 5156 – Filtering Platform Connection - Logs\
+  \ network connections permitted by Windows Filtering Platform (WFP).\n    - Sysmon Event ID 3 – Network Connection Initiated\
+  \ - Captures process, source/destination IP, ports, and parent process.\n- Linux/macOS:\n    - Netfilter (iptables), nftables\
+  \ logs - Tracks incoming and outgoing network connections.\n    - AuditD (`connect` syscall) - Logs TCP, UDP, and ICMP connections.\n\
+  \    - Zeek (`conn.log`) - Captures protocol, duration, and bytes transferred.\n- Cloud & Network Infrastructure:\n    -\
+  \ AWS VPC Flow Logs / Azure NSG Flow Logs - Logs IP traffic at the network level in cloud environments.\n    - Zeek (conn.log)\
+  \ or Suricata (network events) - Captures packet metadata for detection and correlation.\n- Endpoint Detection & Response\
+  \ (EDR):\n    - Detect anomalous network activity such as new C2 connections or data exfiltration attempts."
+external_references:
+- external_id: DC0082
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0082
+id: x-mitre-data-component--181a9f8c-c780-4f1f-91a8-edb770e904ba
+modified: '2026-04-23T18:37:33.992Z'
+name: Network Connection Creation
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- ics-attack
+- mobile-attack
+- enterprise-attack
+x_mitre_log_sources:
+- channel: log entries indicating network connection initiation on macOS
+  name: NSM:Flow
+- channel: connect
+  name: auditd:SYSCALL
+- channel: 'execve: Execs of chromium, google-chrome, firefox, libreoffice with http(s) in cmdline'
+  name: auditd:SYSCALL
+- channel: connect/sendto
+  name: auditd:SYSCALL
+- channel: open or connect syscalls on /tmp/ssh-* or $SSH_AUTH_SOCK
+  name: auditd:SYSCALL
+- channel: socket/connect with TLS context by unexpected process
+  name: auditd:SYSCALL
+- channel: 'socket/bind: New bind() to a previously closed port shortly after the sequence.'
+  name: auditd:SYSCALL
+- channel: sendto/connect
+  name: auditd:SYSCALL
+- channel: outbound connections
+  name: auditd:SYSCALL
+- channel: 'socket/bind: Process binds to a new local port shortly after knock'
+  name: auditd:SYSCALL
+- channel: socket/connect calls showing SSH processes forwarding arbitrary ports
+  name: auditd:SYSCALL
+- channel: openat,connect -k discovery
+  name: auditd:SYSCALL
+- channel: Outbound connection to 169.254.169.254 from EC2 workload
+  name: AWS:VPCFlowLogs
+- channel: Large transfer volume (>20MB) from RDS IP range to external public IPs
+  name: AWS:VPCFlowLogs
+- channel: High outbound traffic from new region resource
+  name: AWS:VPCFlowLogs
+- channel: Outbound connections to port 22, 3389
+  name: AWS:VPCFlowLogs
+- channel: Traffic observed on mirror destination instance
+  name: AWS:VPCFlowLogs
+- channel: outbound connection to internal or external APIs
+  name: cni:netflow
+- channel: socket connect
+  name: ebpf:syscalls
+- channel: /var/log/esxupdate.log or /var/log/vmksummary.log
+  name: esxi:esxupdate
+- channel: System service interactions
+  name: esxi:hostd
+- channel: Service initiated connections
+  name: esxi:hostd
+- channel: Service-Based Network Connection
+  name: esxi:hostd
+- channel: protocol egress
+  name: esxi:vmkernel
+- channel: network activity
+  name: esxi:vmkernel
+- channel: None
+  name: esxi:vmkernel
+- channel: network session initiation with external HTTPS services
+  name: esxi:vmkernel
+- channel: family=AF_PACKET or protocol raw; process name not in allowlist.
+  name: linux:osquery
+- channel: network
+  name: linux:syslog
+- channel: postfix/smtpd
+  name: linux:syslog
+- channel: New Wi-Fi connection established or repeated association failures
+  name: linux:syslog
+- channel: None
+  name: linux:syslog
+- channel: EventCode=3, 22
+  name: linux:Sysmon
+- channel: ES_EVENT_TYPE_NOTIFY_CONNECT
+  name: macos:endpointsecurity
+- channel: process_events/socket_events
+  name: macos:osquery
+- channel: execution of trusted tools interacting with external endpoints
+  name: macos:osquery
+- channel: launchd or network_events
+  name: macos:osquery
+- channel: process_events + launchd
+  name: macos:osquery
+- channel: process_events, socket_events
+  name: macos:osquery
+- channel: 'CONNECT: Long-lived connections from remote-control parents to external IPs/domains'
+  name: macos:osquery
+- channel: None
+  name: macos:osquery
+- channel: connection attempts
+  name: macos:unifiedlog
+- channel: connection open
+  name: macos:unifiedlog
+- channel: network connection events
+  name: macos:unifiedlog
+- channel: First outbound connection from the same PID/user shortly after an inbound trigger.
+  name: macos:unifiedlog
+- channel: network sessions initiated by remote desktop apps
+  name: macos:unifiedlog
+- channel: Inbound connections to VNC/SSH ports
+  name: macos:unifiedlog
+- channel: network
+  name: macos:unifiedlog
+- channel: Outbound Traffic
+  name: macos:unifiedlog
+- channel: None
+  name: macos:unifiedlog
+- channel: networkd or socket
+  name: macos:unifiedlog
+- channel: log stream network activity
+  name: macos:unifiedlog
+- channel: Association and authentication events including failures and new SSIDs
+  name: macos:unifiedlog
+- channel: None
+  name: Network
+- channel: None
+  name: Network Traffic
+- channel: Traffic from mirrored interface to mirror target IP
+  name: networkdevice:Flow
+- channel: Dynamic route changes
+  name: networkdevice:syslog
+- channel: web domain alerts
+  name: NSM:Connections
+- channel: New outbound connection from Safari/Chrome/Firefox/Word
+  name: NSM:Connections
+- channel: Outbound connections from newly spawned child processes or from the browser to uncommon endpoints or on anomalous
+    ports
+  name: NSM:Connections
+- channel: Outbound connection after script or installer launch
+  name: NSM:Connections
+- channel: Outbound Connections
+  name: NSM:Firewall
+- channel: proxy or TLS inspection logs
+  name: NSM:Firewall
+- channel: New TCP/443 or TCP/80 to domain not previously seen for the user/host
+  name: NSM:Flow
+- channel: conn.log
+  name: NSM:Flow
+- channel: Outbound connection to *.tunnels.api.visualstudio.com or *.devtunnels.ms
+  name: NSM:Flow
+- channel: Connections to *.devtunnels.ms or tunnels.api.visualstudio.com
+  name: NSM:Flow
+- channel: HTTPs connection to tunnels.api.visualstudio.com
+  name: NSM:Flow
+- channel: Outbound or inbound TFTP file transfers of ROMMON or firmware binaries
+  name: NSM:Flow
+- channel: 'connection: TCP connections to ports 139/445 to multiple hosts'
+  name: NSM:Flow
+- channel: 'connection: SMB connections to multiple internal hosts'
+  name: NSM:Flow
+- channel: Outbound HTTP/S initiated by newly installed interpreter process
+  name: NSM:Flow
+- channel: outbound connections to RMM services or to unusual destination ports
+  name: NSM:Flow
+- channel: Multiple failed connections (conn_state=REJ/S0 or history has 'R') across distinct ports from the same src_ip followed
+    by success to a specific port.
+  name: NSM:Flow
+- channel: Sequence of REJ/S0 then SF success from same src_ip within TimeWindow.
+  name: NSM:Flow
+- channel: Series of denied/closed flows to distinct ports then success to mgmt port from same src_ip within TimeWindow.
+  name: NSM:Flow
+- channel: Outbound traffic spike through formerly blocked ports/subnets following config change
+  name: NSM:Flow
+- channel: New egress to Internet by the same UID/host shortly after terminal exec
+  name: NSM:Flow
+- channel: 'connection: Inbound connections to SSH or VPN ports'
+  name: NSM:Flow
+- channel: External access to container ports (2375, 6443)
+  name: NSM:Flow
+- channel: remote access
+  name: NSM:Flow
+- channel: Outbound Connections
+  name: NSM:Flow
+- channel: connection attempts
+  name: NSM:Flow
+- channel: High-volume or repeated SNMP GETBULK/GETNEXT queries from untrusted or external IPs
+  name: NSM:Flow
+- channel: outbound connections from host during or immediately after image build
+  name: NSM:Flow
+- channel: new outbound connection from browser/office lineage
+  name: NSM:Flow
+- channel: new outbound connection from exploited lineage
+  name: NSM:Flow
+- channel: Multiple failed connections to closed ports (history contains 'R' or conn_state in {REJ, S0}) followed by a successful
+    handshake to a new port from same src within TimeWindowKnock
+  name: NSM:Flow
+- channel: Closed-port hits followed by success from same src_ip
+  name: NSM:Flow
+- channel: Port-knock pattern from one src to device unicast,broadcast,network addresses on same port within TimeWindowKnock
+  name: NSM:Flow
+- channel: Unexpected inbound/outbound TFTP traffic for device image files
+  name: NSM:Flow
+- channel: Unexpected or unauthorized inbound connections to SNMP, NETCONF, or RESTCONF services
+  name: NSM:Flow
+- channel: GETBULK/GETNEXT requests for OIDs associated with configuration parameters
+  name: snmp:access
+- channel: BITS job lifecycle events such as job create/modify/transfer/complete and URL/remote name fields
+  name: WinEventLog:Microsoft-Windows-Bits-Client/Operational
+- channel: EventCode=8001, 8002, 8003
+  name: WinEventLog:Microsoft-Windows-WLAN-AutoConfig
+- channel: EventCode=5156, 5157
+  name: WinEventLog:Security
+- channel: EventCode=3, 22
+  name: WinEventLog:Sysmon
+- channel: EventCode=8001
+  name: WinEventLog:System
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.1'
+```

@@ -1,0 +1,93 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Remote System Discovery
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1018` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Remote System Discovery](../../attack/techniques/T1018-remote-system-discovery.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1018 |
+| name | Remote System Discovery |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1018 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:30:28.187Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may attempt to get a listing of other systems by IP address, hostname, or other logical identifier\
+  \ on a network that may be used for Lateral Movement from the current system. Functionality could exist within remote access\
+  \ tools to enable this, but utilities available on the operating system could also be used such as  [Ping](https://attack.mitre.org/software/S0097),\
+  \ <code>net view</code> using [Net](https://attack.mitre.org/software/S0039), or, on ESXi servers, `esxcli network diag\
+  \ ping`.\n\nAdversaries may also analyze data from local host files (ex: <code>C:\\Windows\\System32\\Drivers\\etc\\hosts</code>\
+  \ or <code>/etc/hosts</code>) or other passive means (such as local [Arp](https://attack.mitre.org/software/S0099) cache\
+  \ entries) in order to discover the presence of remote systems in an environment.\n\nAdversaries may also target discovery\
+  \ of network infrastructure as well as leverage [Network Device CLI](https://attack.mitre.org/techniques/T1059/008) commands\
+  \ on network devices to gather detailed information about systems within a network (e.g. <code>show cdp neighbors</code>,\
+  \ <code>show arp</code>).(Citation: US-CERT-TA18-106A)(Citation: CISA AR21-126A FIVEHANDS May 2021)  \n"
+external_references:
+- external_id: T1018
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1018
+- description: CISA. (2021, May 6). Analysis Report (AR21-126A) FiveHands Ransomware. Retrieved June 7, 2021.
+  source_name: CISA AR21-126A FIVEHANDS May 2021
+  url: https://us-cert.cisa.gov/ncas/analysis-reports/ar21-126a
+- description: 'Stepanic, D.. (2020, January 13). Embracing offensive tooling: Building detections against Koadic using EQL.
+    Retrieved November 17, 2024.'
+  source_name: Elastic - Koadiac Detection with EQL
+  url: https://www.elastic.co/security-labs/embracing-offensive-tooling-building-detections-against-koadic-using-eql
+- description: US-CERT. (2018, April 20). Alert (TA18-106A) Russian State-Sponsored Cyber Actors Targeting Network Infrastructure
+    Devices. Retrieved October 19, 2020.
+  source_name: US-CERT-TA18-106A
+  url: https://www.us-cert.gov/ncas/alerts/TA18-106A
+id: attack-pattern--e358d692-23c0-4a31-9eb6-ecc13a8d7735
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: discovery
+modified: '2025-10-24T17:49:31.319Z'
+name: Remote System Discovery
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Daniel Stepanic, Elastic
+- RedHuntLabs, @redhuntlabs
+- Austin Clark, @c2defense
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Network Devices
+- Windows
+x_mitre_version: '3.6'
+```

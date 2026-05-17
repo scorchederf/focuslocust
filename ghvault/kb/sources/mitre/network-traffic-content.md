@@ -1,0 +1,681 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Network Traffic Content
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0085` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Network Traffic Content](../../attack/data-sources/DC0085-network-traffic-content.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0085 |
+| name | Network Traffic Content |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0085 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.274Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "The full packet capture (PCAP) or session data that logs both protocol headers and payload content. This allows\
+  \ analysts to inspect command and control (C2) traffic, exfiltration, and other suspicious activity within network communications.\
+  \ Unlike metadata-based logs, full content analysis enables deeper protocol inspection, payload decoding, and forensic investigations.\n\
+  \n*Data Collection Measures:*\n\n- Network Packet Capture (Full Content Logging)\n    - Wireshark / tcpdump / tshark\n \
+  \       - Full packet captures (PCAP files) for manual analysis or IDS correlation. `tcpdump -i eth0 -w capture.pcap`\n\
+  \    - Zeek (formerly Bro)\n        - Extracts protocol headers and payload details into structured logs. `echo \"redef\
+  \ Log::default_store = Log::ASCII;\" > local.zeek | zeek -Cr capture.pcap local.zeek`\n    - Suricata / Snort (IDS/IPS with\
+  \ PCAP Logging)\n        - Deep packet inspection (DPI) with signature-based and behavioral analysis. `suricata -c /etc/suricata/suricata.yaml\
+  \ -i eth0 -l /var/log/suricata`\n- Host-Based Collection\n    - Sysmon Event ID 22 – DNS Query Logging, Captures DNS requests\
+  \ made by processes, useful for detecting C2 domains.\n    - Sysmon Event ID 3 – Network Connection Initiated, Logs process-to-network\
+  \ connection relationships.\n    - AuditD (Linux) – syscall=connect, Monitors outbound network requests from processes.\
+  \ `auditctl -a always,exit -F arch=b64 -S connect -k network_activity`\n- Cloud & SaaS Traffic Collection\n    - AWS VPC\
+  \ Flow Logs / Azure NSG Flow Logs / Google VPC Flow Logs, Captures metadata about inbound/outbound network traffic.\n  \
+  \  - Cloud IDS (AWS GuardDuty, Azure Sentinel, Google Chronicle), Detects malicious activity in cloud environments by analyzing\
+  \ network traffic patterns."
+external_references:
+- external_id: DC0085
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0085
+id: x-mitre-data-component--3772e279-27d6-477a-9fe3-c6beb363594c
+modified: '2026-04-22T14:48:50.367Z'
+name: Network Traffic Content
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- ics-attack
+- mobile-attack
+- enterprise-attack
+x_mitre_log_sources:
+- channel: None
+  name: Traffic
+- channel: AWS ALB/ELB/GCP/Azure Application Gateway HTTP logs with unusual methods, long URIs, serialized payloads, 4xx/5xx
+    bursts
+  name: ALB:HTTPLogs
+- channel: Unusual HTTP POST or PUT requests to paths such as '/uploads/', '/admin/', or CMS plugin folders
+  name: apache:access_log
+- channel: Access to configuration repository endpoints, unusual enumeration requests or mass downloads
+  name: API:ConfigRepoAudit
+- channel: setsockopt, ioctl modifying ARP entries
+  name: auditd:SYSCALL
+- channel: Traffic between instances
+  name: AWS:VPCFlowLogs
+- channel: Large volume of malformed or synthetic payloads to application endpoints prior to failure
+  name: AWS:VPCFlowLogs
+- channel: Unusual volume of data transferred from S3 storage endpoints to non-corporate IPs
+  name: AWS:VPCFlowLogs
+- channel: High volume internal-to-internal IP transfer or cross-account cloud transfer
+  name: AWS:VPCFlowLogs
+- channel: networkInsightsLogs
+  name: azure:activity
+- channel: HTTP requests to 169.254.169.254 or Azure Metadata endpoints
+  name: azure:vpcflow
+- channel: outbound/inbound network activity from spawned pods
+  name: container:proxy
+- channel: remote API calls to /containers/create or /containers/{id}/start
+  name: docker:events
+- channel: unusual network TX/RX byte deltas
+  name: docker:stats
+- channel: Process within container accesses link-local address 169.254.169.254
+  name: ebpf:syscalls
+- channel: 'Advanced Hunting: DeviceProcessEvents + DeviceNetworkEvents'
+  name: EDR:hunting
+- channel: Socket sessions with randomized payloads inconsistent with TLS
+  name: esxcli:network
+- channel: listening sockets bound to non-standard ports
+  name: esxcli:network
+- channel: listening sockets bound with non-standard encapsulated protocols
+  name: esxcli:network
+- channel: Socket inspection showing RSA key exchange outside baseline endpoints
+  name: esxcli:network
+- channel: Network activity
+  name: esxi:vmkernel
+- channel: Outbound traffic using encoded payloads post-login
+  name: esxi:vmkernel
+- channel: HTTPS POST connections to webhook endpoints
+  name: esxi:vmkernel
+- channel: Inspection of sockets showing encrypted sessions from non-baseline processes
+  name: esxi:vmkernel
+- channel: HTTPS POST connections to pastebin-like domains
+  name: esxi:vmkernel
+- channel: network stack module logs
+  name: esxi:vmkernel
+- channel: Suspicious traffic filtered or redirected by VM networking stack
+  name: esxi:vmkernel
+- channel: VMCI syslog entries
+  name: esxi:vmkernel
+- channel: NFS/remote access logs
+  name: esxi:vob
+- channel: TLS Handshake/Network Flow
+  name: etw:Microsoft-Windows-NDIS-PacketCapture
+- channel: HTTPS Inspection
+  name: etw:Microsoft-Windows-WinINet
+- channel: WinINet API telemetry
+  name: etw:Microsoft-Windows-WinINet
+- channel: network.query*
+  name: gcp:audit
+- channel: first 5m egress to unknown ASNs
+  name: gcp:vpcflow
+- channel: Malformed certs, incomplete asymmetric handshakes, or invalid CAs
+  name: IDS:TLSInspection
+- channel: Per-app VPN flow logging indicating opaque/archived payload transfer preceding local decode
+  name: iOS:unifiedlog
+- channel: Per-App VPN flow with code-like content types (application/octet-stream, application/zip, text/javascript, application/x-mach-o)
+  name: iOS:unifiedlog
+- channel: WKWebView navigation to domain visually similar to target brand (IDN/punycode/alike score)
+  name: iOS:unifiedlog
+- channel: Query to suspicious domain with high entropy or low reputation
+  name: linux:syslog
+- channel: curl|wget|python .*http
+  name: linux:syslog
+- channel: Unexpected SQL or application log entries showing tampered or malformed data
+  name: linux:syslog
+- channel: Integrity mismatch warnings or malformed packets detected
+  name: linux:syslog
+- channel: DNS response IPs followed by connections to non-standard calculated ports
+  name: linux:syslog
+- channel: Multiple NXDOMAIN responses and high entropy domains
+  name: linux:syslog
+- channel: External HTTP/DNS connection from Office binary shortly after macro trigger
+  name: m365:office
+- channel: process + network metrics correlation for bandwidth saturation
+  name: macos:unifiedlog
+- channel: DNS query with pseudo-random subdomain patterns
+  name: macos:unifiedlog
+- channel: network flow
+  name: macos:unifiedlog
+- channel: curl|osascript.*open location
+  name: macos:unifiedlog
+- channel: 'subsystem: com.apple.network'
+  name: macos:unifiedlog
+- channel: open URL|clicked link|LSQuarantineAttach
+  name: macos:unifiedlog
+- channel: None
+  name: macos:unifiedlog
+- channel: Connections to suspicious domains with mismatched certificate or unusual patterns
+  name: macos:unifiedlog
+- channel: HTTP POST with encoded content in user-agent or cookie field
+  name: macos:unifiedlog
+- channel: Suspicious outbound HTTPS requests to domains flagged as newly registered or untrusted after spearphishing message
+    interaction
+  name: macos:unifiedlog
+- channel: 'log stream (subsystem: com.apple.system.networking)'
+  name: macos:unifiedlog
+- channel: Encrypted connection with anomalous payload entropy
+  name: macos:unifiedlog
+- channel: Rapid incoming TLS handshakes or HTTP requests in quick succession
+  name: macos:unifiedlog
+- channel: network, socket, and http logs
+  name: macos:unifiedlog
+- channel: DNS responses followed by connections to ports outside standard ranges
+  name: macos:unifiedlog
+- channel: Persistent outbound traffic to mining domains
+  name: macos:unifiedlog
+- channel: Encrypted session initiation by unexpected binary
+  name: macos:unifiedlog
+- channel: eventMessage = 'promiscuous'
+  name: macos:unifiedlog
+- channel: outbound HTTPS connections to code repository APIs
+  name: macos:unifiedlog
+- channel: eventMessage = 'open', 'sendto', 'connect'
+  name: macos:unifiedlog
+- channel: dns-sd, mDNSResponder, socket activity
+  name: macos:unifiedlog
+- channel: process + network activity
+  name: macos:unifiedlog
+- channel: subsystem=com.apple.WebKit
+  name: macos:unifiedlog
+- channel: 'subsystem: com.apple.WebKit or com.apple.WebKit.Networking'
+  name: macos:unifiedlog
+- channel: encrypted outbound traffic carrying unexpected application data
+  name: macos:unifiedlog
+- channel: Persistent outbound connections with consistent periodicity
+  name: macos:unifiedlog
+- channel: TLS connections with abnormal handshake sequence or self-signed cert
+  name: macos:unifiedlog
+- channel: Web server process initiating outbound TCP connections not tied to normal server traffic
+  name: macos:unifiedlog
+- channel: outbound TLS connections to cloud storage providers
+  name: macos:unifiedlog
+- channel: outbound HTTPS connections to cloud storage APIs
+  name: macos:unifiedlog
+- channel: process, network
+  name: macos:unifiedlog
+- channel: process = 'ssh' OR eventMessage CONTAINS 'ssh'
+  name: macos:unifiedlog
+- channel: Forwarded packets log
+  name: Netfilter/iptables
+- channel: None
+  name: Network Traffic
+- channel: interface flag PROMISC, netstat | ip link | ethtool
+  name: 'networkconfig '
+- channel: NAT table modification (add/update/delete rule)
+  name: networkdevice:config
+- channel: content inspection / PCAP / HTTP body
+  name: networkdevice:IDS
+- channel: ACL/Firewall rule modification or new route injection
+  name: networkdevice:syslog
+- channel: config change (e.g., logging buffered, pcap buffers)
+  name: networkdevice:syslog
+- channel: Authentication failures, unexpected community string usage, or unauthorized SNMPv1/v2 requests
+  name: networkdevice:syslog
+- channel: Authentication failures or unusual community string usage in SNMP queries
+  name: networkdevice:syslog
+- channel: Symmetric encryption detected without TLS handshake sequence
+  name: NSM:Connections
+- channel: TLS handshake + HTTP headers
+  name: NSM:Connections
+- channel: Abnormal certificate chains or non-standard ports carrying TLS
+  name: NSM:Connections
+- channel: Unusual POST requests to admin or upload endpoints
+  name: NSM:Connections
+- channel: Outbound connections to internal enterprise services exhibiting anomalous protocol behavior, malformed sessions,
+    or exploit-consistent traffic patterns
+  name: NSM:Connections
+- channel: SSL Certificate Metadata
+  name: NSM:Content
+- channel: HTTP Header Metadata
+  name: NSM:Content
+- channel: TLS Fingerprint and Certificate Analysis
+  name: NSM:Content
+- channel: Traffic on RPC DRSUAPI
+  name: NSM:Content
+- channel: TLS/HTTP inspection
+  name: NSM:Firewall
+- channel: High rate of inbound TCP SYN or ACK packets with missing 3-way handshake completion
+  name: NSM:Firewall
+- channel: Anomalous TCP SYN or ACK spikes from specific source or interface
+  name: NSM:Firewall
+- channel: Outbound encrypted traffic
+  name: NSM:Firewall
+- channel: ICMP/UDP protocol anomaly
+  name: NSM:Firewall
+- channel: mqtt.log / xmpp.log (custom log feeds)
+  name: NSM:Flow
+- channel: mqtt.log or AMQP custom log
+  name: NSM:Flow
+- channel: mqtt.log, xmpp.log, amqp.log
+  name: NSM:Flow
+- channel: TCP/UDP
+  name: NSM:Flow
+- channel: TCP session tracking
+  name: NSM:Flow
+- channel: Captured packet payloads
+  name: NSM:Flow
+- channel: session behavior
+  name: NSM:Flow
+- channel: External C2 channel over TLS
+  name: NSM:Flow
+- channel: 'http/file-xfer: Inbound/outbound transfer of ELF shared objects'
+  name: NSM:Flow
+- channel: http.log, files.log
+  name: NSM:Flow
+- channel: unexpected network activity initiated shortly after shell session starts
+  name: NSM:Flow
+- channel: 'HTTP/WebDAV requests that contain NTLMSSP or PROPFIND/MOVE/OPTIONS with Authorization: NTLM'
+  name: NSM:Flow
+- channel: http.log, ssl.log
+  name: NSM:Flow
+- channel: http.log, conn.log
+  name: NSM:Flow
+- channel: SPAN or port-mirrored HTTP/S
+  name: NSM:Flow
+- channel: http.log, ssl.log, websocket.log
+  name: NSM:Flow
+- channel: ssl.log
+  name: NSM:Flow
+- channel: Browser connections to known C2 or dynamic DNS domains
+  name: NSM:Flow
+- channel: Session History Reset
+  name: NSM:Flow
+- channel: 'HTTP '
+  name: NSM:Flow
+- channel: 'query: High-volume LDAP traffic with filters targeting groupPolicyContainer attributes'
+  name: NSM:Flow
+- channel: HTTP/TLS Logs
+  name: NSM:Flow
+- channel: Suspicious URL patterns, uncommon TLDs, short-lived domains, URL shorteners; HTTP method GET/POST
+  name: NSM:Flow
+- channel: Suspicious URL patterns, uncommon TLDs, URL shorteners
+  name: NSM:Flow
+- channel: Suspicious GET/POST; downloader patterns
+  name: NSM:Flow
+- channel: SSH logins or scp activity
+  name: NSM:Flow
+- channel: remote login and transfer
+  name: NSM:Flow
+- channel: conn.log
+  name: NSM:Flow
+- channel: Suspicious long-lived or reattached remote desktop sessions from unexpected IPs
+  name: NSM:Flow
+- channel: HTTP payloads with SQLi/LFI/JNDI/deserialization indicators
+  name: NSM:Flow
+- channel: outbound egress from web host after suspicious request
+  name: NSM:Flow
+- channel: Requests towards cloud metadata or command & control from pod IPs
+  name: NSM:Flow
+- channel: Connections to TCP 427 (SLP) or vCenter web services from untrusted sources
+  name: NSM:Flow
+- channel: NetFlow/sFlow for odd egress to Internet from mgmt plane
+  name: NSM:Flow
+- channel: packet capture or DPI logs
+  name: NSM:Flow
+- channel: http.log
+  name: NSM:Flow
+- channel: SMB2_LOGOFF/SMB_TREE_DISCONNECT
+  name: NSM:Flow
+- channel: Unusual Base64-encoded content in URI, headers, or POST body
+  name: NSM:Flow
+- channel: Base64 strings or gzip in URI, headers, or POST body
+  name: NSM:Flow
+- channel: Inbound connections to 445, 3389, 5985-5986 with high error/connection-reset rate, followed by new outbound sessions
+    from the same host to internal assets within short interval.
+  name: NSM:Flow
+- channel: Inbound connections to monitored service ports from external or unusual internal sources; rapid follow-on lateral
+    connections from the same host.
+  name: NSM:Flow
+- channel: Inbound to tcp/427 (OpenSLP), tcp/443 (vSphere APIs), tcp/902, tcp/5989 followed by new unexpected outbound sessions
+    from the ESXi/vCenter host.
+  name: NSM:Flow
+- channel: Inbound to 22/5900/8080 and follow-on internal connections.
+  name: NSM:Flow
+- channel: 'http: HTTP body or headers contain long Base64 sections; gzip/deflate + Base64'
+  name: NSM:Flow
+- channel: 'http: HTTP body contains long Base64 sections'
+  name: NSM:Flow
+- channel: 'http: Base64/MIME looking payloads from ESXi host IP'
+  name: NSM:Flow
+- channel: LDAP Bind/Search
+  name: NSM:Flow
+- channel: LDAP Query
+  name: NSM:Flow
+- channel: smtp.log
+  name: NSM:Flow
+- channel: smtp.log, conn.log
+  name: NSM:Flow
+- channel: remote CLI session detection
+  name: NSM:Flow
+- channel: http.log, ftp.log
+  name: NSM:Flow
+- channel: PCAP inspection
+  name: NSM:Flow
+- channel: large HTTPS POST requests to webhook endpoints
+  name: NSM:Flow
+- channel: Single, low-volume inbound packet (REJ/S0/OTH or uncommon dport/protocol) from src_ip followed by outbound SF connection
+    to src_ip.
+  name: NSM:Flow
+- channel: Rare inbound packet characteristics (ICMP/UDP/TCP to uncommon port) from src_ip followed ≤TimeWindow by outbound
+    SF from same host to src_ip.
+  name: NSM:Flow
+- channel: Inbound one-off packet to uncommon port → outbound SF to same src_ip within TimeWindow.
+  name: NSM:Flow
+- channel: large upload to firmware interface port or path
+  name: NSM:Flow
+- channel: 'http.request: HTTP requests and responses for specific script resources, unexpected content-types (application/octet-stream
+    for script URLs), suspicious referrers, or obfuscated javascript resources'
+  name: NSM:Flow
+- channel: 'http::response: HTTP responses with suspicious content-type for scripts, long obfuscated javascript bodies, or
+    redirects to exploit kit domains'
+  name: NSM:Flow
+- channel: HTTP/HTTPS requests for script resources flagged by content inspection (excessive obfuscation, eval usage, unusual
+    redirects)
+  name: NSM:Flow
+- channel: ssl.log + http.log
+  name: NSM:Flow
+- channel: 'http/file-xfer: Outbound transfer of large video-like MIME types soon after capture'
+  name: NSM:Flow
+- channel: Outbound SCP, TFTP, or FTP sessions carrying configuration file content
+  name: NSM:Flow
+- channel: Session Transfer Content
+  name: NSM:Flow
+- channel: Captured File Content
+  name: NSM:Flow
+- channel: C2 exfiltration
+  name: NSM:Flow
+- channel: Transferred file observations
+  name: NSM:Flow
+- channel: 'http::post: Outbound HTTP POST from host shortly after DB export activity'
+  name: NSM:Flow
+- channel: HTTPS API requests to Dropbox, iCloud, Google Drive, OneDrive shortly after DB tool usage
+  name: NSM:Flow
+- channel: Observed downgrade in negotiated cipher suites or TLS/SSH versions across sessions
+  name: NSM:Flow
+- channel: New egress from container IP/namespace to Internet or non-approved CIDRs/ASNs
+  name: NSM:Flow
+- channel: New VM egress to crypto-mining pools or non-approved Internet ranges within minutes of boot
+  name: NSM:Flow
+- channel: 'http::request: Network connection to package registry or C2 from interpreter shortly after install'
+  name: NSM:Flow
+- channel: 'http::request: Outbound HTTP initiated by Python interpreter'
+  name: NSM:Flow
+- channel: DrsAddEntry, DrsReplicaAdd, GetNCChanges calls between non-DC and DCs.
+  name: NSM:Flow
+- channel: large HTTPS POST requests to text storage domains
+  name: NSM:Flow
+- channel: Unexpected ARP replies or DNS responses inconsistent with authoritative servers
+  name: NSM:Flow
+- channel: TLS downgrade or inconsistent DNS answers
+  name: NSM:Flow
+- channel: Unusual request pattern leading up to service crash (e.g., malformed or oversized payload)
+  name: NSM:Flow
+- channel: conn.log or http.log
+  name: NSM:Flow
+- channel: 'http: HTTP bodies/headers contain long tokens with non-standard alphabets or constant-size periodic POSTs'
+  name: NSM:Flow
+- channel: 'dns: DNS labels with excessive length and restricted custom alphabets (e.g., base36 only) repeated frequently'
+  name: NSM:Flow
+- channel: 'http: suspicious long tokens with custom alphabets in body/headers'
+  name: NSM:Flow
+- channel: 'http: HTTP bodies from ESXi host IPs containing long, non-standard tokens'
+  name: NSM:Flow
+- channel: Traffic patterns showing downgrade from strong encryption (AES-256) to weaker or plaintext protocols
+  name: NSM:Flow
+- channel: HTTP(S) requests with User-Agents typical of PowerShell or curl from desktop; or URIs matching paste-inspired payload
+    hosts
+  name: NSM:Flow
+- channel: Egress to non-approved networks from host after terminal exec
+  name: NSM:Flow
+- channel: Flow/PCAP analysis for outbound payloads
+  name: NSM:Flow
+- channel: conn.log + files.log + ssl.log
+  name: NSM:Flow
+- channel: HTTPS or custom protocol traffic with large payloads
+  name: NSM:Flow
+- channel: Unexpected script or binary content returned in HTTP response body
+  name: NSM:Flow
+- channel: Injected content responses with unexpected script/malware signatures
+  name: NSM:Flow
+- channel: Content injection observed in HTTPS responses with mismatched certificates or altered payloads
+  name: NSM:Flow
+- channel: Relay patterns across IP hops
+  name: NSM:Flow
+- channel: ldap.log
+  name: NSM:Flow
+- channel: Probe responses from unauthorized APs responding to client probe requests
+  name: NSM:Flow
+- channel: Excessive gratuitous ARP replies on local subnet
+  name: NSM:Flow
+- channel: Inbound HTTP POST with suspicious payload size or user-agent
+  name: NSM:Flow
+- channel: POST requests to .php, .jsp, .aspx files with high entropy body
+  name: NSM:Flow
+- channel: dns.log
+  name: NSM:Flow
+- channel: dns.log
+  name: NSM:FLow
+- channel: Encrypted tunnels or proxy traffic to non-standard destinations
+  name: NSM:Flow
+- channel: large transfer from management IPs to unauthorized host
+  name: NSM:Flow
+- channel: Sustained abnormal inbound request rate targeting application ports (e.g., 80/443/25)
+  name: NSM:Flow
+- channel: ftp.log, smb_files.log
+  name: NSM:Flow
+- channel: ftp.log, conn.log
+  name: NSM:Flow
+- channel: mirror/SPAN port
+  name: NSM:Flow
+- channel: ftp.log, conn.log, smb_files.log
+  name: NSM:Flow
+- channel: SSL/TLS Inspection or PCAP
+  name: NSM:Flow
+- channel: conn.log, ssl.log
+  name: NSM:Flow
+- channel: http, dns, smb, ssl logs
+  name: NSM:Flow
+- channel: dns, ssl, conn
+  name: NSM:Flow
+- channel: conn.log, http.log, dns.log, ssl.log
+  name: NSM:Flow
+- channel: ICMP/UDP traffic (Wireshark, Suricata, Zeek)
+  name: NSM:Flow
+- channel: icmp.log, weird.log
+  name: NSM:Flow
+- channel: ICMP/UDP monitoring (tcpdump, Wireshark, Zeek)
+  name: NSM:Flow
+- channel: Unusual responses to LLMNR (UDP 5355) or NBT-NS (UDP 137) queries from unauthorized hosts
+  name: NSM:Flow
+- channel: DHCP OFFER or ACK with unauthorized DNS/gateway parameters
+  name: NSM:Flow
+- channel: Multiple DHCP OFFER responses for a single DISCOVER
+  name: NSM:Flow
+- channel: SSL/TLS Handshake Analysis
+  name: NSM:Flow
+- channel: HTTP Header Metadata
+  name: NSM:Flow
+- channel: Network Capture TLS/HTTP
+  name: NSM:Flow
+- channel: container egress to unknown IPs/domains
+  name: NSM:Flow
+- channel: HTTP Request Logging
+  name: NSM:Flow
+- channel: ssh connections originating from third-party CIDRs
+  name: NSM:Flow
+- channel: ssh/smb connections to internal resources from third-party devices
+  name: NSM:Flow
+- channel: Degraded encryption throughput or switch to weaker cipher suites compared to historical baselines
+  name: NSM:Flow
+- channel: ssl.log (for TLS handshake analysis), dns.log (tunneling indicators)
+  name: NSM:Flow
+- channel: host switch egress data
+  name: NSM:Flow
+- channel: Outbound HTTP/S
+  name: NSM:Flow
+- channel: ssl.log - Certificate Analysis
+  name: NSM:Flow
+- channel: ssl.log, conn.log
+  name: NSM:Flow
+- channel: ssl.log, x509.log
+  name: NSM:Flow
+- channel: Packets with unusual flags or payloads outside established flows (e.g., WoL magic FF×6 + 16×MAC)
+  name: NSM:Flow
+- channel: Suspicious POSTs to upload endpoints
+  name: NSM:Flow
+- channel: TLS/HTTP download with atypical MIME (application/octet-stream, application/x-zip, application/x-gzip) followed
+    by local decode/write
+  name: NSM:Flow
+- channel: HTTP(S)/QUIC media download with opaque content types (image/*, audio/*, video/*) from non-gallery domains or CDNs
+    not previously used by the app
+  name: NSM:Flow
+- channel: HTTP(S)/QUIC download of executable/opaque content (application/octet-stream, application/zip, application/java-archive,
+    application/x-dex, application/x-sharedlib, text/javascript)
+  name: NSM:Flow
+- channel: burst of DNS queries/connection attempts to RFC1918 or local gateway immediately after scans
+  name: NSM:Flow
+- channel: HTTPS sessions exhibiting periodic request cadence or structured payload exchanges inconsistent with application
+    baseline
+  name: NSM:Flow
+- channel: Application-layer indicators observable via enterprise network controls (HTTP method, URI path pattern class, TLS
+    SNI, JA3/ALPN when available, DNS qname/type) showing anomalous or low-and-slow command polling behavior
+  name: NSM:Flow
+- channel: Near-term increase in traffic to identity endpoints associated with SMS MFA, account recovery, or OTP verification
+    (IdP, banking, crypto), correlated to SIM/service loss
+  name: NSM:Flow
+- channel: Abrupt shift from cellular egress to Wi-Fi-only egress, or new VPN/proxy session establishment following cellular
+    service loss
+  name: NSM:Flow
+- channel: Application-layer web traffic showing suspicious redirect chains, iframe/ad-tech cascades, user-agent or environment
+    fingerprinting requests, or staged payload retrieval after page visit
+  name: NSM:Flow
+- channel: Application initiates HTTPS connection with repeated certificate validation failure under enterprise proxy followed
+    by direct network retry or stable opaque TLS communication to same endpoint within correlation window
+  name: NSM:Flow
+- channel: App-destination pair shows consistent inspection bypass/refusal pattern followed by direct encrypted communication
+    or repeated short-lived TLS sessions to same endpoint within correlation window
+  name: NSM:Flow
+- channel: Application retrieves remote content from non-baselined domain or IP and the transfer direction is inbound to device
+    during the file acquisition phase
+  name: NSM:Flow
+- channel: Managed iOS app retrieves remote content from non-baselined domain or IP with inbound payload transfer during the
+    acquisition phase
+  name: NSM:Flow
+- channel: Device shows correlated inbound session establishment followed by outbound connections to separate external destinations
+    with overlapping timing and relay-like byte symmetry
+  name: NSM:Flow
+- channel: Traffic spike preceding control crash
+  name: NSM:Flow
+- channel: TLS session from mobile app fails, resets, or refuses enterprise interception while same destination/app pair repeatedly
+    establishes direct encrypted communication pattern consistent with pinned certificate/public-key validation
+  name: NSM:Inspection
+- channel: TLS handshake from iOS app repeatedly fails or is rejected only when enterprise SSL inspection certificate is presented,
+    indicating certificate or public-key pin validation effect
+  name: NSM:Inspection
+- channel: API calls exceeding baseline thresholds
+  name: saas:box
+- channel: REST API access from non-browser agents
+  name: saas:confluence
+- channel: Subscriber information queries, routing requests, or location update messages with anomalous node identifiers or
+    unexpected origin patterns
+  name: TelecomLogs:SS7Signaling
+- channel: Location resolution, routing, or subscriber information exchanges with anomalous signaling paths or node identities
+  name: TelecomLogs:SS7Signaling
+- channel: Supervised or newly activated device initiates outbound connections to destinations outside Apple, MDM, update,
+    or enterprise-managed baselines while locked, with no recent user interaction, or before expected app enrollment completion
+  name: VPN:MobileProxy
+- channel: Application or device component communicates with legitimate external web-service infrastructure such as cloud
+    storage, social media, messaging, collaboration, paste, code-hosting, CDN-backed API, or generic HTTPS service in a pattern
+    inconsistent with the app's approved network baseline, timing, or service class
+  name: VPN:MobileProxy
+- channel: Supervised device or managed app communicates with legitimate external web-service infrastructure such as cloud
+    storage, messaging, collaboration, social, paste, or generic HTTPS API platforms in a pattern inconsistent with expected
+    service baseline, managed app role, or normal background refresh behavior
+  name: VPN:MobileProxy
+- channel: App-attributed HTTP GET or HTTPS session to public web platform (social, paste, collaboration, cloud storage, code-hosting)
+    returned content followed by outbound connection to a different domain or IP within TimeWindow
+  name: VPN:MobileProxy
+- channel: DNS query or TLS SNI for previously unseen domain occurred within TimeWindow after session to legitimate web-service
+    domain from same app identity
+  name: VPN:MobileProxy
+- channel: Initial session to public web-service domain transferred small response payload followed by connection to new external
+    endpoint with different ASN or domain category
+  name: VPN:MobileProxy
+- channel: App-attributed session to public web-service domain included inbound content retrieval followed by outbound POST,
+    PUT, upload, comment, message send, document update, or API write to same service class within TimeWindow
+  name: VPN:MobileProxy
+- channel: Repeated alternating inbound and outbound sessions to same public web-service domain or API endpoint occurred from
+    same app identity with stable recurrence interval
+  name: VPN:MobileProxy
+- channel: Outbound write operation to public web-service domain occurred after small inbound response retrieval from same
+    domain or service class without preceding user-visible foreground activity
+  name: VPN:MobileProxy
+- channel: App-attributed HTTP GET, content fetch, sync pull, or inbound-oriented HTTPS session to public web-service domain
+    recurred within TimeWindow without app-attributed POST, PUT, PATCH, upload, comment, message send, or API write to same
+    service class
+  name: VPN:MobileProxy
+- channel: Repeated app-attributed retrieval from same public web-service domain or API endpoint occurred at stable recurrence
+    interval with low outbound volume relative to inbound content
+  name: VPN:MobileProxy
+- channel: Inbound content retrieval from public web-service domain occurred without subsequent writeback to same service
+    class and was followed by local or downstream activity outside normal app sync profile
+  name: VPN:MobileProxy
+- channel: TLS handshake, HTTP method/header pattern, or WebSocket upgrade was observed on destination port outside approved
+    port set for detected protocol during app-attributed outbound session
+  name: VPN:MobileProxy
+- channel: Repeated app-attributed sessions to same destination or service class used non-standard destination port with stable
+    recurrence interval or persistent connection behavior
+  name: VPN:MobileProxy
+- channel: Destination port was not in approved protocol-to-port mapping for app identity or service class and session did
+    not match known enterprise proxy, relay, or developer tooling exception
+  name: VPN:MobileProxy
+- channel: Observed protocol-to-port pairing was outside approved mapping for managed bundle or service class and did not
+    match enterprise proxy, relay, or developer tooling exception
+  name: VPN:MobileProxy
+- channel: 'SSRF-like patterns accessing metadata endpoint through proxy (e.g., Host: 169.254.169.254)'
+  name: WebProxy:AccessLogs
+- channel: Unauthorized AP or anomalous MAC address connection attempts
+  name: WIDS:AssociationLogs
+- channel: IIS Logs
+  name: WinEventLog:iis
+- channel: Unusual external domain access
+  name: WinEventLog:Microsoft-Windows-Windows Defender/Operational
+- channel: Outbound requests with forged tokens/cookies in headers
+  name: WinEventLog:Sysmon
+- channel: EventCode=5005 (WLAN), EventCode=302 (Bluetooth)
+  name: WinEventLog:System
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.1'
+```

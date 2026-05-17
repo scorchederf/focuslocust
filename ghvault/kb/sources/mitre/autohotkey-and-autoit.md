@@ -1,0 +1,93 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# AutoHotKey & AutoIT
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1059.010` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [AutoHotKey & AutoIT](../../attack/techniques/T1059.010-autohotkey-and-autoit.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1059.010 |
+| name | AutoHotKey & AutoIT |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1059/010 |
+
+## Preserved Source Material
+
+```yaml
+created: '2024-03-29T18:07:04.743Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may execute commands and perform malicious tasks using AutoIT and AutoHotKey automation scripts.
+  AutoIT and AutoHotkey (AHK) are scripting languages that enable users to automate Windows tasks. These automation scripts
+  can be used to perform a wide variety of actions, such as clicking on buttons, entering text, and opening and closing programs.(Citation:
+  AutoIT)(Citation: AutoHotKey)
+
+
+  Adversaries may use AHK (`.ahk`) and AutoIT (`.au3`) scripts to execute malicious code on a victim''s system. For example,
+  adversaries have used for AHK to execute payloads and other modular malware such as keyloggers. Adversaries have also used
+  custom AHK files containing embedded malware as [Phishing](https://attack.mitre.org/techniques/T1566) payloads.(Citation:
+  Splunk DarkGate)
+
+
+  These scripts may also be compiled into self-contained executable payloads (`.exe`).(Citation: AutoIT)(Citation: AutoHotKey)'
+external_references:
+- external_id: T1059.010
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1059/010
+- description: AutoHotkey Foundation LLC. (n.d.). Using the Program. Retrieved March 29, 2024.
+  source_name: AutoHotKey
+  url: https://www.autohotkey.com/docs/v1/Program.htm
+- description: AutoIT. (n.d.). Running Scripts. Retrieved March 29, 2024.
+  source_name: AutoIT
+  url: https://www.autoitscript.com/autoit3/docs/intro/running.htm
+- description: 'Splunk Threat Research Team. (2024, January 17). Enter The Gates: An Analysis of the DarkGate AutoIt Loader.
+    Retrieved March 29, 2024.'
+  source_name: Splunk DarkGate
+  url: https://www.splunk.com/en_us/blog/security/enter-the-gates-an-analysis-of-the-darkgate-autoit-loader.html
+id: attack-pattern--3a32740a-11b0-4bcf-b0a9-3abd0f6d3cd5
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: execution
+modified: '2025-04-15T19:58:23.600Z'
+name: AutoHotKey & AutoIT
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- TruKno
+- Liran Ravich, CardinalOps
+- Serhii Melnyk, Trustwave SpiderLabs
+- Rahmat Nurfauzi, @infosecn1nja, PT Xynexis International
+- '@_montysecurity'
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.1'
+```

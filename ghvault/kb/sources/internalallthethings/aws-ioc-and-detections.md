@@ -1,0 +1,50 @@
+---
+parsed_by: focuslocust
+source: internalallthethings
+type: generated
+---
+# AWS - IOC & Detections
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `internalallthethings` |
+| Type | `internal-topic` |
+| Record ID | `iatt-cloud-aws-aws-ioc-detection` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/internalallthethings/docs/cloud/aws/aws-ioc-detection.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [AWS - IOC & Detections](../../topics/cloud/aws-ioc-and-detections.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | iatt-cloud-aws-aws-ioc-detection |
+| name | AWS - IOC & Detections |
+| type | internal-topic |
+| source | internalallthethings |
+| url | https://github.com/swisskyrepo/InternalAllTheThings/blob/main/docs/cloud/aws/aws-ioc-detection.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# AWS - IOC & Detections\n\n## CloudTrail\n\n### Disable CloudTrail\n\n```powershell\naws cloudtrail delete-trail\
+  \ --name cloudgoat_trail --profile administrator\n```\n\nDisable monitoring of events from global services\n\n```powershell\n\
+  aws cloudtrail update-trail --name cloudgoat_trail --no-include-global-service-event \n```\n\nDisable Cloud Trail on specific\
+  \ regions\n\n```powershell\naws cloudtrail update-trail --name cloudgoat_trail --no-include-global-service-event --no-is-multi-region\
+  \ --region=eu-west\n```\n\n## GuardDuty\n\n### OS User Agent\n\n:warning: When using awscli on Kali Linux, Pentoo and Parrot\
+  \ Linux, a log is generated based on the user-agent.\n\nPacu bypass this problem by defining a custom User-Agent: [pacu.py#L1473](https://web.archive.org/web/20201111195614/https://github.com/RhinoSecurityLabs/pacu/blob/master/pacu.py#L1303)\n\
+  \n```python\nboto3_session = boto3.session.Session()\nua = boto3_session._session.user_agent()\nif 'kali' in ua.lower()\
+  \ or 'parrot' in ua.lower() or 'pentoo' in ua.lower():  # If the local OS is Kali/Parrot/Pentoo Linux\n    # GuardDuty triggers\
+  \ a finding around API calls made from Kali Linux, so let's avoid that...\n    self.print('Detected environment as one of\
+  \ Kali/Parrot/Pentoo Linux. Modifying user agent to hide that from GuardDuty...')\n```"
+_relative_path: cloud/aws/aws-ioc-detection.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/internalallthethings/docs/cloud/aws/aws-ioc-detection.md
+````

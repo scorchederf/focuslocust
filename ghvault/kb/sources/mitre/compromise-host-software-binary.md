@@ -1,0 +1,103 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Compromise Host Software Binary
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1554` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Compromise Host Software Binary](../../attack/techniques/T1554-compromise-host-software-binary.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1554 |
+| name | Compromise Host Software Binary |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1554 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-02-11T18:18:34.279Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may modify host software binaries to establish persistent access to systems. Software binaries/executables
+  provide a wide range of system commands or services, programs, and libraries. Common software binaries are SSH clients,
+  FTP clients, email clients, web browsers, and many other user or server applications.
+
+
+  Adversaries may establish persistence though modifications to host software binaries. For example, an adversary may replace
+  or otherwise infect a legitimate application binary (or support files) with a backdoor. Since these binaries may be routinely
+  executed by applications or the user, the adversary can leverage this for persistent access to the host. An adversary may
+  also modify a software binary such as an SSH client in order to persistently collect credentials during logins (i.e., [Modify
+  Authentication Process](https://attack.mitre.org/techniques/T1556)).(Citation: Google Cloud Mandiant UNC3886 2024)
+
+
+  An adversary may also modify an existing binary by patching in malicious functionality (e.g., IAT Hooking/Entry point patching)(Citation:
+  Unit42 Banking Trojans Hooking 2022) prior to the binary’s legitimate execution. For example, an adversary may modify the
+  entry point of a binary to point to malicious code patched in by the adversary before resuming normal execution flow.(Citation:
+  ESET FontOnLake Analysis 2021)
+
+
+  After modifying a binary, an adversary may attempt to impair defenses by preventing it from updating (e.g., via the `yum-versionlock`
+  command or `versionlock.list` file in Linux systems that use the yum package manager).(Citation: Google Cloud Mandiant UNC3886
+  2024)'
+external_references:
+- external_id: T1554
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1554
+- description: ' Punsaen Boonyakarn, Shawn Chew, Logeswaran Nadarajan, Mathew Potaczek, Jakub Jozwiak, and Alex Marvi. (2024,
+    June 18). Cloaked and Covert: Uncovering UNC3886 Espionage Operations. Retrieved September 24, 2024.'
+  source_name: Google Cloud Mandiant UNC3886 2024
+  url: https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations
+- description: 'Or Chechik. (2022, October 31). Banking Trojan Techniques: How Financially Motivated Malware Became Infrastructure.
+    Retrieved September 27, 2023.'
+  source_name: Unit42 Banking Trojans Hooking 2022
+  url: https://unit42.paloaltonetworks.com/banking-trojan-techniques/#post-125550-_rm3d6xxbk52n
+- description: Vladislav Hrčka. (2021, January 1). FontOnLake. Retrieved September 27, 2023.
+  source_name: ESET FontOnLake Analysis 2021
+  url: https://web-assets.esetstatic.com/wls/2021/10/eset_fontonlake.pdf
+id: attack-pattern--960c3c86-1480-4d72-b4e0-8c242e84a5c5
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: persistence
+modified: '2026-04-16T18:57:08.883Z'
+name: Compromise Host Software Binary
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- CrowdStrike Falcon OverWatch
+- Liran Ravich, CardinalOps
+- Jamie Williams (U ω U), PANW Unit 42
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '2.2'
+```

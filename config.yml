@@ -1,5 +1,10 @@
 vault_path: "./vault"
 
+runtime:
+  # Keep the build local-only unless explicitly changed by the operator.
+  # If a required source is missing, the builder should fail with the reason and requested URL.
+  allow_network: false
+
 logging:
   verbose: false
   log_dir: ".logs"
@@ -53,3 +58,31 @@ naming:
   lowercase: true
   separator: "-"
   preserve_dots: true
+
+ghvault:
+  enabled: true
+  path: "./ghvault"
+  manual_path: "manual"
+  link_style: "github-relative"
+  clear_on_build: true
+  provenance:
+    include_source_page: true
+    include_short_excerpt: true
+    include_source_hash: true
+  relationships:
+    mode: "conservative"
+    mark_inferred: true
+    preserve_conflicts: true
+    flag_conflicts: true
+  commands:
+    one_page_per_tool_platform: true
+    safety_notice: true
+  validation:
+    write_broken_links_report: true
+    strict_default: false
+  review:
+    always_generate: true
+  ollama:
+    enabled: false
+    mode: "review_only"
+    write_to_canonical_pages: false

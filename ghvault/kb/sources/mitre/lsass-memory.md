@@ -1,0 +1,150 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# LSASS Memory
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1003.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [LSASS Memory](../../attack/techniques/T1003.001-lsass-memory.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1003.001 |
+| name | LSASS Memory |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1003/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-02-11T18:41:44.783Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority
+  Subsystem Service (LSASS). After a user logs on, the system generates and stores a variety of credential materials in LSASS
+  process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct [Lateral
+  Movement](https://attack.mitre.org/tactics/TA0008) using [Use Alternate Authentication Material](https://attack.mitre.org/techniques/T1550).
+
+
+  As well as in-memory techniques, the LSASS process memory can be dumped from the target host and analyzed on a local system.
+
+
+  For example, on the target host use procdump:
+
+
+  * <code>procdump -ma lsass.exe lsass_dump</code>
+
+
+  Locally, mimikatz can be run using:
+
+
+  * <code>sekurlsa::Minidump lsassdump.dmp</code>
+
+  * <code>sekurlsa::logonPasswords</code>
+
+
+  Built-in Windows tools such as `comsvcs.dll` can also be used:
+
+
+  * <code>rundll32.exe C:\Windows\System32\comsvcs.dll MiniDump PID  lsass.dmp full</code>(Citation: Volexity Exchange Marauder
+  March 2021)(Citation: Symantec Attacks Against Government Sector)
+
+
+  Similar to [Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012), the silent process exit
+  mechanism can be abused to create a memory dump of `lsass.exe` through Windows Error Reporting (`WerFault.exe`).(Citation:
+  Deep Instinct LSASS)
+
+
+  Windows Security Support Provider (SSP) DLLs are loaded into LSASS process at system start. Once loaded into the LSA, SSP
+  DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user''s Domain password
+  or smart card PINs. The SSP configuration is stored in two Registry keys: <code>HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security
+  Packages</code> and <code>HKLM\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\Security Packages</code>. An adversary may
+  modify these Registry keys to add new SSPs, which will be loaded the next time the system boots, or when the AddSecurityPackage
+  Windows API function is called.(Citation: Graeber 2014)
+
+
+  The following SSPs can be used to access credentials:
+
+
+  * Msv: Interactive logons, batch logons, and service logons are done through the MSV authentication package.
+
+  * Wdigest: The Digest Authentication protocol is designed for use with Hypertext Transfer Protocol (HTTP) and Simple Authentication
+  Security Layer (SASL) exchanges.(Citation: TechNet Blogs Credential Protection)
+
+  * Kerberos: Preferred for mutual client-server domain authentication in Windows 2000 and later.
+
+  * CredSSP:  Provides SSO and Network Level Authentication for Remote Desktop Services.(Citation: TechNet Blogs Credential
+  Protection)
+
+  '
+external_references:
+- external_id: T1003.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1003/001
+- description: French, D. (2018, October 2). Detecting Attempts to Steal Passwords from Memory. Retrieved October 11, 2019.
+  source_name: Medium Detecting Attempts to Steal Passwords from Memory
+  url: https://medium.com/threatpunter/detecting-attempts-to-steal-passwords-from-memory-558f16dce4ea
+- description: Gilboa, A. (2021, February 16). LSASS Memory Dumps are Stealthier than Ever Before - Part 2. Retrieved December
+    27, 2023.
+  source_name: Deep Instinct LSASS
+  url: https://www.deepinstinct.com/blog/lsass-memory-dumps-are-stealthier-than-ever-before-part-2
+- description: Graeber, M. (2014, October). Analysis of Malicious Security Support Provider DLLs. Retrieved March 1, 2017.
+  source_name: Graeber 2014
+  url: http://docplayer.net/20839173-Analysis-of-malicious-security-support-provider-dlls.html
+- description: 'Gruzweig, J. et al. (2021, March 2). Operation Exchange Marauder: Active Exploitation of Multiple Zero-Day
+    Microsoft Exchange Vulnerabilities. Retrieved March 3, 2021.'
+  source_name: Volexity Exchange Marauder March 2021
+  url: https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/
+- description: PowerSploit. (n.d.). Retrieved December 4, 2014.
+  source_name: Powersploit
+  url: https://github.com/mattifestation/PowerSploit
+- description: Symantec. (2021, June 10). Attacks Against the Government Sector. Retrieved September 28, 2021.
+  source_name: Symantec Attacks Against Government Sector
+  url: https://symantec.broadcom.com/hubfs/Attacks-Against-Government-Sector.pdf
+- description: Wilson, B. (2016, April 18). The Importance of KB2871997 and KB2928120 for Credential Protection. Retrieved
+    April 11, 2018.
+  source_name: TechNet Blogs Credential Protection
+  url: https://blogs.technet.microsoft.com/askpfeplat/2016/04/18/the-importance-of-kb2871997-and-kb2928120-for-credential-protection/
+id: attack-pattern--65f2d882-3f41-4d48-8a06-29af77ec9f90
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: credential-access
+modified: '2025-10-24T17:48:52.657Z'
+name: LSASS Memory
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Edward Millington
+- Ed Williams, Trustwave, SpiderLabs
+- Olaf Hartong, Falcon Force
+- Michael Forret, Quorum Cyber
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.5'
+```

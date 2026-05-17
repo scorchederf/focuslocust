@@ -1,0 +1,305 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# File Access
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0055` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [File Access](../../attack/data-sources/DC0055-file-access.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0055 |
+| name | File Access |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0055 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.273Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "To events where a file is opened or accessed, making its contents available to the requester. This includes\
+  \ reading, executing, or interacting with files by authorized or unauthorized entities. Examples include logging file access\
+  \ events (e.g., Windows Event ID 4663), monitoring file reads, and detecting unusual file access patterns. Examples: \n\n\
+  - File Read Operations: A user opens a sensitive document (e.g., financial_report.xlsx) on a shared drive.\n- File Execution:\
+  \ A script or executable file is accessed and executed (e.g., malware.exe is run from a temporary directory).\n- Unauthorized\
+  \ File Access: An unauthorized user attempts to access a protected configuration file (e.g., `/etc/passwd` on Linux or `System32`\
+  \ files on Windows).\n- File Access Patterns: Bulk access to multiple files in a short time (e.g., mass access to documents\
+  \ on a file server).\n- File Access via Network: Files on a network share are accessed remotely (e.g., logs of SMB file\
+  \ access)."
+external_references:
+- external_id: DC0055
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0055
+id: x-mitre-data-component--235b7491-2d2b-4617-9a52-3c0783680f71
+modified: '2026-04-23T18:39:07.536Z'
+name: File Access
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- ics-attack
+- enterprise-attack
+- mobile-attack
+x_mitre_log_sources:
+- channel: looking for file access to scripts with abnormal encoding patterns
+  name: macOS:unifiedlog
+- channel: READ or COPY operations where path matches external/shared locations of other apps (e.g., /storage/emulated/0/Android/data/<otherpkg>/files/,
+    /storage/emulated/0/Download/<app>/*)
+  name: android:logcat
+- channel: KeyChain/AndroidKeyStore read of token alias
+  name: android:logcat
+- channel: READ/LIST/STAT of /sdcard|/storage/emulated/0|/Android/media|/Documents with >N distinct paths in TimeWindow
+  name: android:logcat
+- channel: /home/*/.mozilla/firefox/*/logins.json OR /home/*/.config/google-chrome/*/Login Data
+  name: auditd:FILE
+- channel: /proc/*/mem read attempt
+  name: auditd:FILE
+- channel: 'read: File access to /proc/modules or /sys/module/'
+  name: auditd:FS
+- channel: Read access to known backup software configuration files (e.g., /etc/rsnapshot.conf, /opt/veeam/config.ini)
+  name: auditd:PATH
+- channel: 'open: Access to sensitive log files (/var/log/auth.log, /var/log/secure, /var/log/syslog)'
+  name: auditd:PATH
+- channel: PATH
+  name: auditd:PATH
+- channel: file read
+  name: auditd:PATH
+- channel: open, read, or stat of browser config files
+  name: auditd:SYSCALL
+- channel: 'open: File access attempt on /tmp/krb5cc_* or /tmp/krb5.ccache'
+  name: auditd:SYSCALL
+- channel: openat
+  name: auditd:SYSCALL
+- channel: open
+  name: auditd:SYSCALL
+- channel: open, read
+  name: auditd:SYSCALL
+- channel: open, flock, fcntl, unlink
+  name: auditd:SYSCALL
+- channel: read/open of sensitive files
+  name: auditd:SYSCALL
+- channel: Unusual processes accessing or modifying cookie databases
+  name: auditd:SYSCALL
+- channel: PATH records referencing /dev/video*
+  name: auditd:SYSCALL
+- channel: 'open, read: /etc/ssl/, /etc/pki/, ~/.pki/nssdb/'
+  name: auditd:SYSCALL
+- channel: Processes reading credential or token cache files
+  name: auditd:SYSCALL
+- channel: read/open of sensitive file directories
+  name: auditd:SYSCALL
+- channel: open/read of sensitive config or secret files
+  name: auditd:SYSCALL
+- channel: open/read of sensitive directories
+  name: auditd:SYSCALL
+- channel: 'open/read: Access to /proc/self/status with focus on TracerPID field'
+  name: auditd:SYSCALL
+- channel: open/read access to ~/.bash_history
+  name: auditd:SYSCALL
+- channel: open,read
+  name: auditd:SYSCALL
+- channel: open/read system calls to ~/.bash_history or /etc/shadow
+  name: auditd:SYSCALL
+- channel: read of /run/secrets or docker volumes by non-entrypoint process
+  name: auditd:SYSCALL
+- channel: Reads of ~/.bash_history, ~/.mozilla, or access to /dev/input
+  name: auditd:SYSCALL
+- channel: open/read
+  name: auditd:SYSCALL
+- channel: 'open: Access to named pipes or FIFO in /tmp or /dev/shm by unexpected processes'
+  name: auditd:SYSCALL
+- channel: open or read to browser cookie storage
+  name: auditd:SYSCALL
+- channel: open, read, mount
+  name: auditd:SYSCALL
+- channel: file
+  name: auditd:SYSCALL
+- channel: Access to /var/lib/sss/secrets/secrets.ldb or .secrets.mkey
+  name: auditd:SYSCALL
+- channel: open/read of sensitive directories (/etc, /home/*)
+  name: auditd:SYSCALL
+- channel: PATH
+  name: auditd:SYSCALL
+- channel: open/read on ~/.local/share/keepassxc/* OR ~/.password-store/*
+  name: auditd:SYSCALL
+- channel: attempts to read /proc/* entries at scale (openat/getdents64/readlink) or access denied for /proc traversal; correlate
+    to app UID
+  name: auditd:SYSCALL
+- channel: 'CollectGuestLogs: Unexpected collection of guest logs by Azure VM Agent outside normal maintenance windows'
+  name: azure:activity
+- channel: sensitive credential files in buckets or local image storage
+  name: CloudTrail:GetObject
+- channel: nautilus, dolphin, or gvfs logs
+  name: desktop:file_manager
+- channel: container_file_activity
+  name: ebpf:syscalls
+- channel: open/read on secret mount paths
+  name: ebpf:syscalls
+- channel: datastore file access
+  name: esxi:hostd
+- channel: 'read: Access to sensitive log files by non-admin users'
+  name: esxi:hostd
+- channel: datastore/log file access
+  name: esxi:hostd
+- channel: vSphere File API Access
+  name: esxi:hostd
+- channel: file copy or datastore upload via HTTPS
+  name: esxi:hostd
+- channel: guest OS outbound transfer logs
+  name: esxi:syslog
+- channel: VMFS access logs
+  name: esxi:vmkernel
+- channel: Datastore Access
+  name: esxis:vmkernel
+- channel: None
+  name: File
+- channel: File system access events with kFSEventStreamEventFlagItemRemoved, kFSEventStreamEventFlagItemRenamed flags for
+    environmental artifact collection (/System/Library, /usr/sbin, plist files)
+  name: fs:fileevents
+- channel: file system events indicating access to system configuration files and environmental information sources
+  name: fs:fsevents
+- channel: file
+  name: fs:fsusage
+- channel: File Access Monitor
+  name: fs:fsusage
+- channel: Disk Activity Tracing
+  name: fs:fsusage
+- channel: filesystem activity
+  name: fs:fsusage
+- channel: Filesystem Call Monitoring
+  name: fs:fsusage
+- channel: read/write
+  name: fs:fsusage
+- channel: file open for known browser cookie paths
+  name: fs:fsusage
+- channel: file reads/writes from /Volumes/
+  name: fs:fsusage
+- channel: /var/log/quarantine.log
+  name: fs:quarantine
+- channel: Write operations to storage
+  name: gcp:audit
+- channel: READ operations from App Group containers (/var/mobile/Containers/Shared/AppGroup/...) or Files/Photos provider
+    mountpoints, especially when group not owned by bundle
+  name: iOS:unifiedlog
+- channel: readdir/stat/read of /private/var/mobile/Containers/Shared/AppGroup|/Library/Mobile Documents|/On\\ My\\ iPhone
+    with >N distinct paths in TimeWindow
+  name: iOS:unifiedlog
+- channel: GET or LIST requests to /var/run/secrets/kubernetes.io/serviceaccount/ followed by access to the Kubernetes API
+    server
+  name: kubernetes:audit
+- channel: /proc/*/maps access
+  name: linux:osquery
+- channel: None
+  name: linux:osquery
+- channel: auth.log or custom tool logs
+  name: linux:syslog
+- channel: /var/log/syslog
+  name: linux:syslog
+- channel: kernel messages related to cryptographic operations, module loading, and filesystem access patterns
+  name: linux:syslog
+- channel: FileAccessed, MailboxAccessed
+  name: m365:unified
+- channel: Bulk downloads or API extractions from Microsoft-hosted data repositories (e.g., Dynamics 365)
+  name: m365:unified
+- channel: 'ES_EVENT_TYPE_NOTIFY_OPEN: Open of .dylib/.so in user-writable locations'
+  name: macos:endpointsecurity
+- channel: 'open: Process opens AppleCamera/IOUSB device nodes or AVFoundation frameworks'
+  name: macos:endpointsecurity
+- channel: open or read syscall to ~/.bash_history
+  name: macos:endpointsecurity
+- channel: es_event_open, es_event_exec
+  name: macos:endpointsecurity
+- channel: Access to Keychain DB or system.keychain
+  name: macos:keychain
+- channel: ~/Library/Keychains, /Library/Keychains
+  name: macos:keychain
+- channel: file_events
+  name: macos:osquery
+- channel: None
+  name: macos:osquery
+- channel: Access to ~/Library/*/Safari or Chrome directories by non-browser processes
+  name: macos:unifiedlog
+- channel: file events
+  name: macos:unifiedlog
+- channel: Kerberos framework calls to API:{uuid} cache outside normal process lineage
+  name: macos:unifiedlog
+- channel: ~/Library/Application Support/Google/Chrome/*/Login Data OR ~/Library/Application Support/Firefox/*/logins.json
+  name: macos:unifiedlog
+- channel: Read access to Time Machine plist files or CCC configurations in ~/Library/Preferences/
+  name: macos:unifiedlog
+- channel: log stream - file subsystem
+  name: macos:unifiedlog
+- channel: file read of sensitive directories
+  name: macos:unifiedlog
+- channel: Abnormal process access to Safari or Chrome cookie storage
+  name: macos:unifiedlog
+- channel: 'open: Access to /var/log/system.log or related security event logs'
+  name: macos:unifiedlog
+- channel: open/read of *.plist or .env files
+  name: macos:unifiedlog
+- channel: read of user document directories
+  name: macos:unifiedlog
+- channel: read access to ~/Library/Keychains/login.keychain-db
+  name: macos:unifiedlog
+- channel: filesystem and process events
+  name: macos:unifiedlog
+- channel: read access to ~/Library/Keychains or history files by terminal processes
+  name: macos:unifiedlog
+- channel: access to /Volumes/SharePoint or network mount
+  name: macos:unifiedlog
+- channel: Access to ~/Library/Safari/Bookmarks.plist or recent files
+  name: macos:unifiedlog
+- channel: access to keychain database
+  name: macos:unifiedlog
+- channel: log stream - file provider subsystem
+  name: macos:unifiedlog
+- channel: read/write of user documents prior to upload
+  name: macos:unifiedlog
+- channel: open/read access to private key files (id_rsa, *.pem, *.p12)
+  name: macos:unifiedlog
+- channel: 'read: File access to /System/Library/Extensions/ or related kernel extension paths'
+  name: macos:unifiedlog
+- channel: '*.opvault OR *.ldb OR *.kdbx'
+  name: macos:unifiedlog
+- channel: Recent download opened or executed
+  name: macos:unifiedlog
+- channel: Application reads multiple local container files, browser-history artifacts, messaging artifacts, or local records
+    in rapid sequence during the collection phase
+  name: MobileEDR:telemetry
+- channel: Application performs burst reads across local system paths, external storage, media directories, cache locations,
+    or local database files within a short interval as the primary collection phase
+  name: MobileEDR:telemetry
+- channel: application loads executable or library from external or writable directory (e.g., /sdcard/, app cache) prior to
+    execution
+  name: MobileEDR:telemetry
+- channel: Suspicious file execution on removable media path
+  name: WinEventLog:Microsoft-Windows-Windows Defender/Operational
+- channel: EventCode=4663, 4670, 4656
+  name: WinEventLog:Security
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '3.0'
+```

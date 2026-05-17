@@ -1,0 +1,256 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# File Metadata
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0059` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [File Metadata](../../attack/data-sources/DC0059-file-metadata.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0059 |
+| name | File Metadata |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0059 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.273Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "contextual information about a file, including attributes such as the file's name, size, type, content (e.g.,\
+  \ signatures, headers, media), user/owner, permissions, timestamps, and other related properties. File metadata provides\
+  \ insights into a file's characteristics and can be used to detect malicious activity, unauthorized modifications, or other\
+  \ anomalies. Examples: \n\n- File Ownership and Permissions: Checking the owner and permissions of a critical configuration\
+  \ file like /etc/passwd on Linux or C:\\Windows\\System32\\config\\SAM on Windows.\n- Timestamps: Analyzing the creation,\
+  \ modification, and access timestamps of a file.\n- File Content and Signatures: Extracting the headers of an executable\
+  \ file to verify its signature or detect packing/obfuscation.\n- File Attributes: Analyzing attributes like hidden, system,\
+  \ or read-only flags in Windows.\n- File Hashes: Generating MD5, SHA-1, or SHA-256 hashes of files to compare against threat\
+  \ intelligence feeds.\n- File Location: Monitoring files located in unusual directories or paths, such as temporary or user\
+  \ folders."
+external_references:
+- external_id: DC0059
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0059
+id: x-mitre-data-component--639e87f3-acb6-448a-9645-258f20da4bc5
+modified: '2026-04-23T18:33:47.956Z'
+name: File Metadata
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- ics-attack
+- enterprise-attack
+- mobile-attack
+x_mitre_log_sources:
+- channel: stat and lstat syscall results on files, including inode and permission info
+  name: auditd:SYSCALL
+- channel: BroadcastReceiver registration for android.intent.action.BOOT_COMPLETED by previously unseen or recently installed
+    apps
+  name: AndroidLogs:Framework
+- channel: chmod or chown of hook files indicating privilege escalation or execution permission change
+  name: auditd:CONFIG_CHANGE
+- channel: file path matches exclusion directories
+  name: auditd:PATH
+- channel: PATH
+  name: auditd:PATH
+- channel: file path modifications on critical system directories (/etc, /usr/bin, /usr/sbin, /var, /opt)
+  name: auditd:PATH
+- channel: Inotify watch creation or auditctl changes on /etc/cron* or /lib/systemd/system/
+  name: auditd:SYSCALL
+- channel: PATH
+  name: auditd:SYSCALL
+- channel: file write after sleep delay
+  name: auditd:SYSCALL
+- channel: syscall in (chmod, fchmod, fchmodat, chown, fchown, fchownat, setxattr, lsetxattr, fsetxattr)
+  name: auditd:SYSCALL
+- channel: setuid or setgid bit changes
+  name: auditd:SYSCALL
+- channel: syscall in (chmod, fchmod, fchmodat, chown, fchown, fchownat, lchown, setxattr, lsetxattr, fsetxattr, removexattr,
+    lremovexattr, fremovexattr)
+  name: auditd:SYSCALL
+- channel: setxattr or getxattr system call
+  name: auditd:SYSCALL
+- channel: chmod, chown, setxattr, or file writes to /etc/ssl/* or /usr/local/share/ca-certificates/*
+  name: auditd:SYSCALL
+- channel: Unexpected container volume unmount + file deletion
+  name: ebpf:syscalls
+- channel: App reputation telemetry
+  name: EDR:detection
+- channel: File Metadata Inspection (Low String Entropy, Missing PDB)
+  name: EDR:file
+- channel: File Metadata Analysis (PE overlays, entropy)
+  name: EDR:file
+- channel: host daemon events related to file or VM permission changes
+  name: esxi:hostd
+- channel: Datastore file hidden or renamed unexpectedly
+  name: esxi:syslog
+- channel: Upload of file to datastore
+  name: esxi:vmkernel
+- channel: Storage access and file ops
+  name: esxi:vmkernel
+- channel: VMware kernel events for file system permission modifications
+  name: esxi:vmkernel
+- channel: Datastore modification events
+  name: esxi:vmkernel
+- channel: None
+  name: File
+- channel: /var/log/install.log
+  name: fs:fileevents
+- channel: Binary file hash changes outside of update/patch cycles
+  name: fs:filesystem
+- channel: file system events indicating permission or attribute changes
+  name: fs:fsevents
+- channel: filesystem monitoring of exec/open
+  name: fs:fsusage
+- channel: Firmware updates applied or failed
+  name: fwupd:logs
+- channel: LaunchServices quarantine
+  name: gatekeeper/quarantine database
+- channel: dpkg/apt or yum/dnf transaction logs (install/update of build tools)
+  name: journald:package
+- channel: dpkg/apt/yum/dnf transaction logs; vendor updaters in systemd journals
+  name: journald:package
+- channel: dpkg/apt install, remove, upgrade events
+  name: journald:package
+- channel: yum/dnf install or update transactions
+  name: journald:package
+- channel: event-based
+  name: linux:osquery
+- channel: file_events, hash
+  name: linux:osquery
+- channel: hash, elf_info, file_metadata
+  name: linux:osquery
+- channel: file_events
+  name: linux:osquery
+- channel: elf_info, hash, yara_matches
+  name: linux:osquery
+- channel: Read headers and detect MIME type mismatch
+  name: linux:osquery
+- channel: file_events.path
+  name: linux:osquery
+- channel: Filesystem modifications to trusted paths
+  name: linux:osquery
+- channel: Write or modify .desktop file in XDG autostart path
+  name: linux:osquery
+- channel: hash, rpm_packages, deb_packages, file_events
+  name: linux:osquery
+- channel: Discrepancies in _VBA_PROJECT p-code vs source code extracted with oletools/pcodedmp
+  name: linux:syslog
+- channel: application or system execution logs
+  name: linux:syslog
+- channel: file permission modification events in kernel messages
+  name: linux:syslog
+- channel: kernel messages related to file system permission changes and security violations
+  name: linux:syslog
+- channel: es_event_file_rename_t or es_event_file_write_t
+  name: macos:endpointsecurity
+- channel: es_event_authentication
+  name: macos:endpointsecurity
+- channel: code_signing, file_metadata
+  name: macos:osquery
+- channel: file_events
+  name: macos:osquery
+- channel: mach_o_info, file_metadata
+  name: macos:osquery
+- channel: softwareupdated/homebrew/install logs, pkginstalld events
+  name: macos:unifiedlog
+- channel: AMFI or Gatekeeper signature/notarization failures for newly installed dev components
+  name: macos:unifiedlog
+- channel: Detection of altered _VBA_PROJECT or PerformanceCache streams
+  name: macos:unifiedlog
+- channel: subsystem:syspolicyd
+  name: macos:unifiedlog
+- channel: File metadata updated with UF_HIDDEN flag
+  name: macos:unifiedlog
+- channel: Code signature validation fails or is absent post-binary modification
+  name: macos:unifiedlog
+- channel: Code signing verification failures or bypassed trust decisions
+  name: macos:unifiedlog
+- channel: Creation of new LaunchAgent or LoginItem plist files in ~/Library/LaunchAgents/
+  name: macos:unifiedlog
+- channel: filesystem events
+  name: macos:unifiedlog
+- channel: xattr -d com.apple.quarantine or similar attribute removal commands
+  name: macos:unifiedlog
+- channel: Gatekeeper quarantine policy decision anomalies recorded in com.apple.LaunchServices.QuarantineEventsV2
+  name: macos:unifiedlog
+- channel: pkginstalld/softwareupdated/Homebrew install transactions
+  name: macos:unifiedlog
+- channel: AMFI/Gatekeeper code signature or notarization failures
+  name: macos:unifiedlog
+- channel: kernel extension and system extension logs related to file system security violations or SIP bypass attempts
+  name: macos:unifiedlog
+- channel: Unexpected application binary modifications or altered signing status
+  name: macos:unifiedlog
+- channel: extended attribute write or modification
+  name: macos:unifiedlog
+- channel: New certificate trust settings added by unexpected process
+  name: macos:unifiedlog
+- channel: subsystem=com.apple.lsd
+  name: macos:unifiedlog
+- channel: 'installer or system_installd ''PackageKit: install succeeded/failed'' with non-notarized or unknown signer'
+  name: macos:unifiedlog
+- channel: Gatekeeper/AMFI 'code signature invalid' / 'not notarized' messages
+  name: macos:unifiedlog
+- channel: File creation or modification with com.apple.ResourceFork extended attribute
+  name: macos:unifiedlog
+- channel: OS version query results inconsistent with expected or approved version list
+  name: networkdevice:syslog
+- channel: Observed File Transfers
+  name: NSM:Flow
+- channel: BSM audit events for file permission modifications
+  name: OpenBSM:AuditTrail
+- channel: BSM audit events for file permission, ownership, and attribute modifications with user context
+  name: OpenBSM:AuditTrail
+- channel: New file added or modified in PR targeting CI/CD or build config (e.g., `gitlab-ci.yml`, `build.gradle`, `pom.xml`,
+    `.github/workflows/*.yml`)
+  name: saas:RepoEvents
+- channel: Invalid/Unsigned image when developer tool launches newly installed binaries
+  name: WinEventLog:Microsoft-Windows-CodeIntegrity/Operational
+- channel: Unsigned or invalid image for newly installed/updated binaries
+  name: WinEventLog:Microsoft-Windows-CodeIntegrity/Operational
+- channel: Code integrity violations in boot-start drivers or firmware
+  name: WinEventLog:Microsoft-Windows-CodeIntegrity/Operational
+- channel: CodeIntegrity reports 'Invalid image hash' or 'Unsigned image' for new/updated binaries
+  name: WinEventLog:Microsoft-Windows-CodeIntegrity/Operational
+- channel: SmartScreen or ASR blocks on newly downloaded installer/updater
+  name: WinEventLog:Microsoft-Windows-Windows Defender/Operational
+- channel: EventCode=4663, 4670, 4656
+  name: WinEventLog:Security
+- channel: EventCode=4663, 4656, 4658
+  name: WinEventLog:Security
+- channel: MSI/Product install, repair or update events
+  name: WinEventLog:Setup
+- channel: EventCode=15
+  name: WinEventLog:Sysmon
+- channel: Operational log
+  name: WinEventLog:Windows Defender
+- channel: Operational
+  name: WinEventLog:Windows Defender
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.1'
+```

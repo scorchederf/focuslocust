@@ -1,0 +1,80 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Multi-Stage Channels
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1104` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Multi-Stage Channels](../../attack/techniques/T1104-multi-stage-channels.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1104 |
+| name | Multi-Stage Channels |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1104 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:31:15.935Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may create multiple stages for command and control that are employed under different conditions
+  or for certain functions. Use of multiple stages may obfuscate the command and control channel to make detection more difficult.
+
+
+  Remote access tools will call back to the first-stage command and control server for instructions. The first stage may have
+  automated capabilities to collect basic host information, update tools, and upload additional files. A second remote access
+  tool (RAT) could be uploaded at that point to redirect the host to the second-stage command and control server. The second
+  stage will likely be more fully featured and allow the adversary to interact with the system through a reverse shell and
+  additional RAT features.
+
+
+  The different stages will likely be hosted separately with no overlapping infrastructure. The loader may also have backup
+  first-stage callbacks or [Fallback Channels](https://attack.mitre.org/techniques/T1008) in case the original first-stage
+  communication path is discovered and blocked.'
+external_references:
+- external_id: T1104
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1104
+id: attack-pattern--84e02621-8fdf-470f-bd58-993bb6a89d91
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:49:03.646Z'
+name: Multi-Stage Channels
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+- ESXi
+x_mitre_version: '1.1'
+```

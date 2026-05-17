@@ -1,0 +1,98 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# PowerShell Profile
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1546.013` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [PowerShell Profile](../../attack/techniques/T1546.013-powershell-profile.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1546.013 |
+| name | PowerShell Profile |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1546/013 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-01-24T15:11:02.758Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may gain persistence and elevate privileges by executing malicious content triggered by PowerShell\
+  \ profiles. A PowerShell profile  (<code>profile.ps1</code>) is a script that runs when [PowerShell](https://attack.mitre.org/techniques/T1059/001)\
+  \ starts and can be used as a logon script to customize user environments.\n\n[PowerShell](https://attack.mitre.org/techniques/T1059/001)\
+  \ supports several profiles depending on the user or host program. For example, there can be different profiles for [PowerShell](https://attack.mitre.org/techniques/T1059/001)\
+  \ host programs such as the PowerShell console, PowerShell ISE or Visual Studio Code. An administrator can also configure\
+  \ a profile that applies to all users and host programs on the local computer. (Citation: Microsoft About Profiles) \n\n\
+  Adversaries may modify these profiles to include arbitrary commands, functions, modules, and/or [PowerShell](https://attack.mitre.org/techniques/T1059/001)\
+  \ drives to gain persistence. Every time a user opens a [PowerShell](https://attack.mitre.org/techniques/T1059/001) session\
+  \ the modified script will be executed unless the <code>-NoProfile</code> flag is used when it is launched. (Citation: ESET\
+  \ Turla PowerShell May 2019) \n\nAn adversary may also be able to escalate privileges if a script in a PowerShell profile\
+  \ is loaded and executed by an account with higher privileges, such as a domain administrator. (Citation: Wits End and Shady\
+  \ PowerShell Profiles)"
+external_references:
+- external_id: T1546.013
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1546/013
+- description: 'DeRyke, A.. (2019, June 7). Lab Notes: Persistence and Privilege Elevation using the Powershell Profile. Retrieved
+    July 8, 2019.'
+  source_name: Wits End and Shady PowerShell Profiles
+  url: https://witsendandshady.blogspot.com/2019/06/lab-notes-persistence-and-privilege.html
+- description: Faou, M. and Dumont R.. (2019, May 29). A dive into Turla PowerShell usage. Retrieved June 14, 2019.
+  source_name: ESET Turla PowerShell May 2019
+  url: https://www.welivesecurity.com/2019/05/29/turla-powershell-usage/
+- description: Malware Archaeology. (2016, June). WINDOWS POWERSHELL LOGGING CHEAT SHEET - Win 7/Win 2008 or later. Retrieved
+    June 24, 2016.
+  source_name: Malware Archaeology PowerShell Cheat Sheet
+  url: http://www.malwarearchaeology.com/s/Windows-PowerShell-Logging-Cheat-Sheet-ver-June-2016-v2.pdf
+- description: Microsoft. (2017, November 29). About Profiles. Retrieved June 14, 2019.
+  source_name: Microsoft About Profiles
+  url: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-6
+- description: Microsoft. (2021, September 27). about_Profiles. Retrieved February 4, 2022.
+  source_name: Microsoft Profiles
+  url: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_profiles
+id: attack-pattern--0f2c410d-d740-4ed9-abb1-b8f4a7faf6c3
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: privilege-escalation
+- kill_chain_name: mitre-attack
+  phase_name: persistence
+modified: '2025-10-24T17:48:24.124Z'
+name: PowerShell Profile
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Allen DeRyke, ICE
+- Matt Green, @mgreen27
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.2'
+```

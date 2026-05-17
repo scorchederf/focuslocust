@@ -1,0 +1,89 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Rclone
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `tool` |
+| Record ID | `S1040` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Rclone](../../tools/unknown/rclone.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | S1040 |
+| name | Rclone |
+| type | tool |
+| source | mitre |
+| url | https://attack.mitre.org/software/S1040 |
+
+## Preserved Source Material
+
+```yaml
+created: '2022-08-30T13:02:36.422Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: '[Rclone](https://attack.mitre.org/software/S1040) is a command line program for syncing files with cloud storage
+  services such as Dropbox, Google Drive, Amazon S3, and MEGA. [Rclone](https://attack.mitre.org/software/S1040) has been
+  used in a number of ransomware campaigns, including those associated with the [Conti](https://attack.mitre.org/software/S0575)
+  and DarkSide Ransomware-as-a-Service operations.(Citation: Rclone)(Citation: Rclone Wars)(Citation: Detecting Rclone)(Citation:
+  DarkSide Ransomware Gang)(Citation: DFIR Conti Bazar Nov 2021)'
+external_references:
+- external_id: S1040
+  source_name: mitre-attack
+  url: https://attack.mitre.org/software/S1040
+- description: ' Aaron Greetham. (2021, May 27). Detecting Rclone – An Effective Tool for Exfiltration. Retrieved August 30,
+    2022.'
+  source_name: Detecting Rclone
+  url: https://research.nccgroup.com/2021/05/27/detecting-rclone-an-effective-tool-for-exfiltration/
+- description: DFIR Report. (2021, November 29). CONTInuing the Bazar Ransomware Story. Retrieved September 29, 2022.
+  source_name: DFIR Conti Bazar Nov 2021
+  url: https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/
+- description: 'Justin Schoenfeld and Aaron Didier. (2021, May 4). Rclone Wars: Transferring leverage in a ransomware attack.
+    Retrieved August 30, 2022.'
+  source_name: Rclone Wars
+  url: https://redcanary.com/blog/rclone-mega-extortion/
+- description: Nick Craig-Wood. (n.d.). Rclone syncs your files to cloud storage. Retrieved August 30, 2022.
+  source_name: Rclone
+  url: https://rclone.org
+- description: 'Ramarcus Baylor. (2021, May 12). DarkSide Ransomware Gang: An Overview. Retrieved August 30, 2022.'
+  source_name: DarkSide Ransomware Gang
+  url: https://unit42.paloaltonetworks.com/darkside-ransomware/
+id: tool--59096109-a1dd-463b-87e7-a8d110fe3a79
+modified: '2026-04-20T13:39:30.460Z'
+name: Rclone
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: tool
+x_mitre_aliases:
+- Rclone
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Edward Millington
+- Ian McKay
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- Windows
+- macOS
+x_mitre_version: '1.3'
+```

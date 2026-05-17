@@ -1,0 +1,142 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Services Registry Permissions Weakness
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1574.011` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Services Registry Permissions Weakness](../../attack/techniques/T1574.011-services-registry-permissions-weakness.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1574.011 |
+| name | Services Registry Permissions Weakness |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1574/011 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-13T11:42:14.444Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may execute their own malicious payloads by hijacking the Registry entries used by services. Flaws
+  in the permissions for Registry keys related to services can allow adversaries to redirect the originally specified executable
+  to one they control, launching their own code when a service starts. Windows stores local service configuration information
+  in the Registry under <code>HKLM\SYSTEM\CurrentControlSet\Services</code>. The information stored under a service''s Registry
+  keys can be manipulated to modify a service''s execution parameters through tools such as the service controller, sc.exe,  [PowerShell](https://attack.mitre.org/techniques/T1059/001),
+  or [Reg](https://attack.mitre.org/software/S0075). Access to Registry keys is controlled through access control lists and
+  user permissions. (Citation: Registry Key Security)(Citation: malware_hides_service)
+
+
+  If the permissions for users and groups are not properly set and allow access to the Registry keys for a service, adversaries
+  may change the service''s binPath/ImagePath to point to a different executable under their control. When the service starts
+  or is restarted, the adversary-controlled program will execute, allowing the adversary to establish persistence and/or privilege
+  escalation to the account context the service is set to execute under (local/domain account, SYSTEM, LocalService, or NetworkService).
+
+
+  Adversaries may also alter other Registry keys in the service’s Registry tree. For example, the <code>FailureCommand</code>
+  key may be changed so that the service is executed in an elevated context anytime the service fails or is intentionally
+  corrupted.(Citation: Kansa Service related collectors)(Citation: Tweet Registry Perms Weakness)
+
+
+  The <code>Performance</code> key contains the name of a driver service''s performance DLL and the names of several exported
+  functions in the DLL.(Citation: microsoft_services_registry_tree) If the <code>Performance</code> key is not already present
+  and if an adversary-controlled user has the <code>Create Subkey</code> permission, adversaries may create the <code>Performance</code>
+  key in the service’s Registry tree to point to a malicious DLL.(Citation: insecure_reg_perms)
+
+
+  Adversaries may also add the <code>Parameters</code> key, which can reference malicious drivers file paths. This technique
+  has been identified to be a method of abuse by configuring DLL file paths within the <code>Parameters</code> key of a given
+  services registry configuration. By placing and configuring the <code>Parameters</code> key to reference a malicious DLL,
+  adversaries can ensure that their code is loaded persistently whenever the associated service or library is invoked.
+
+
+  For example, the registry path(Citation: MDSec) <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinSock2\Parameters</code>(Citation:
+  hexacorn)(Citation: gendigital) contains the <code>AutodiaDLL</code> value, which specifies the DLL to be loaded for autodial
+  funcitionality. An adversary could set the <code>AutodiaDLL</code> to point to a hijacked or malicious DLL:
+
+
+  <code>"AutodialDLL"="c:\temp\foo.dll"</code>
+
+
+  This ensures persistence, as it causes the DLL (in this case, foo.dll) to be loaded each time the Winsock 2 library is invoked.'
+external_references:
+- external_id: T1574.011
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1574/011
+- description: '@r0wdy_. (2017, November 30). Service Recovery Parameters. Retrieved September 12, 2024.'
+  source_name: Tweet Registry Perms Weakness
+  url: https://x.com/r0wdy_/status/936365549553991680
+- description: Clément Labro. (2020, November 12). Windows RpcEptMapper Service Insecure Registry Permissions EoP. Retrieved
+    August 25, 2021.
+  source_name: insecure_reg_perms
+  url: https://itm4n.github.io/windows-registry-rpceptmapper-eop/
+- description: hexacorn. (2015, January 13). Beyond good ol’ Run key, Part 24. Retrieved September 25, 2025.
+  source_name: hexacorn
+  url: https://www.hexacorn.com/blog/2015/01/13/beyond-good-ol-run-key-part-24/
+- description: 'Hull, D.. (2014, May 3). Kansa: Service related collectors and analysis. Retrieved October 10, 2019.'
+  source_name: Kansa Service related collectors
+  url: https://trustedsignal.blogspot.com/2014/05/kansa-service-related-collectors-and.html
+- description: Lawrence Abrams. (2004, September 10). How Malware hides and is installed as a Service. Retrieved August 30,
+    2021.
+  source_name: malware_hides_service
+  url: https://www.bleepingcomputer.com/tutorials/how-malware-hides-as-a-service/
+- description: MDSec. (n.d.). Autodial(DLL)ing Your Way. Retrieved September 25, 2025.
+  source_name: MDSec
+  url: https://www.mdsec.co.uk/2022/10/autodialdlling-your-way/
+- description: Microsoft. (2018, May 31). Registry Key Security and Access Rights. Retrieved March 16, 2017.
+  source_name: Registry Key Security
+  url: https://docs.microsoft.com/en-us/windows/win32/sysinfo/registry-key-security-and-access-rights?redirectedfrom=MSDN
+- description: Microsoft. (2021, August 5). HKLM\SYSTEM\CurrentControlSet\Services Registry Tree. Retrieved August 25, 2021.
+  source_name: microsoft_services_registry_tree
+  url: https://docs.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree
+- description: 'Threat Research Team. (2022, March 22). Operation Dragon Castling: APT group targeting betting companies.
+    Retrieved September 25, 2025.'
+  source_name: gendigital
+  url: https://www.gendigital.com/blog/insights/research/operation-dragon-castling-apt-group-targeting-betting-companies
+id: attack-pattern--17cc750b-e95b-4d7d-9dde-49e0de24148c
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: stealth
+- kill_chain_name: mitre-attack
+  phase_name: execution
+modified: '2026-04-15T23:02:58.258Z'
+name: Services Registry Permissions Weakness
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Joe Gumke, U.S. Bank
+- Matthew Demaske, Adaptforward
+- Travis Smith, Tripwire
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_remote_support: false
+x_mitre_version: '2.0'
+```

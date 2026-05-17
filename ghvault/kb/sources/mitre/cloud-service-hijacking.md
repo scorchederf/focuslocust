@@ -1,0 +1,95 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Cloud Service Hijacking
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1496.004` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Cloud Service Hijacking](../../attack/techniques/T1496.004-cloud-service-hijacking.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1496.004 |
+| name | Cloud Service Hijacking |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1496/004 |
+
+## Preserved Source Material
+
+```yaml
+created: '2024-09-25T14:05:59.910Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may leverage compromised software-as-a-service (SaaS) applications to complete resource-intensive\
+  \ tasks, which may impact hosted service availability. \n\nFor example, adversaries may leverage email and messaging services,\
+  \ such as AWS Simple Email Service (SES), AWS Simple Notification Service (SNS), SendGrid, and Twilio, in order to send\
+  \ large quantities of spam / [Phishing](https://attack.mitre.org/techniques/T1566) emails and SMS messages.(Citation: Invictus\
+  \ IR DangerDev 2024)(Citation: Permiso SES Abuse 2023)(Citation: SentinelLabs SNS Sender 2024) Alternatively, they may engage\
+  \ in LLMJacking by leveraging reverse proxies to hijack the power of cloud-hosted AI models.(Citation: Sysdig LLMJacking\
+  \ 2024)(Citation: Lacework LLMJacking 2024)\n\nIn some cases, adversaries may leverage services that the victim is already\
+  \ using. In others, particularly when the service is part of a larger cloud platform, they may first enable the service.(Citation:\
+  \ Sysdig LLMJacking 2024) Leveraging SaaS applications may cause the victim to incur significant financial costs, use up\
+  \ service quotas, and otherwise impact availability. "
+external_references:
+- external_id: T1496.004
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1496/004
+- description: Alex Delamotte. (2024, February 15). SNS Sender | Active Campaigns Unleash Messaging Spam Through the Cloud.
+    Retrieved September 25, 2024.
+  source_name: SentinelLabs SNS Sender 2024
+  url: https://www.sentinelone.com/labs/sns-sender-active-campaigns-unleash-messaging-spam-through-the-cloud/
+- description: Invictus Incident Response. (2024, January 31). The curious case of DangerDev@protonmail.me. Retrieved March
+    19, 2024.
+  source_name: Invictus IR DangerDev 2024
+  url: https://www.invictus-ir.com/news/the-curious-case-of-dangerdev-protonmail-me
+- description: Lacework Labs. (2024, June 6). Detecting AI resource-hijacking with Composite Alerts. Retrieved September 25,
+    2024.
+  source_name: Lacework LLMJacking 2024
+  url: https://www.lacework.com/blog/detecting-ai-resource-hijacking-with-composite-alerts
+- description: 'LLMjacking: Stolen Cloud Credentials Used in New AI Attack. (2024, May 6). Alessandro Brucato. Retrieved September
+    25, 2024.'
+  source_name: Sysdig LLMJacking 2024
+  url: https://sysdig.com/blog/llmjacking-stolen-cloud-credentials-used-in-new-ai-attack/
+- description: Nathan Eades. (2023, January 12). SES-pionage. Retrieved September 25, 2024.
+  source_name: Permiso SES Abuse 2023
+  url: https://permiso.io/blog/s/aws-ses-pionage-detecting-ses-abuse/
+id: attack-pattern--924d273c-be0d-4d8d-af58-2dddb15ef1e2
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: impact
+modified: '2025-04-15T22:03:40.356Z'
+name: Cloud Service Hijacking
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_impact_type:
+- Availability
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- SaaS
+x_mitre_version: '1.0'
+```

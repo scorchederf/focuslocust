@@ -1,0 +1,82 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Social Media Accounts
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1585.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Social Media Accounts](../../attack/techniques/T1585.001-social-media-accounts.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1585.001 |
+| name | Social Media Accounts |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1585/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-10-01T01:08:41.124Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may create and cultivate social media accounts that can be used during targeting. Adversaries can\
+  \ create social media accounts that can be used to build a persona to further operations. Persona development consists of\
+  \ the development of public information, presence, history and appropriate affiliations.(Citation: NEWSCASTER2014)(Citation:\
+  \ BlackHatRobinSage)\n\nFor operations incorporating social engineering, the utilization of a persona on social media may\
+  \ be important. These personas may be fictitious or impersonate real people. The persona may exist on a single social media\
+  \ site or across multiple sites (ex: Facebook, LinkedIn, Twitter, etc.). Establishing a persona  on social media may require\
+  \ development of additional documentation to make them seem real. This could include filling out profile information, developing\
+  \ social networks, or incorporating photos. \n\nOnce a persona has been developed an adversary can use it to create connections\
+  \ to targets of interest. These connections may be direct or may include trying to connect through others.(Citation: NEWSCASTER2014)(Citation:\
+  \ BlackHatRobinSage) These accounts may be leveraged during other phases of the adversary lifecycle, such as during Initial\
+  \ Access (ex: [Spearphishing via Service](https://attack.mitre.org/techniques/T1566/003))."
+external_references:
+- external_id: T1585.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1585/001
+- description: Lennon, M. (2014, May 29). Iranian Hackers Targeted US Officials in Elaborate Social Media Attack Operation.
+    Retrieved March 1, 2017.
+  source_name: NEWSCASTER2014
+  url: https://www.securityweek.com/iranian-hackers-targeted-us-officials-elaborate-social-media-attack-operation
+- description: Ryan, T. (2010). “Getting In Bed with Robin Sage.”. Retrieved March 6, 2017.
+  source_name: BlackHatRobinSage
+  url: http://media.blackhat.com/bh-us-10/whitepapers/Ryan/BlackHat-USA-2010-Ryan-Getting-In-Bed-With-Robin-Sage-v1.0.pdf
+id: attack-pattern--b1ccd744-3f78-4a0e-9bb2-2002057f7928
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: resource-development
+modified: '2025-10-24T17:49:14.364Z'
+name: Social Media Accounts
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- PRE
+x_mitre_version: '1.1'
+```

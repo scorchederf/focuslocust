@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "8f11449c6df41b7f",
+    "type": "split",
+    "children": [
+      {
+        "id": "7b44afcd74adf7e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8cd5ff86f27af92a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "kb/attack/tactics/collection.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "collection"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7b0403a1837a38cf",
+    "type": "split",
+    "children": [
+      {
+        "id": "983dd03d870c022a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a98b3e1237254759",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "f8f9af3f7db67d9b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "4541d06e6871a6cb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7b454e47946f9261",
+    "type": "split",
+    "children": [
+      {
+        "id": "e4bfc1483b8cc58e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cc77ec6c9d0fd288",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "kb/tools/unknown/certutil.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for certutil"
+            }
+          },
+          {
+            "id": "80b34ff2d8b07eff",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "kb/tools/unknown/certutil.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from certutil"
+            }
+          },
+          {
+            "id": "a816253baeecb3b6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "bde0942b72a88266",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "f79c44a3503a60ae",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "kb/tools/unknown/certutil.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of certutil"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "8cd5ff86f27af92a",
+  "lastOpenFiles": [
+    "_review/unmapped-records.md",
+    "_review/README.md",
+    "_review/optional-ollama-suggestions.md",
+    "_review/low-confidence-relationships.md",
+    "_review/conflicts.md",
+    "_build/source-coverage.md",
+    "_build/source-hashes.md",
+    "_build/schema-summary.md",
+    "_build/relationship-coverage.md",
+    "_build/orphan-pages.md",
+    "_build/inferred-relationships.md",
+    "_build/duplicate-pages.md",
+    "_build/build-summary.md",
+    "_build/broken-links.md",
+    "kb/tools/unknown/certutil.md",
+    "kb/topics/databases/mssql-audit-checks.md",
+    "kb/topics/welcome/hacktricks-values-and-faq.md",
+    "kb/topics/welcome/about-the-author.md",
+    "kb/topics/README.md",
+    "kb/sources/payloadsallthethings/README.md",
+    "kb/indexes/sources-by-concept.md",
+    "kb/indexes/README.md",
+    "kb/indexes/commands-by-platform.md",
+    "kb/indexes/commands-by-tool.md",
+    "kb/indexes/verification-index.md",
+    "kb/indexes/tools-by-technique.md"
+  ]
+}

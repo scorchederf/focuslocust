@@ -1,0 +1,103 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# SMB／Windows Admin Shares
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1021.002` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [SMB／Windows Admin Shares](../../attack/techniques/T1021.002-smb-windows-admin-shares.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1021.002 |
+| name | SMB／Windows Admin Shares |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1021/002 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-02-11T18:25:28.212Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may use [Valid Accounts](https://attack.mitre.org/techniques/T1078) to interact with a remote network
+  share using Server Message Block (SMB). The adversary may then perform actions as the logged-on user.
+
+
+  SMB is a file, printer, and serial port sharing protocol for Windows machines on the same network or domain. Adversaries
+  may use SMB to interact with file shares, allowing them to move laterally throughout a network. Linux and macOS implementations
+  of SMB typically use Samba.
+
+
+  Windows systems have hidden network shares that are accessible only to administrators and provide the ability for remote
+  file copy and other administrative functions. Example network shares include `C$`, `ADMIN$`, and `IPC$`. Adversaries may
+  use this technique in conjunction with administrator-level [Valid Accounts](https://attack.mitre.org/techniques/T1078) to
+  remotely access a networked system over SMB,(Citation: Wikipedia Server Message Block) to interact with systems using remote
+  procedure calls (RPCs),(Citation: TechNet RPC) transfer files, and run transferred binaries through remote Execution. Example
+  execution techniques that rely on authenticated sessions over SMB/RPC are [Scheduled Task/Job](https://attack.mitre.org/techniques/T1053),
+  [Service Execution](https://attack.mitre.org/techniques/T1569/002), and [Windows Management Instrumentation](https://attack.mitre.org/techniques/T1047).
+  Adversaries can also use NTLM hashes to access administrator shares on systems with [Pass the Hash](https://attack.mitre.org/techniques/T1550/002)
+  and certain configuration and patch levels.(Citation: Microsoft Admin Shares)'
+external_references:
+- external_id: T1021.002
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1021/002
+- description: French, D. (2018, October 9). Detecting & Removing an Attacker’s WMI Persistence. Retrieved October 11, 2019.
+  source_name: Medium Detecting WMI Persistence
+  url: https://medium.com/threatpunter/detecting-removing-wmi-persistence-60ccbb7dff96
+- description: Microsoft. (2003, March 28). What Is RPC?. Retrieved June 12, 2016.
+  source_name: TechNet RPC
+  url: https://technet.microsoft.com/en-us/library/cc787851.aspx
+- description: Microsoft. (n.d.). How to create and delete hidden or administrative shares on client computers. Retrieved
+    November 20, 2014.
+  source_name: Microsoft Admin Shares
+  url: http://support.microsoft.com/kb/314984
+- description: Payne, J. (2015, November 23). Monitoring what matters - Windows Event Forwarding for everyone (even if you
+    already have a SIEM.). Retrieved February 1, 2016.
+  source_name: Windows Event Forwarding Payne
+  url: https://docs.microsoft.com/en-us/archive/blogs/jepayne/monitoring-what-matters-windows-event-forwarding-for-everyone-even-if-you-already-have-a-siem
+- description: Payne, J. (2015, November 26). Tracking Lateral Movement Part One - Special Groups and Specific Service Accounts.
+    Retrieved February 1, 2016.
+  source_name: Lateral Movement Payne
+  url: https://docs.microsoft.com/en-us/archive/blogs/jepayne/tracking-lateral-movement-part-one-special-groups-and-specific-service-accounts
+- description: Wikipedia. (2017, December 16). Server Message Block. Retrieved December 21, 2017.
+  source_name: Wikipedia Server Message Block
+  url: https://en.wikipedia.org/wiki/Server_Message_Block
+id: attack-pattern--4f9ca633-15c5-463c-9724-bdcd54fde541
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: lateral-movement
+modified: '2025-10-24T17:48:45.700Z'
+name: SMB/Windows Admin Shares
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.3'
+```

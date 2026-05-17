@@ -1,0 +1,118 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Windows Credential Manager
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1555.004` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Windows Credential Manager](../../attack/techniques/T1555.004-windows-credential-manager.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1555.004 |
+| name | Windows Credential Manager |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1555/004 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-11-23T15:35:53.793Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may acquire credentials from the Windows Credential Manager. The Credential Manager stores credentials
+  for signing into websites, applications, and/or devices that request authentication through NTLM or Kerberos in Credential
+  Lockers (previously known as Windows Vaults).(Citation: Microsoft Credential Manager store)(Citation: Microsoft Credential
+  Locker)
+
+
+  The Windows Credential Manager separates website credentials from application or network credentials in two lockers. As
+  part of [Credentials from Web Browsers](https://attack.mitre.org/techniques/T1555/003), Internet Explorer and Microsoft
+  Edge website credentials are managed by the Credential Manager and are stored in the Web Credentials locker. Application
+  and network credentials are stored in the Windows Credentials locker.
+
+
+  Credential Lockers store credentials in encrypted `.vcrd` files, located under `%Systemdrive%\Users\\[Username]\AppData\Local\Microsoft\\[Vault/Credentials]\`.
+  The encryption key can be found in a file named <code>Policy.vpol</code>, typically located in the same folder as the credentials.(Citation:
+  passcape Windows Vault)(Citation: Malwarebytes The Windows Vault)
+
+
+  Adversaries may list credentials managed by the Windows Credential Manager through several mechanisms. <code>vaultcmd.exe</code>
+  is a native Windows executable that can be used to enumerate credentials stored in the Credential Locker through a command-line
+  interface. Adversaries may also gather credentials by directly reading files located inside of the Credential Lockers. Windows
+  APIs, such as <code>CredEnumerateA</code>, may also be absued to list credentials managed by the Credential Manager.(Citation:
+  Microsoft CredEnumerate)(Citation: Delpy Mimikatz Crendential Manager)
+
+
+  Adversaries may also obtain credentials from credential backups. Credential backups and restorations may be performed by
+  running <code>rundll32.exe keymgr.dll KRShowKeyMgr</code> then selecting the “Back up...” button on the “Stored User Names
+  and Passwords” GUI.
+
+
+  Password recovery tools may also obtain plain text passwords from the Credential Manager.(Citation: Malwarebytes The Windows
+  Vault)'
+external_references:
+- external_id: T1555.004
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1555/004
+- description: Arntz, P. (2016, March 30). The Windows Vault . Retrieved November 23, 2020.
+  source_name: Malwarebytes The Windows Vault
+  url: https://blog.malwarebytes.com/101/2016/01/the-windows-vaults/
+- description: Delpy, B. (2017, December 12). howto ~ credential manager saved credentials. Retrieved November 23, 2020.
+  source_name: Delpy Mimikatz Crendential Manager
+  url: https://github.com/gentilkiwi/mimikatz/wiki/howto-~-credential-manager-saved-credentials
+- description: Microsoft. (2013, October 23). Credential Locker Overview. Retrieved November 24, 2020.
+  source_name: Microsoft Credential Locker
+  url: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/jj554668(v=ws.11)?redirectedfrom=MSDN
+- description: Microsoft. (2016, August 31). Cached and Stored Credentials Technical Overview. Retrieved November 24, 2020.
+  source_name: Microsoft Credential Manager store
+  url: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh994565(v=ws.11)#credential-manager-store
+- description: Microsoft. (2018, December 5). CredEnumarateA function (wincred.h). Retrieved November 24, 2020.
+  source_name: Microsoft CredEnumerate
+  url: https://docs.microsoft.com/en-us/windows/win32/api/wincred/nf-wincred-credenumeratea
+- description: Passcape. (n.d.). Windows Password Recovery - Vault Explorer and Decoder. Retrieved November 24, 2020.
+  source_name: passcape Windows Vault
+  url: https://www.passcape.com/windows_password_recovery_vault_explorer
+id: attack-pattern--d336b553-5da9-46ca-98a8-0b23f49fb447
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: credential-access
+modified: '2025-10-24T17:49:26.444Z'
+name: Windows Credential Manager
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Bernaldo Penas Antelo
+- Mugdha Peter Bansode
+- Uriel Kosayev
+- Vadim Khrykov
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.1'
+```

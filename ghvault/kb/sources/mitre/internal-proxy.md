@@ -1,0 +1,86 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Internal Proxy
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1090.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Internal Proxy](../../attack/techniques/T1090.001-internal-proxy.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1090.001 |
+| name | Internal Proxy |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1090/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-14T23:08:20.244Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may use an internal proxy to direct command and control traffic between two or more systems in a
+  compromised environment. Many tools exist that enable traffic redirection through proxies or port redirection, including
+  [HTRAN](https://attack.mitre.org/software/S0040), ZXProxy, and ZXPortMap. (Citation: Trend Micro APT Attack Tools) Adversaries
+  use internal proxies to manage command and control communications inside a compromised environment, to reduce the number
+  of simultaneous outbound network connections, to provide resiliency in the face of connection loss, or to ride over existing
+  trusted communications paths between infected systems to avoid suspicion. Internal proxy connections may use common peer-to-peer
+  (p2p) networking protocols, such as SMB, to better blend in with the environment.
+
+
+  By using a compromised internal system as a proxy, adversaries may conceal the true destination of C2 traffic while reducing
+  the need for numerous connections to external systems.'
+external_references:
+- external_id: T1090.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1090/001
+- description: Gardiner, J.,  Cova, M., Nagaraja, S. (2014, February). Command & Control Understanding, Denying and Detecting.
+    Retrieved April 20, 2016.
+  source_name: University of Birmingham C2
+  url: https://arxiv.org/ftp/arxiv/papers/1408/1408.1136.pdf
+- description: 'Wilhoit, K. (2013, March 4). In-Depth Look: APT Attack Tools of the Trade. Retrieved December 2, 2015.'
+  source_name: Trend Micro APT Attack Tools
+  url: http://blog.trendmicro.com/trendlabs-security-intelligence/in-depth-look-apt-attack-tools-of-the-trade/
+id: attack-pattern--f6dacc85-b37d-458e-b58d-74fc4bbf5755
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:49:37.574Z'
+name: Internal Proxy
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Network Devices
+- Windows
+x_mitre_version: '1.2'
+```

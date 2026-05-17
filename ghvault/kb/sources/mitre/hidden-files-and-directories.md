@@ -1,0 +1,104 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Hidden Files and Directories
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1564.001` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Hidden Files and Directories](../../attack/techniques/T1564.001-hidden-files-and-directories.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1564.001 |
+| name | Hidden Files and Directories |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1564/001 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-02-26T17:46:13.128Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may set files and directories to be hidden to evade detection mechanisms. To prevent normal users
+  from accidentally changing special files on a system, most operating systems have the concept of a ‘hidden’ file. These
+  files don’t show up when a user browses the file system with a GUI or when using normal commands on the command line. Users
+  must explicitly ask to show the hidden files either via a series of Graphical User Interface (GUI) prompts or with command
+  line switches (<code>dir /a</code> for Windows and <code>ls –a</code> for Linux and macOS).
+
+
+  On Linux and Mac, users can mark specific files as hidden simply by putting a “.” as the first character in the file or
+  folder name  (Citation: Sofacy Komplex Trojan) (Citation: Antiquated Mac Malware). Files and folders that start with a period,
+  ‘.’, are by default hidden from being viewed in the Finder application and standard command-line utilities like “ls”. Users
+  must specifically change settings to have these files viewable.
+
+
+  Files on macOS can also be marked with the UF_HIDDEN flag which prevents them from being seen in Finder.app, but still allows
+  them to be seen in Terminal.app (Citation: WireLurker). On Windows, users can mark specific files as hidden by using the
+  attrib.exe binary. Many applications create these hidden files and folders to store information so that it doesn’t clutter
+  up the user’s workspace. For example, SSH utilities create a .ssh folder that’s hidden and contains the user’s known hosts
+  and keys.
+
+
+  Additionally, adversaries may name files in a manner that would allow the file to be hidden such as naming a file only a
+  “space” character.
+
+
+  Adversaries can use this to their advantage to hide files and folders anywhere on the system and evading a typical user
+  or system analysis that does not incorporate investigation of hidden files.'
+external_references:
+- external_id: T1564.001
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1564/001
+- description: 'Claud Xiao. (n.d.). WireLurker: A New Era in iOS and OS X Malware. Retrieved July 10, 2017.'
+  source_name: WireLurker
+  url: https://www.paloaltonetworks.com/content/dam/pan/en_US/assets/pdf/reports/Unit_42/unit42-wirelurker.pdf
+- description: Dani Creus, Tyler Halfpop, Robert Falcone. (2016, September 26). Sofacy's 'Komplex' OS X Trojan. Retrieved
+    July 8, 2017.
+  source_name: Sofacy Komplex Trojan
+  url: https://researchcenter.paloaltonetworks.com/2016/09/unit42-sofacys-komplex-os-x-trojan/
+- description: Thomas Reed. (2017, January 18). New Mac backdoor using antiquated code. Retrieved July 5, 2017.
+  source_name: Antiquated Mac Malware
+  url: https://blog.malwarebytes.com/threat-analysis/2017/01/new-mac-backdoor-using-antiquated-code/
+id: attack-pattern--ec8fc7e2-b356-455c-8db5-2e37be158e7d
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: stealth
+modified: '2026-04-15T20:23:13.914Z'
+name: Hidden Files and Directories
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Gr@ve_Rose (tcpdump101.com on bsky)
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+x_mitre_version: '2.0'
+```

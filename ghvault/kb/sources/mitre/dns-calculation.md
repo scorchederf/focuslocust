@@ -1,0 +1,85 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# DNS Calculation
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1568.003` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [DNS Calculation](../../attack/techniques/T1568.003-dns-calculation.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1568.003 |
+| name | DNS Calculation |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1568/003 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-11T14:56:34.154Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may perform calculations on addresses returned in DNS results to determine which port and IP address
+  to use for command and control, rather than relying on a predetermined port number or the actual returned IP address. A
+  IP and/or port number calculation can be used to bypass egress filtering on a C2 channel.(Citation: Meyers Numbered Panda)
+
+
+  One implementation of [DNS Calculation](https://attack.mitre.org/techniques/T1568/003) is to take the first three octets
+  of an IP address in a DNS response and use those values to calculate the port for command and control traffic.(Citation:
+  Meyers Numbered Panda)(Citation: Moran 2014)(Citation: Rapid7G20Espionage)'
+external_references:
+- external_id: T1568.003
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1568/003
+- description: Meyers, A. (2013, March 29). Whois Numbered Panda. Retrieved January 14, 2016.
+  source_name: Meyers Numbered Panda
+  url: http://www.crowdstrike.com/blog/whois-numbered-panda/
+- description: Moran, N., Oppenheim, M., Engle, S., & Wartell, R.. (2014, September 3). Darwin’s Favorite APT Group &#91;Blog&#93;.
+    Retrieved November 12, 2014.
+  source_name: Moran 2014
+  url: https://www.fireeye.com/blog/threat-research/2014/09/darwins-favorite-apt-group-2.html
+- description: Rapid7. (2013, August 26). Upcoming G20 Summit Fuels Espionage Operations. Retrieved March 6, 2017.
+  source_name: Rapid7G20Espionage
+  url: https://blog.rapid7.com/2013/08/26/upcoming-g20-summit-fuels-espionage-operations/
+id: attack-pattern--83a766f8-1501-4b3a-a2de-2e2849e8dfc1
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: command-and-control
+modified: '2025-10-24T17:49:03.093Z'
+name: DNS Calculation
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Windows
+x_mitre_version: '1.1'
+```

@@ -1,0 +1,96 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Messaging Applications
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1213.005` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Messaging Applications](../../attack/techniques/T1213.005-messaging-applications.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1213.005 |
+| name | Messaging Applications |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1213/005 |
+
+## Preserved Source Material
+
+```yaml
+created: '2024-08-30T13:50:42.023Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may leverage chat and messaging applications, such as Microsoft Teams, Google Chat, and Slack, to\
+  \ mine valuable information.  \n\nThe following is a brief list of example information that may hold potential value to\
+  \ an adversary and may also be found on messaging applications: \n\n* Testing / development credentials (i.e., [Chat Messages](https://attack.mitre.org/techniques/T1552/008))\
+  \ \n* Source code snippets \n* Links to network shares and other internal resources \n* Proprietary data(Citation: Guardian\
+  \ Grand Theft Auto Leak 2022)\n* Discussions about ongoing incident response efforts(Citation: SC Magazine Ragnar Locker\
+  \ 2021)(Citation: Microsoft DEV-0537)\n\nIn addition to exfiltrating data from messaging applications, adversaries may leverage\
+  \ data from chat messages in order to improve their targeting - for example, by learning more about an environment or evading\
+  \ ongoing incident response efforts.(Citation: Sentinel Labs NullBulge 2024)(Citation: Permiso Scattered Spider 2023)"
+external_references:
+- external_id: T1213.005
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1213/005
+- description: ' Jim Walter. (2024, July 16). NullBulge | Threat Actor Masquerades as Hacktivist Group Rebelling Against AI.
+    Retrieved August 30, 2024.'
+  source_name: Sentinel Labs NullBulge 2024
+  url: https://www.sentinelone.com/labs/nullbulge-threat-actor-masquerades-as-hacktivist-group-rebelling-against-ai/
+- description: 'Ian Ahl. (2023, September 20). LUCR-3: SCATTERED SPIDER GETTING SAAS-Y IN THE CLOUD. Retrieved September 25,
+    2023.'
+  source_name: Permiso Scattered Spider 2023
+  url: https://permiso.io/blog/lucr-3-scattered-spider-getting-saas-y-in-the-cloud
+- description: Joe Uchill. (2021, December 3). Ragnar Locker reminds breach victims it can read the on-network incident response
+    chat rooms. Retrieved August 30, 2024.
+  source_name: SC Magazine Ragnar Locker 2021
+  url: https://www.scmagazine.com/analysis/ragnar-locker-reminds-breach-victims-it-can-read-the-on-network-incident-response-chat-rooms
+- description: 'Keza MacDonald, Keith Stuart and Alex Hern. (2022, September 19). Grand Theft Auto 6 leak: who hacked Rockstar
+    and what was stolen?. Retrieved August 30, 2024.'
+  source_name: Guardian Grand Theft Auto Leak 2022
+  url: https://www.theguardian.com/games/2022/sep/19/grand-theft-auto-6-leak-who-hacked-rockstar-and-what-was-stolen
+- description: Microsoft. (2022, March 22). DEV-0537 criminal actor targeting organizations for data exfiltration and destruction.
+    Retrieved March 23, 2022.
+  source_name: Microsoft DEV-0537
+  url: https://www.microsoft.com/security/blog/2022/03/22/dev-0537-criminal-actor-targeting-organizations-for-data-exfiltration-and-destruction/
+id: attack-pattern--fb75213f-cfb0-40bf-a02f-3bad93d6601e
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: collection
+modified: '2025-04-15T22:48:58.763Z'
+name: Messaging Applications
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Menachem Goldstein
+- Obsidian Security
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Office Suite
+- SaaS
+x_mitre_version: '1.0'
+```

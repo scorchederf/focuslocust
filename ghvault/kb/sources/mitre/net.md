@@ -1,0 +1,81 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Net
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `tool` |
+| Record ID | `S0039` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Net](../../tools/unknown/net.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | S0039 |
+| name | Net |
+| type | tool |
+| source | mitre |
+| url | https://attack.mitre.org/software/S0039 |
+
+## Preserved Source Material
+
+```yaml
+created: '2017-05-31T21:32:31.601Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'The [Net](https://attack.mitre.org/software/S0039) utility is a component of the Windows operating system. It
+  is used in command-line operations for control of users, groups, services, and network connections. (Citation: Microsoft
+  Net Utility)
+
+
+  [Net](https://attack.mitre.org/software/S0039) has a great deal of functionality, (Citation: Savill 1999) much of which
+  is useful for an adversary, such as gathering system and network information for Discovery, moving laterally through [SMB/Windows
+  Admin Shares](https://attack.mitre.org/techniques/T1021/002) using <code>net use</code> commands, and interacting with services.
+  The net1.exe utility is executed for certain functionality when net.exe is run and can be used directly in commands such
+  as <code>net1 user</code>.'
+external_references:
+- external_id: S0039
+  source_name: mitre-attack
+  url: https://attack.mitre.org/software/S0039
+- description: Microsoft. (2006, October 18). Net.exe Utility. Retrieved September 22, 2015.
+  source_name: Microsoft Net Utility
+  url: https://msdn.microsoft.com/en-us/library/aa939914
+- description: Savill, J. (1999, March 4). Net.exe reference. Retrieved September 22, 2015.
+  source_name: Savill 1999
+  url: https://web.archive.org/web/20150511162820/http://windowsitpro.com/windows/netexe-reference
+id: tool--03342581-f790-4f03-ba41-e82e67392e23
+modified: '2026-04-17T14:16:53.721Z'
+name: Net
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: tool
+x_mitre_aliases:
+- Net
+- net.exe
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- David Ferguson, CyberSponse
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '2.8'
+```

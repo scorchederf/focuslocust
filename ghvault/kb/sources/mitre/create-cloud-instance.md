@@ -1,0 +1,79 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Create Cloud Instance
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1578.002` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Create Cloud Instance](../../attack/techniques/T1578.002-create-cloud-instance.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1578.002 |
+| name | Create Cloud Instance |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1578/002 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-05-14T14:45:15.978Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'An adversary may create a new instance or virtual machine (VM) within the compute service of a cloud account
+  to evade defenses. Creating a new instance may allow an adversary to bypass firewall rules and permissions that exist on
+  instances currently residing within an account. An adversary may [Create Snapshot](https://attack.mitre.org/techniques/T1578/001)
+  of one or more volumes in an account, create a new instance, mount the snapshots, and then apply a less restrictive security
+  policy to collect [Data from Local System](https://attack.mitre.org/techniques/T1005) or for [Remote Data Staging](https://attack.mitre.org/techniques/T1074/002).(Citation:
+  Mandiant M-Trends 2020)
+
+
+  Creating a new instance may also allow an adversary to carry out malicious activity within an environment without affecting
+  the execution of current running instances.'
+external_references:
+- external_id: T1578.002
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1578/002
+- description: Mandiant. (2020, February). M-Trends 2020. Retrieved November 17, 2024.
+  source_name: Mandiant M-Trends 2020
+  url: https://www.mandiant.com/sites/default/files/2021-09/mtrends-2020.pdf
+id: attack-pattern--cf1c2504-433f-4c4e-a1f8-91de45a0318c
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: defense-impairment
+modified: '2026-04-16T20:07:52.862Z'
+name: Create Cloud Instance
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Arun Seelagan, CISA
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- IaaS
+x_mitre_version: '2.0'
+```

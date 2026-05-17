@@ -1,0 +1,151 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Forced Authentication
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1187` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Forced Authentication](../../attack/techniques/T1187-forced-authentication.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1187 |
+| name | Forced Authentication |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1187 |
+
+## Preserved Source Material
+
+```yaml
+created: '2018-01-16T16:13:52.465Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may gather credential material by invoking or forcing a user to automatically provide authentication
+  information through a mechanism in which they can intercept.
+
+
+  The Server Message Block (SMB) protocol is commonly used in Windows networks for authentication and communication between
+  systems for access to resources and file sharing. When a Windows system attempts to connect to an SMB resource it will automatically
+  attempt to authenticate and send credential information for the current user to the remote system.(Citation: Wikipedia Server
+  Message Block) This behavior is typical in enterprise environments so that users do not need to enter credentials to access
+  network resources.
+
+
+  Web Distributed Authoring and Versioning (WebDAV) is also typically used by Windows systems as a backup protocol when SMB
+  is blocked or fails. WebDAV is an extension of HTTP and will typically operate over TCP ports 80 and 443.(Citation: Didier
+  Stevens WebDAV Traffic)(Citation: Microsoft Managing WebDAV Security)
+
+
+  Adversaries may take advantage of this behavior to gain access to user account hashes through forced SMB/WebDAV authentication.
+  An adversary can send an attachment to a user through spearphishing that contains a resource link to an external server
+  controlled by the adversary  (i.e. [Template Injection](https://attack.mitre.org/techniques/T1221)), or place a specially
+  crafted file on navigation path for privileged accounts (e.g. .SCF file placed on desktop) or on a publicly accessible share
+  to be accessed by victim(s). When the user''s system accesses the untrusted resource, it will attempt authentication and
+  send information, including the user''s hashed credentials, over SMB to the adversary-controlled server.(Citation: GitHub
+  Hashjacking) With access to the credential hash, an adversary can perform off-line [Brute Force](https://attack.mitre.org/techniques/T1110)
+  cracking to gain access to plaintext credentials.(Citation: Cylance Redirect to SMB)
+
+
+  There are several different ways this can occur.(Citation: Osanda Stealing NetNTLM Hashes) Some specifics from in-the-wild
+  use include:
+
+
+  * A spearphishing attachment containing a document with a resource that is automatically loaded when the document is opened
+  (i.e. [Template Injection](https://attack.mitre.org/techniques/T1221)). The document can include, for example, a request
+  similar to <code>file[:]//[remote address]/Normal.dotm</code> to trigger the SMB request.(Citation: US-CERT APT Energy Oct
+  2017)
+
+  * A modified .LNK or .SCF file with the icon filename pointing to an external reference such as <code>\\[remote address]\pic.png</code>
+  that will force the system to load the resource when the icon is rendered to repeatedly gather credentials.(Citation: US-CERT
+  APT Energy Oct 2017)
+
+
+  Alternatively, by leveraging the <code>EfsRpcOpenFileRaw</code> function, an adversary can send SMB requests to a remote
+  system''s MS-EFSRPC interface and force the victim computer to initiate an authentication procedure and share its authentication
+  details. The Encrypting File System Remote Protocol (EFSRPC) is a protocol used in Windows networks for maintenance and
+  management operations on encrypted data that is stored remotely to be accessed over a network. Utilization of <code>EfsRpcOpenFileRaw</code>
+  function in EFSRPC is used to open an encrypted object on the server for backup or restore. Adversaries can collect this
+  data and abuse it as part of a NTLM relay attack to gain access to remote systems on the same internal network.(Citation:
+  Rapid7)(Citation: GitHub)
+
+
+  '
+external_references:
+- external_id: T1187
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1187
+- description: 'Condon, Caitlin. (2022, April 24). PetitPotam: Novel Attack Chain Can Fully Compromise Windows Domains. Retrieved
+    May 30, 2025.'
+  source_name: Rapid7
+  url: https://www.rapid7.com/blog/post/2021/08/03/petitpotam-novel-attack-chain-can-fully-compromise-windows-domains-running-ad-cs/
+- description: Cylance. (2015, April 13). Redirect to SMB. Retrieved December 21, 2017.
+  source_name: Cylance Redirect to SMB
+  url: https://www.cylance.com/content/dam/cylance/pdfs/white_papers/RedirectToSMB.pdf
+- description: Dunning, J. (2016, August 1). Hashjacking. Retrieved December 21, 2017.
+  source_name: GitHub Hashjacking
+  url: https://github.com/hob0/hashjacking
+- description: Microsoft. (n.d.). Managing WebDAV Security (IIS 6.0). Retrieved November 17, 2024.
+  source_name: Microsoft Managing WebDAV Security
+  url: https://web.archive.org/web/20100210125749/https://www.microsoft.com/technet/prodtechnol/WindowsServer2003/Library/IIS/4beddb35-0cba-424c-8b9b-a5832ad8e208.mspx
+- description: Osanda Malith Jayathissa. (2017, March 24). Places of Interest in Stealing NetNTLM Hashes. Retrieved January
+    26, 2018.
+  source_name: Osanda Stealing NetNTLM Hashes
+  url: https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/
+- description: Stevens, D. (2017, November 13). WebDAV Traffic To Malicious Sites. Retrieved December 21, 2017.
+  source_name: Didier Stevens WebDAV Traffic
+  url: https://blog.didierstevens.com/2017/11/13/webdav-traffic-to-malicious-sites/
+- description: topotam. (2021, July 18). PetitPotam. PoC tool to coerce Windows hosts to authenticate to other machines. Retrieved
+    May 30, 2025.
+  source_name: GitHub
+  url: https://github.com/topotam/PetitPotam
+- description: 'US-CERT. (2017, October 20). Alert (TA17-293A): Advanced Persistent Threat Activity Targeting Energy and Other
+    Critical Infrastructure Sectors. Retrieved November 2, 2017.'
+  source_name: US-CERT APT Energy Oct 2017
+  url: https://www.us-cert.gov/ncas/alerts/TA17-293A
+- description: Wikipedia. (2017, December 16). Server Message Block. Retrieved December 21, 2017.
+  source_name: Wikipedia Server Message Block
+  url: https://en.wikipedia.org/wiki/Server_Message_Block
+id: attack-pattern--b77cf5f3-6060-475d-bd60-40ccbf28fdc2
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: credential-access
+modified: '2025-10-24T17:49:16.134Z'
+name: Forced Authentication
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Teodor Cimpoesu
+- Sudhanshu Chauhan, @Sudhanshu_C
+- Jiraput Thamsongkrah
+- Purinut Wongwaiwuttiguldej
+- Natthawut Saexu
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.4'
+```

@@ -1,0 +1,89 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# AppInit DLLs
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1546.010` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [AppInit DLLs](../../attack/techniques/T1546.010-appinit-dlls.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1546.010 |
+| name | AppInit DLLs |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1546/010 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-01-24T14:52:25.589Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by\
+  \ AppInit DLLs loaded into processes. Dynamic-link libraries (DLLs) that are specified in the <code>AppInit_DLLs</code>\
+  \ value in the Registry keys <code>HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows</code> or\
+  \ <code>HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Windows</code> are loaded by user32.dll\
+  \ into every process that loads user32.dll. In practice this is nearly every program, since user32.dll is a very common\
+  \ library. (Citation: Elastic Process Injection July 2017)\n\nSimilar to Process Injection, these values can be abused to\
+  \ obtain elevated privileges by causing a malicious DLL to be loaded and run in the context of separate processes on the\
+  \ computer. (Citation: AppInit Registry) Malicious AppInit DLLs may also provide persistence by continuously being triggered\
+  \ by API activity. \n\nThe AppInit DLL functionality is disabled in Windows 8 and later versions when secure boot is enabled.\
+  \ (Citation: AppInit Secure Boot)"
+external_references:
+- external_id: T1546.010
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1546/010
+- description: 'Hosseini, A. (2017, July 18). Ten Process Injection Techniques: A Technical Survey Of Common And Trending
+    Process Injection Techniques. Retrieved December 7, 2017.'
+  source_name: Elastic Process Injection July 2017
+  url: https://www.endgame.com/blog/technical-blog/ten-process-injection-techniques-technical-survey-common-and-trending-process
+- description: Microsoft. (2006, October). Working with the AppInit_DLLs registry value. Retrieved July 15, 2015.
+  source_name: AppInit Registry
+  url: https://support.microsoft.com/en-us/kb/197571
+- description: Microsoft. (n.d.). AppInit DLLs and Secure Boot. Retrieved July 15, 2015.
+  source_name: AppInit Secure Boot
+  url: https://msdn.microsoft.com/en-us/library/dn280412
+- description: Russinovich, M. (2016, January 4). Autoruns for Windows v13.51. Retrieved June 6, 2016.
+  source_name: TechNet Autoruns
+  url: https://technet.microsoft.com/en-us/sysinternals/bb963902
+id: attack-pattern--cc89ecbd-3d33-4a41-bcca-001e702d18fd
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: privilege-escalation
+- kill_chain_name: mitre-attack
+  phase_name: persistence
+modified: '2025-10-24T17:49:24.008Z'
+name: AppInit DLLs
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.2'
+```

@@ -1,0 +1,104 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# VBA Stomping
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1564.007` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [VBA Stomping](../../attack/techniques/T1564.007-vba-stomping.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1564.007 |
+| name | VBA Stomping |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1564/007 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-09-17T12:51:40.845Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may hide malicious Visual Basic for Applications (VBA) payloads embedded within MS Office documents
+  by replacing the VBA source code with benign data.(Citation: FireEye VBA stomp Feb 2020)
+
+
+  MS Office documents with embedded VBA content store source code inside of module streams. Each module stream has a <code>PerformanceCache</code>
+  that stores a separate compiled version of the VBA source code known as p-code. The p-code is executed when the MS Office
+  version specified in the <code>_VBA_PROJECT</code> stream (which contains the version-dependent description of the VBA project)
+  matches the version of the host MS Office application.(Citation: Evil Clippy May 2019)(Citation: Microsoft _VBA_PROJECT
+  Stream)
+
+
+  An adversary may hide malicious VBA code by overwriting the VBA source code location with zero’s, benign code, or random
+  bytes while leaving the previously compiled malicious p-code. Tools that scan for malicious VBA source code may be bypassed
+  as the unwanted code is hidden in the compiled p-code. If the VBA source code is removed, some tools might even think that
+  there are no macros present. If there is a version match between the <code>_VBA_PROJECT</code> stream and host MS Office
+  application, the p-code will be executed, otherwise the benign VBA source code will be decompressed and recompiled to p-code,
+  thus removing malicious p-code and potentially bypassing dynamic analysis.(Citation: Walmart Roberts Oct 2018)(Citation:
+  FireEye VBA stomp Feb 2020)(Citation: pcodedmp Bontchev)'
+external_references:
+- external_id: T1564.007
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1564/007
+- description: Bontchev, V. (2019, July 30). pcodedmp.py - A VBA p-code disassembler. Retrieved September 17, 2020.
+  source_name: pcodedmp Bontchev
+  url: https://github.com/bontchev/pcodedmp
+- description: 'Cole, R., Moore, A., Stark, G., Stancill, B. (2020, February 5). STOMP 2 DIS: Brilliance in the (Visual) Basics.
+    Retrieved September 17, 2020.'
+  source_name: FireEye VBA stomp Feb 2020
+  url: https://www.fireeye.com/blog/threat-research/2020/01/stomp-2-dis-brilliance-in-the-visual-basics.html
+- description: 'Hegt, S. (2019, May 5). Evil Clippy: MS Office maldoc assistant. Retrieved September 17, 2020.'
+  source_name: Evil Clippy May 2019
+  url: https://outflank.nl/blog/2019/05/05/evil-clippy-ms-office-maldoc-assistant/
+- description: 'Microsoft. (2020, February 19). 2.3.4.1 _VBA_PROJECT Stream: Version Dependent Project Information. Retrieved
+    September 18, 2020.'
+  source_name: Microsoft _VBA_PROJECT Stream
+  url: https://docs.microsoft.com/en-us/openspecs/office_file_formats/ms-ovba/ef7087ac-3974-4452-aab2-7dba2214d239
+- description: Sayre, K., Ogden, H., Roberts, C. (2018, October 10). VBA Stomping — Advanced Maldoc Techniques. Retrieved
+    September 17, 2020.
+  source_name: Walmart Roberts Oct 2018
+  url: https://medium.com/walmartglobaltech/vba-stomping-advanced-maldoc-techniques-612c484ab278
+id: attack-pattern--c898c4b5-bf36-4e6e-a4ad-5b8c4c13e35b
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: stealth
+modified: '2026-04-15T20:26:09.220Z'
+name: VBA Stomping
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_contributors:
+- Rick Cole, Mandiant
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Linux
+- macOS
+- Windows
+x_mitre_version: '2.0'
+```

@@ -1,0 +1,77 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# BloodHound
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `tool` |
+| Record ID | `S0521` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [BloodHound](../../tools/unknown/bloodhound.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | S0521 |
+| name | BloodHound |
+| type | tool |
+| source | mitre |
+| url | https://attack.mitre.org/software/S0521 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-10-28T12:51:29.358Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: '[BloodHound](https://attack.mitre.org/software/S0521) is an Active Directory (AD) reconnaissance tool that can
+  reveal hidden relationships and identify attack paths within an AD environment.(Citation: GitHub Bloodhound)(Citation: CrowdStrike
+  BloodHound April 2018)(Citation: FoxIT Wocao December 2019)'
+external_references:
+- external_id: S0521
+  source_name: mitre-attack
+  url: https://attack.mitre.org/software/S0521
+- description: 'Dantzig, M. v., Schamper, E. (2019, December 19). Operation Wocao: Shining a light on one of China’s hidden
+    hacking groups. Retrieved October 8, 2020.'
+  source_name: FoxIT Wocao December 2019
+  url: https://www.fox-it.com/media/kadlze5c/201912_report_operation_wocao.pdf
+- description: 'Red Team Labs. (2018, April 24). Hidden Administrative Accounts: BloodHound to the Rescue. Retrieved October
+    28, 2020.'
+  source_name: CrowdStrike BloodHound April 2018
+  url: https://www.crowdstrike.com/blog/hidden-administrative-accounts-bloodhound-to-the-rescue/
+- description: 'Robbins, A., Vazarkar, R., and Schroeder, W. (2016, April 17). Bloodhound: Six Degrees of Domain Admin. Retrieved
+    March 5, 2019.'
+  source_name: GitHub Bloodhound
+  url: https://github.com/BloodHoundAD/BloodHound
+id: tool--066b057c-944e-4cfc-b654-e3dfba04b926
+modified: '2025-03-12T20:27:03.654Z'
+name: BloodHound
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: tool
+x_mitre_aliases:
+- BloodHound
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- Windows
+x_mitre_version: '1.7'
+```

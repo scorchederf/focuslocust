@@ -1,0 +1,83 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Digital Certificates
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1587.003` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Digital Certificates](../../attack/techniques/T1587.003-digital-certificates.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1587.003 |
+| name | Digital Certificates |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1587/003 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-10-01T01:42:24.974Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may create self-signed SSL/TLS certificates that can be used during targeting. SSL/TLS certificates
+  are designed to instill trust. They include information about the key, information about its owner''s identity, and the
+  digital signature of an entity that has verified the certificate''s contents are correct. If the signature is valid, and
+  the person examining the certificate trusts the signer, then they know they can use that key to communicate with its owner.
+  In the case of self-signing, digital certificates will lack the element of trust associated with the signature of a third-party
+  certificate authority (CA).
+
+
+  Adversaries may create self-signed SSL/TLS certificates that can be used to further their operations, such as encrypting
+  C2 traffic (ex: [Asymmetric Cryptography](https://attack.mitre.org/techniques/T1573/002) with [Web Protocols](https://attack.mitre.org/techniques/T1071/001))
+  or even enabling [Adversary-in-the-Middle](https://attack.mitre.org/techniques/T1557) if added to the root of trust (i.e.
+  [Install Root Certificate](https://attack.mitre.org/techniques/T1553/004)).
+
+
+  After creating a digital certificate, an adversary may then install that certificate (see [Install Digital Certificate](https://attack.mitre.org/techniques/T1608/003))
+  on infrastructure under their control.'
+external_references:
+- external_id: T1587.003
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1587/003
+- description: Kovar, R. (2017, December 11). Tall Tales of Hunting with TLS/SSL Certificates. Retrieved October 16, 2020.
+  source_name: Splunk Kovar Certificates 2017
+  url: https://www.splunk.com/en_us/blog/security/tall-tales-of-hunting-with-tls-ssl-certificates.html
+id: attack-pattern--1cec9319-743b-4840-bb65-431547bce82a
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: resource-development
+modified: '2025-10-24T17:48:29.137Z'
+name: Digital Certificates
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: true
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- PRE
+x_mitre_version: '1.2'
+```

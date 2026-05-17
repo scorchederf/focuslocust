@@ -1,0 +1,71 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Pod Enumeration
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0037` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Pod Enumeration](../../attack/data-sources/DC0037-pod-enumeration.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0037 |
+| name | Pod Enumeration |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0037 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.272Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "Extracting a list of running or existing pods within a containerized cluster environment. Pods are the smallest\
+  \ deployable units in a Kubernetes cluster and typically represent an application or workload. Enumeration of pods provides\
+  \ insight into the structure and state of applications running in the cluster, such as the names of pods, their namespaces,\
+  \ and their associated metadata.\n\n*Data Collection Measures:*\n\n- Kubernetes API Server Audit Logs:\n    - Enable Audit\
+  \ Logging in Kubernetes to capture API requests, such as GET `/api/v1/pods`.\n- Container Runtime Logs:\n    - Collect runtime-level\
+  \ logs from tools like CRI-O, containerd, or Docker, which might show relevant API calls for pod enumeration.\n- EDR and\
+  \ SIEM:\n    - Endpoint Detection and Response (EDR) tools, if configured with cluster-level visibility, can monitor user\
+  \ commands like `kubectl get pods`.\n    - SIEM platforms (e.g., Splunk) can ingest Kubernetes API logs to detect enumeration\
+  \ patterns.\n- Host-Based Monitoring:\n    - Monitor processes and commands executed on nodes where `kubectl` is installed\
+  \ using tools like auditd, Sysmon for Linux, or kernel modules."
+external_references:
+- external_id: DC0037
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0037
+id: x-mitre-data-component--07688e40-a7fa-4436-937f-1216674341a0
+modified: '2025-10-21T15:14:40.544Z'
+name: Pod Enumeration
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_log_sources:
+- channel: list or get requests against pods, deployments, or nodes
+  name: kubernetes:apiserver
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.0'
+```

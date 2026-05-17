@@ -1,0 +1,78 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Exfiltration Over Web Service
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `technique` |
+| Record ID | `T1567` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Exfiltration Over Web Service](../../attack/techniques/T1567-exfiltration-over-web-service.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | T1567 |
+| name | Exfiltration Over Web Service |
+| type | technique |
+| source | mitre |
+| url | https://attack.mitre.org/techniques/T1567 |
+
+## Preserved Source Material
+
+```yaml
+created: '2020-03-09T12:51:45.570Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: 'Adversaries may use an existing, legitimate external Web service to exfiltrate data rather than their primary
+  command and control channel. Popular Web services acting as an exfiltration mechanism may give a significant amount of cover
+  due to the likelihood that hosts within a network are already communicating with them prior to compromise. Firewall rules
+  may also already exist to permit traffic to these services.
+
+
+  Web service providers also commonly use SSL/TLS encryption, giving adversaries an added level of protection.'
+external_references:
+- external_id: T1567
+  source_name: mitre-attack
+  url: https://attack.mitre.org/techniques/T1567
+id: attack-pattern--40597f16-0963-4249-bf4c-ac93b7fb9807
+kill_chain_phases:
+- kill_chain_name: mitre-attack
+  phase_name: exfiltration
+modified: '2025-10-24T17:48:42.061Z'
+name: Exfiltration Over Web Service
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: attack-pattern
+x_mitre_attack_spec_version: 3.2.0
+x_mitre_contributors:
+- William Cain
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_is_subtechnique: false
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_platforms:
+- ESXi
+- Linux
+- macOS
+- Office Suite
+- SaaS
+- Windows
+x_mitre_version: '1.5'
+```

@@ -1,0 +1,81 @@
+---
+parsed_by: focuslocust
+source: mitre
+type: generated
+---
+# Container Start
+
+[Home](../../../README.md)
+
+## Provenance
+
+| Field | Value |
+| --- | --- |
+| Source | `mitre` |
+| Type | `data-source` |
+| Record ID | `DC0077` |
+| Source file | `` |
+| Parsed by | `focuslocust` |
+| Relationship mode | `explicit / conservative inferred / manual` |
+
+## Generated Concept Page
+
+- [Container Start](../../attack/data-sources/DC0077-container-start.md)
+
+## Extracted Fields
+
+| Field | Value |
+| --- | --- |
+| id | DC0077 |
+| name | Container Start |
+| type | data-source |
+| source | mitre |
+| url | https://attack.mitre.org/datacomponents/DC0077 |
+
+## Preserved Source Material
+
+```yaml
+created: '2021-10-20T15:05:19.274Z'
+created_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+description: "\"Container Start\" data component captures events related to the activation or invocation of a container within\
+  \ a containerized environment. This includes starting a previously stopped container, restarting an existing container,\
+  \ or initializing a container for runtime. Monitoring these activities is critical for identifying unauthorized or unexpected\
+  \ container activations, which may indicate potential adversarial activity or misconfigurations. Examples: \n\n- Docker\
+  \ Example: `docker start <container_name>`, `docker restart <container_name>`\n- Kubernetes Example: Kubernetes automatically\
+  \ restarts containers as part of pod lifecycle management (e.g., due to health checks or configuration changes).\n- Cloud-Native\
+  \ Example\n    - AWS ECS: API Call: StartTask to activate a stopped ECS task.\n    - Azure Container Instances: Command\
+  \ to restart a container group instance.\n    - GCP Kubernetes Engine: Automatic restarts as part of node or pod management.\n\
+  \nThis data component can be collected through the following measures:\n\n- Docker Audit Logging: Enable Docker logging\
+  \ to capture start and restart events. Use tools like auditd to monitor terminal activity involving container lifecycle\
+  \ commands.\n- Kubernetes Audit Logs: Enable Kubernetes API server audit logging.\n- Cloud Provider Logs\n    - AWS CloudTrail:\
+  \ Capture StartTask or related API calls for ECS.\n    - Azure Monitor: Track activity in container groups that indicate\
+  \ start or restart events.\n    - GCP Cloud Logging: Record logs related to pod restarts or scaling events in Kubernetes\
+  \ Engine.\n- SIEM Integration: Collect logs from Docker, Kubernetes, and cloud services to correlate container start events."
+external_references:
+- external_id: DC0077
+  source_name: mitre-attack
+  url: https://attack.mitre.org/datacomponents/DC0077
+id: x-mitre-data-component--5fe82895-28e5-4aac-845e-dc886b63be2e
+modified: '2025-10-21T15:14:37.615Z'
+name: Container Start
+object_marking_refs:
+- marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168
+revoked: false
+spec_version: '2.1'
+type: x-mitre-data-component
+x_mitre_attack_spec_version: 3.3.0
+x_mitre_deprecated: false
+x_mitre_domains:
+- enterprise-attack
+x_mitre_log_sources:
+- channel: 'exec_create: docker exec events targeting running containers from non-CI sources'
+  name: docker:events
+- channel: 'start: ContainerStarted or Pulling image → Started container'
+  name: kubernetes:events
+- channel: CRI CreateContainer/StartContainer with privileged=true OR added capabilities OR host* namespaces
+  name: containerd:runtime
+- channel: start
+  name: docker:events
+x_mitre_modified_by_ref: identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5
+x_mitre_version: '2.0'
+```
